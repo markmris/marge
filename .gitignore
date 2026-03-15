@@ -1,0 +1,354 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Linker files
+*.ilk
+
+# Debugger Files
+*.pdb
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# debug information files
+*.dwo
+
+# ---------------------------
+# Visual Studio
+# ---------------------------
+
+# Visual Studio workspace cache
+.vs/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+
+# IntelliSense cache
+ipch/
+*.ipch
+
+# Visual Studio database files
+*.VC.db
+*.VC.opendb
+
+# Build directories
+[Bb]in/
+[Oo]bj/
+x64/
+x86/
+build/
+
+# Profiling
+*.psess
+*.vsp
+*.vspx
+
+# Visual Studio temporary files
+*.tlog
+*.lastbuildstate
+*.unsuccessfulbuild
+
+# CMake (if used later)
+CMakeFiles/
+CMakeCache.txt
+cmake-build-*/
+
+# Logs
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Linker files
+*.ilk
+
+# Debugger Files
+*.pdb
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Debug information files
+*.dwo
+
+# ---------------------------
+# Visual Studio
+# ---------------------------
+# Visual Studio workspace cache
+.vs/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+
+# IntelliSense cache
+ipch/
+*.ipch
+
+# Visual Studio database files
+*.VC.db
+*.VC.opendb
+
+# Build directories
+[Bb]in/
+[Oo]bj/
+x64/
+x86/
+build/
+
+# Profiling
+*.psess
+*.vsp
+*.vspx
+
+# Visual Studio temporary files
+*.tlog
+*.lastbuildstate
+*.unsuccessfulbuild
+
+# ---------------------------
+# CMake
+# ---------------------------
+CMakeFiles/
+CMakeCache.txt
+cmake-build-*/
+CMakeUserPresets.json
+_deps/
+*.cmake
+!cmake/
+install_manifest.txt
+compile_commands.json
+
+# ---------------------------
+# Clang / GCC toolchain
+# ---------------------------
+*.bc
+*.s
+*.ii
+*.i
+# AddressSanitizer / coverage artifacts
+*.gcno
+*.gcda
+*.gcov
+default.profdata
+default.profraw
+*.profdata
+*.profraw
+
+# ---------------------------
+# Raytracer output images
+# ---------------------------
+*.ppm
+*.png
+*.bmp
+*.hdr
+*.exr
+*.tga
+*.jpg
+*.jpeg
+renders/
+output/
+frames/
+
+# ---------------------------
+# Scene / asset files (local test data)
+# ---------------------------
+*.obj
+!src/**/*.obj
+*.mtl
+!src/**/*.mtl
+*.fbx
+*.gltf
+*.glb
+assets/
+scenes/
+models/
+textures/
+
+# ---------------------------
+# Profiling & performance tools
+# ---------------------------
+# Valgrind
+callgrind.out.*
+cachegrind.out.*
+massif.out.*
+vgcore.*
+
+# gprof
+gmon.out
+
+# perf (Linux)
+perf.data
+perf.data.old
+
+# Intel VTune
+r[0-9][0-9][0-9]hs/
+*.vtune
+
+# Tracy profiler
+*.tracy
+
+# Optick
+*.opt
+
+# ---------------------------
+# IDEs & editors
+# ---------------------------
+# CLion
+.idea/
+*.iml
+cmake-build-debug/
+cmake-build-release/
+cmake-build-relwithdebinfo/
+cmake-build-minsizerel/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Xcode
+*.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+DerivedData/
+*.moved-aside
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Qt Creator
+*.pro.user
+*.qbs.user
+
+# Emacs / Vim
+*~
+\#*\#
+.#*
+*.swp
+*.swo
+*.swn
+Session.vim
+.nvimlog
+tags
+TAGS
+GTAGS
+GPATH
+GRTAGS
+
+# ---------------------------
+# OS junk
+# ---------------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+.directory
+.Trash-*
+
+# ---------------------------
+# Logs & crash dumps
+# ---------------------------
+*.log
+*.log.*
+logs/
+*.dmp
+core
+core.*
+crash_*.txt
+
+# ---------------------------
+# Dependency managers
+# ---------------------------
+# Conan
+.conan/
+conanbuildinfo.*
+conaninfo.txt
+graph_info.json
+
+# vcpkg
+vcpkg_installed/
+
+# ---------------------------
+# Benchmark & test artifacts
+# ---------------------------
+benchmark_results/
+test_results/
+*.xml
+!.github/**/*.xml
+*.json
+!.github/**/*.json
+timing_*.txt
+bench_*.txt
