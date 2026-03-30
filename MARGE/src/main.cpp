@@ -28,12 +28,12 @@ struct vector3
 		return vector3(x / n, y / n, z / n);
 	}
 
-	float length() const
+	float magnitude() const
 	{
 		return std::sqrt(x * x + y * y + z * z);
 	}
 
-	float lengthSq() const
+	float magnitudeSqr() const
 	{
 		return (x * x + y * y + z * z);
 	}
