@@ -28,6 +28,11 @@ struct vector3
 		return vector3(x / n, y / n, z / n);
 	}
 
+	vector3 normalized(const vector3 &v) const
+	{
+		return v / v.magnitude();
+	}
+
 	float magnitude() const
 	{
 		return std::sqrt(x * x + y * y + z * z);
@@ -37,17 +42,17 @@ struct vector3
 	{
 		return (x * x + y * y + z * z);
 	}
-
-	vector3 normalized(const vector3 &v) const
-	{
-		return v / v.magnitude();
-	}
 };
 
 // Handle reversed vector multiplication
 inline vector3 operator *(const float n, const vector3 v)
 {
 	return v * n;
+}
+
+float dot(const vector3& v1, const vector3& v2)
+{
+	return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
 }
 
 int main()
