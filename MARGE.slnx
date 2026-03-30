@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="MARGE/MARGE.vcxproj" />
+  <Project Path="MARGE/MARGE.vcxproj" Id="31d81bb9-261b-49f0-815c-c7b3554c1207" />
 </Solution>
