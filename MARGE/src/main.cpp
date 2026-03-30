@@ -37,6 +37,11 @@ struct vector3
 	{
 		return (x * x + y * y + z * z);
 	}
+
+	vector3 normalized(const vector3 &v) const
+	{
+		return v / v.magnitude();
+	}
 };
 
 // Handle reversed vector multiplication
