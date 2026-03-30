@@ -23,9 +23,19 @@ struct vector3
 		return vector3(x * n, y * n, z * n);
 	}
 
-	vector3 operator /(const float& n) const
+	vector3 operator /(const float &n) const
 	{
 		return vector3(x / n, y / n, z / n);
+	}
+
+	float length() const
+	{
+		return std::sqrt(x * x + y * y + z * z);
+	}
+
+	float lengthSq() const
+	{
+		return (x * x + y * y + z * z);
 	}
 };
 
