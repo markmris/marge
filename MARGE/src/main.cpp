@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 #include <vector>
 
 struct vector3
@@ -55,8 +56,38 @@ float dot(const vector3& v1, const vector3& v2)
 	return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
 }
 
+vector3 cross(const vector3 &a, const vector3 &b) {
+	return vector3(
+		a.y * b.z - a.z * b.y,
+		a.z * b.x - a.x * b.z,
+		a.x * b.y - a.y * b.x
+	);
+}
+
 int main()
 {
+	int width = 800;
+	int height = 800;
+
+
+	std::cout << "P3\n" << width << ' ' << height << "\n255\n";
+
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			auto r = float(i) / (height - 1);
+			auto g = float(j) / (width - 1);
+			auto b = float(i + j) / (width - 1);
+
+			int ir = int(255.999 * r);
+			int ig = int(255.999 * g);
+			int ib = int(255.999 * b);
+
+			std::cout << ir << ' ' << ig << ' ' << ib << '\n';
+		}
+	}
+
 
 	return 0;
 }
