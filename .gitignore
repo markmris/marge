@@ -352,3 +352,7 @@ test_results/
 !.github/**/*.json
 timing_*.txt
 bench_*.txt
+
+# Renderer Ignores
+raytracer
+./raytracer
