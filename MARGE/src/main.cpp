@@ -74,11 +74,11 @@ int main()
 
 	for (int i = 0; i < height; i++)
 	{
-		for (int j = 0; j < width; j++)
+		for (int j = 0; j < width; j++) 
 		{
-			auto r = float(i) / (height - 1);
-			auto g = float(j) / (width - 1);
-			auto b = float(i + j) / (width - 1);
+			auto r = float(j) / (width - 1);
+			auto g = float(i) / (height - 1);
+			auto b = 0;
 
 			int ir = int(255.999 * r);
 			int ig = int(255.999 * g);
