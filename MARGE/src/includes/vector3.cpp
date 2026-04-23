@@ -1,4 +1,5 @@
 #include <cmath>
+#include <ostream>
 #include "vector3.h"
 
 vector3::vector3() : x(0), y(0), z(0) {}
@@ -44,6 +45,11 @@ float vector3::magnitudeSqr() const
 inline vector3 operator *(const float &n, const vector3 &v)
 {
 	return v * n;
+}
+
+inline std::ostream& operator<<(std::ostream& out, const vector3 &v)
+{
+	return out << v.x << ' ' << v.y << ' ' << v.z;
 }
 
 float dot(const vector3& v1, const vector3& v2)

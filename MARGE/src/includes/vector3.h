@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ostream>
+
 struct vector3
 {
 	float x, y, z;
@@ -19,6 +21,8 @@ struct vector3
 };
 
 inline vector3 operator *(const float &n, const vector3 &v);
+
+inline std::ostream& operator<<(const std::ostream& out, const vector3 &v);
 
 float dot(const vector3& v1, const vector3& v2);
 
