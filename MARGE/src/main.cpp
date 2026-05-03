@@ -2,6 +2,7 @@
 #include <cmath>
 #include <vector>
 #include "includes/vector3.h"
+#include "includes/color.h"
 
 int main()
 {
@@ -20,13 +21,10 @@ int main()
 			auto g = float(i) / (height - 1);
 			auto b = 0;
 
-			int ir = int(255.999 * r);
-			int ig = int(255.999 * g);
-			int ib = int(255.999 * b);
-
-			std::cout << ir << ' ' << ig << ' ' << ib << '\n';
+			writecolor(std::cout, vector3(r, g, b));
 		}
 	}
+	
 	std::clog << "\r----------------------DONE----------------------\n";
 
 	return 0;
