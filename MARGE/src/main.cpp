@@ -3,11 +3,15 @@
 #include <vector>
 #include "includes/vector3.h"
 #include "includes/color.h"
+#include "includes/ray.h"
 
 int main()
 {
-	int width = 800;
-	int height = 800;
+	auto aspectRatio = 16.0 / 9.0;
+	int width = 1080;
+
+	int height = int(width / aspectRatio);
+	height = (height < 1) ? 1 : height;
 
 	std::cout << "P3\n" << width << ' ' << height << "\n255\n";
 
