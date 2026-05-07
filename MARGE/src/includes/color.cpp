@@ -1,7 +1,6 @@
 #include "color.h"
-#include "vector3.h"
 
-void writecolor(std::ostream& out, const vector3 &color)
+void writecolor(std::ostream& out, const color3 &color)
 {
     auto r = color.x;
     auto g = color.y;
