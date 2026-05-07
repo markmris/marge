@@ -21,7 +21,7 @@ int main()
 			auto g = float(i) / (height - 1);
 			auto b = 0;
 
-			writecolor(std::cout, vector3(r, g, b));
+			writecolor(std::cout, color3(r, g, b));
 		}
 	}
 	
