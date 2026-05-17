@@ -17,10 +17,10 @@ int main()
 
 	for (int i = 0; i < height; i++)
 	{
+		std::clog << "\rScanlines remaining" << (height - i) << std::flush;
+
 		for (int j = 0; j < width; j++) 
 		{
-			std::clog << "\rScanlines remaining" << (height - j) << std::flush;
-
 			auto r = float(j) / (width - 1);
 			auto g = float(i) / (height - 1);
 			auto b = 0;
