@@ -19,7 +19,7 @@ int main()
 	{
 		for (int j = 0; j < width; j++) 
 		{
-			std::clog << "\rScanlines remaining" << (height - j) << std::flush;
+			std::clog << "\rScanlines remaining" << (height - i) << std::flush;
 
 			auto r = float(j) / (width - 1);
 			auto g = float(i) / (height - 1);
