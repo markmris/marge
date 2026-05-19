@@ -4,26 +4,26 @@
 
 struct vector3
 {
-	float x, y, z;
+	double x, y, z;
 
 	vector3();
-	vector3(float x, float y, float z);
+	vector3(double x, double y, double z);
 
 	vector3 operator +(const vector3 &v) const;
 	vector3 operator -(const vector3 &v) const;
-	vector3 operator *(const float &n) const;
-	vector3 operator /(const float &n) const;
+	vector3 operator *(const double &n) const;
+	vector3 operator /(const double &n) const;
 
 	vector3 normalized(const vector3 &v) const;
 
-	float magnitude() const;
-	float magnitudeSqr() const;
+	double magnitude() const;
+	double magnitudeSqr() const;
 };
 
-inline vector3 operator *(const float &n, const vector3 &v);
+vector3 operator *(const double &n, const vector3 &v);
 
-inline std::ostream& operator<<(const std::ostream& out, const vector3 &v);
+std::ostream& operator<<(const std::ostream& out, const vector3 &v);
 
-float dot(const vector3& v1, const vector3& v2);
+double dot(const vector3& v1, const vector3& v2);
 
 vector3 cross(const vector3 &a, const vector3 &b);
