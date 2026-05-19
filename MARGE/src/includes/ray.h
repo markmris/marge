@@ -12,5 +12,5 @@ struct ray
     ray();
     ray(const point3& origin, const vector3& direction);
 
-    point3 at(float& dist);
+    point3 at(double& dist);
 };

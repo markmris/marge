@@ -5,27 +5,53 @@
 #include "includes/color.h"
 #include "includes/ray.h"
 
+color3 rayColor(const ray& r)
+{
+	return color3(0, 0, 0);
+}
+
+/*
+	X: Positive X to the right, Negative to the left
+	Y: Positive Y upwards, Negative Y downwards, except viewport coordinates are inverted
+	Z: Positive Z forward, Negative Z backwards
+*/
+
 int main()
 {
+	point3 cameraPoint = point3(0, 0, 0);
+	double focalLength = 1.0;
+
 	auto aspectRatio = 16.0 / 9.0;
-	int width = 1080;
+	int imageWidth = 1080;
 
-	int height = int(width / aspectRatio);
-	height = (height < 1) ? 1 : height;
+	int imageHeight = int(imageWidth / aspectRatio);
+	imageHeight = (imageHeight < 1) ? 1 : imageHeight;
 
-	std::cout << "P3\n" << width << ' ' << height << "\n255\n";
+	// Viewport Creation
+	double viewportHeight = 2.0;
+	double viewportWidth = viewportHeight * double(imageWidth/imageHeight);
+	vector3 viewportX(viewportWidth, 0, 0);
+	vector3 viewportY(0, -viewportHeight, 0);
+	vector3 pixelDeltaX = viewportX / imageHeight;
+	vector3 pixelDeltaY = viewportY / imageWidth;
 
-	for (int i = 0; i < height; i++)
+	// Viewport Origin Calculation and Definition
+	point3 viewportUpperLeft = (cameraPoint + vector3(0, 0, focalLength)) - (viewportX / 2) - (viewportY / 2);
+	point3 viewportOrigin = viewportUpperLeft + 0.5 * (pixelDeltaX + pixelDeltaY);
+
+	std::cout << "P3\n" << imageWidth << ' ' << imageHeight << "\n255\n";
+
+	for (int i = 0; i < imageHeight; i++)
 	{
-		std::clog << "\rScanlines remaining" << (height - i) << std::flush;
+		std::clog << "\rScanlines remaining" << (imageHeight - i) << std::flush;
 
-		for (int j = 0; j < width; j++) 
+		for (int j = 0; j < imageWidth; j++)
 		{
-			auto r = float(j) / (width - 1);
-			auto g = float(i) / (height - 1);
-			auto b = 0;
+			point3 pixelCenter = viewportOrigin + (i * pixelDeltaY) + (j * pixelDeltaX);
+			vector3 rayDirection = pixelCenter - cameraPoint;
+			ray raycast(pixelCenter, rayDirection);
 
-			writecolor(std::cout, color3(r, g, b));
+			writecolor(std::cout, rayColor(raycast));
 		}
 	}
 	
