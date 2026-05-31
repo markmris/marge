@@ -14,11 +14,11 @@ struct vector3
 	vector3 operator *(const double &n) const;
 	vector3 operator /(const double &n) const;
 
-	vector3 normalized(const vector3 &v) const;
-
 	double magnitude() const;
 	double magnitudeSqr() const;
 };
+
+vector3 normalized(const vector3& v);
 
 vector3 operator *(const double &n, const vector3 &v);
 

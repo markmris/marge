@@ -25,7 +25,7 @@ vector3 vector3::operator /(const double &n) const
 	return vector3(x / n, y / n, z / n);
 }
 
-vector3 vector3::normalized(const vector3 &v) const
+vector3 normalized(const vector3 &v)
 {
 	return v / v.magnitude();
 }

@@ -7,7 +7,9 @@
 
 color3 rayColor(const ray& r)
 {
-	return color3(0, 0, 0);
+	vector3 rayDir = normalized(r.direction);
+	auto a = 0.5 * (rayDir.y + 1.0);
+	return (1.0 - a) * color3(1.0, 1.0, 1.0) + a * color3(0.5, 0.7, 1.0);
 }
 
 /*
@@ -32,12 +34,12 @@ int main()
 	double viewportWidth = viewportHeight * double(imageWidth/imageHeight);
 	vector3 viewportX(viewportWidth, 0, 0);
 	vector3 viewportY(0, -viewportHeight, 0);
-	vector3 pixelDeltaX = viewportX / imageHeight;
-	vector3 pixelDeltaY = viewportY / imageWidth;
+	vector3 pixelDeltaX = viewportX / imageWidth;
+	vector3 pixelDeltaY = viewportY / imageHeight;
 
 	// Viewport Origin Calculation and Definition
 	point3 viewportUpperLeft = (cameraPoint + vector3(0, 0, focalLength)) - (viewportX / 2) - (viewportY / 2);
-	point3 viewportOrigin = viewportUpperLeft + 0.5 * (pixelDeltaX + pixelDeltaY);
+	point3 viewportOrigin = viewportUpperLeft + (0.5 * (pixelDeltaX + pixelDeltaY));
 
 	std::cout << "P3\n" << imageWidth << ' ' << imageHeight << "\n255\n";
 
