@@ -5,8 +5,24 @@
 #include "includes/color.h"
 #include "includes/ray.h"
 
+bool spherehit(const point3& center, double radius, const ray& r)
+{
+	vector3 oc = center - r.origin;
+	auto a = dot(r.direction, r.direction);
+	auto b = -2.0 * dot(r.direction, oc);
+	auto c = dot(oc, oc) - radius * radius;
+	auto discriminant = b * b - 4 * a * c;
+	
+	return (discriminant >= 0);
+}
+
 color3 rayColor(const ray& r)
 {
+	if (spherehit(point3(0, 0, 1), 0.5, r))
+	{
+		return color3(1, 0, 0);
+	}
+
 	vector3 rayDir = normalized(r.direction);
 	auto a = 0.5 * (rayDir.y + 1.0);
 	return (1.0 - a) * color3(1.0, 1.0, 1.0) + a * color3(0.5, 0.7, 1.0);
@@ -31,7 +47,7 @@ int main()
 
 	// Viewport Creation
 	double viewportHeight = 2.0;
-	double viewportWidth = viewportHeight * double(imageWidth/imageHeight);
+	double viewportWidth = viewportHeight * (double(imageWidth) / double(imageHeight));
 	vector3 viewportX(viewportWidth, 0, 0);
 	vector3 viewportY(0, -viewportHeight, 0);
 	vector3 pixelDeltaX = viewportX / imageWidth;
