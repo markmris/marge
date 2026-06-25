@@ -5,7 +5,7 @@
 #include "includes/color.h"
 #include "includes/ray.h"
 
-bool spherehit(const point3& center, double radius, const ray& r)
+double spherehit(const point3& center, double radius, const ray& r)
 {
 	vector3 oc = center - r.origin;
 	auto a = dot(r.direction, r.direction);
@@ -13,14 +13,25 @@ bool spherehit(const point3& center, double radius, const ray& r)
 	auto c = dot(oc, oc) - radius * radius;
 	auto discriminant = b * b - 4 * a * c;
 	
-	return (discriminant >= 0);
+	if (discriminant < 0)
+	{
+		return -1.0;
+	}
+	else
+	{
+		return (-b - std::sqrt(discriminant)) / (2.0 * a);
+	}
 }
 
 color3 rayColor(const ray& r)
 {
-	if (spherehit(point3(0, 0, 1), 0.5, r))
+	auto dist = spherehit(point3(0, 0, 1), 0.5, r);
+
+	if (dist > 0.0)
 	{
-		return color3(1, 0, 0);
+		vector3 normal = normalized(r.at(dist) - vector3(0, 0, 1));
+		
+		return 0.65 * color3(normal.x + 1, normal.y + 1, normal.z + 1);
 	}
 
 	vector3 rayDir = normalized(r.direction);
@@ -67,7 +78,7 @@ int main()
 		{
 			point3 pixelCenter = viewportOrigin + (i * pixelDeltaY) + (j * pixelDeltaX);
 			vector3 rayDirection = pixelCenter - cameraPoint;
-			ray raycast(pixelCenter, rayDirection);
+			ray raycast(cameraPoint, rayDirection);
 
 			writecolor(std::cout, rayColor(raycast));
 		}
