@@ -5,13 +5,19 @@
 #include "includes/color.h"
 #include "includes/ray.h"
 
+/*
+	X: Positive X to the right, Negative to the left
+	Y: Positive Y upward, Negative Y downward, except viewport coordinates are inverted
+	Z: Positive Z forward, Negative Z backward
+*/
+
 double spherehit(const point3& center, double radius, const ray& r)
 {
 	vector3 oc = center - r.origin;
-	auto a = dot(r.direction, r.direction);
-	auto b = -2.0 * dot(r.direction, oc);
-	auto c = dot(oc, oc) - radius * radius;
-	auto discriminant = b * b - 4 * a * c;
+	auto a = r.direction.magnitudeSqr();
+	auto b = dot(r.direction, oc);
+	auto c = oc.magnitudeSqr() - radius * radius;
+	auto discriminant = b * b - a * c;
 	
 	if (discriminant < 0)
 	{
@@ -19,7 +25,7 @@ double spherehit(const point3& center, double radius, const ray& r)
 	}
 	else
 	{
-		return (-b - std::sqrt(discriminant)) / (2.0 * a);
+		return (b - std::sqrt(discriminant)) / a;
 	}
 }
 
@@ -38,12 +44,6 @@ color3 rayColor(const ray& r)
 	auto a = 0.5 * (rayDir.y + 1.0);
 	return (1.0 - a) * color3(1.0, 1.0, 1.0) + a * color3(0.5, 0.7, 1.0);
 }
-
-/*
-	X: Positive X to the right, Negative to the left
-	Y: Positive Y upwards, Negative Y downwards, except viewport coordinates are inverted
-	Z: Positive Z forward, Negative Z backwards
-*/
 
 int main()
 {
