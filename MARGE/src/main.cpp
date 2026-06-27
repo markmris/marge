@@ -11,9 +11,9 @@
 	Z: Positive Z forward, Negative Z backward
 */
 
-double spherehit(const point3& center, double radius, const ray& r)
+double spherehit(const point3& position, double radius, const ray& r)
 {
-	vector3 oc = center - r.origin;
+	vector3 oc = position - r.origin;
 	auto a = r.direction.magnitudeSqr();
 	auto b = dot(r.direction, oc);
 	auto c = oc.magnitudeSqr() - radius * radius;
