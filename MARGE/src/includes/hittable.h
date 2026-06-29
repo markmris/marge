@@ -13,11 +13,7 @@ struct hitdata
     vector3 normal;
 
     // Determines whether the ray hit the inside or the outside of the sphere.
-    void setFaceNormal(const ray& r, const vector3& outwardNormal)
-    {
-        frontFace = dot(r.direction, outwardNormal) < 0;
-        normal = frontFace ? outwardNormal : -1 * outwardNormal;
-    }
+    void setFaceNormal(const ray& r, const vector3& outwardNormal);
 };
 
 struct hittable

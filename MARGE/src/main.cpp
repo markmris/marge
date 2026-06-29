@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cmath>
-#include <vector>
 #include "includes/vector3.h"
 #include "includes/color.h"
 #include "includes/ray.h"
