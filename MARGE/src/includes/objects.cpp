@@ -25,9 +25,9 @@ bool sphere::hit(const ray& r, double rayTmin, double rayTmax, hitdata& hd) cons
             return false;
     }
 
-    hd.t = root;
-    hd.point = r.at(hd.t);
-    hd.normal = (hd.point - position) / radius;
+    hd.t = root; // Closest point in the acceptable range that the ray hit
+    hd.point = r.at(hd.t); // The world position of the hit
+    hd.setFaceNormal(r, (hd.point - position) / radius); 
 
     return true;
 }
