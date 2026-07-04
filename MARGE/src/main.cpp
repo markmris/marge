@@ -15,7 +15,7 @@ color3 rayColor(const ray& r, const hittable& world)
 
 	if (world.hit(r, 0, infinity, hd))
 	{
-		return 0.5 * (hd.normal + color3(1, 1, 1));
+		return 0.5 * (hd.normal + color3(1, 0, 1));
 	}
 
 	vector3 normalDirection = normalized(r.direction);
@@ -49,8 +49,9 @@ int main()
 
 	objectlist world;
 
-	world.add(make_shared<sphere>(point3(-0.3, 0, 5), 0.5));
-	world.add(make_shared<sphere>(point3(0.5, 0.3, 0.8), 0.25));
+	world.add(make_shared<sphere>(point3(0.8, 0.2, 2), 0.5));
+	world.add(make_shared<sphere>(point3(0.6, -0.3, 1), 0.25));
+	world.add(make_shared<sphere>(point3(1, -1, 1), 0.25));
 
 	std::cout << "P3\n" << imageWidth << ' ' << imageHeight << "\n255\n";
 

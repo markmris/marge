@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "color.h"
 
 void writecolor(std::ostream& out, const color3 &color)
@@ -6,9 +7,9 @@ void writecolor(std::ostream& out, const color3 &color)
     auto g = color.y;
     auto b = color.z;
 
-    int rbyte = int(255.999 * r);
-    int gbyte = int(255.999 * g);
-    int bbyte = int(255.999 * b);
+    int rbyte = std::clamp(int(255.999 * r), 0, 255);
+    int gbyte = std::clamp(int(255.999 * g), 0, 255);
+    int bbyte = std::clamp(int(255.999 * b), 0, 255);
 
     out << rbyte << ' ' << gbyte << ' ' << bbyte << '\n';
 }
