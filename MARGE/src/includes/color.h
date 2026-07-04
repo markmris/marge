@@ -4,4 +4,4 @@
 
 using color3 = vector3;
 
-void writecolor(std::ostream& out, const vector3 &color);
+void writecolor(std::ostream& out, const color3 &color);

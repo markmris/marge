@@ -1,11 +1,8 @@
 #pragma once
 
 #include <vector>
-#include <memory>
-#include "hittable.h"
 
-using std::make_shared;
-using std::shared_ptr;
+#include "marge.h"
 
 struct objectlist : public hittable
 {

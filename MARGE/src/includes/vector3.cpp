@@ -1,6 +1,4 @@
-#include <cmath>
-#include <ostream>
-#include "vector3.h"
+#include "marge.h"
 
 vector3::vector3() : x(0), y(0), z(0) {}
 vector3::vector3(double x, double y, double z) : x(x), y(y), z(z) {}
