@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ray.h"
+#include "marge.h"
 
 struct hitdata
 {
@@ -20,5 +20,5 @@ struct hittable
 {
     virtual ~hittable() = default;
 
-    virtual bool hit(const ray& r, double rayTmin, double rayTmax, hitdata& hd) const = 0;
+    virtual bool hit(const ray& r, interval rayt, hitdata& hd) const = 0;
 };

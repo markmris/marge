@@ -14,5 +14,5 @@ struct objectlist : public hittable
     void add(shared_ptr<hittable> object);
     void clear();
 
-    bool hit(const ray& r, double rayTmin, double rayTmax, hitdata& hd) const override;
+    bool hit(const ray& r, interval rayt, hitdata& hd) const override;
 };
