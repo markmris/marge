@@ -9,5 +9,5 @@ struct sphere : public hittable
 
     sphere(const point3& position, double radius);
 
-    virtual bool hit(const ray& r, double rayTmin, double rayTmax, hitdata& hd) const override;
+    virtual bool hit(const ray& r, interval rayt, hitdata& hd) const override;
 };

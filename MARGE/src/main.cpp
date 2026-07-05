@@ -13,9 +13,9 @@ color3 rayColor(const ray& r, const hittable& world)
 {
 	hitdata hd;
 
-	if (world.hit(r, 0, infinity, hd))
+	if (world.hit(r, interval(0, infinity), hd))
 	{
-		return 0.5 * (hd.normal + color3(1, 0, 1));
+		return 0.5 * (hd.normal + color3(1, 1, 1));
 	}
 
 	vector3 normalDirection = normalized(r.direction);
@@ -47,17 +47,17 @@ int main()
 	point3 viewportUpperLeft = (cameraPoint + vector3(0, 0, focalLength)) - (viewportX / 2) - (viewportY / 2);
 	point3 viewportOrigin = viewportUpperLeft + (0.5 * (pixelDeltaX + pixelDeltaY));
 
+	// World Creation
 	objectlist world;
-
-	world.add(make_shared<sphere>(point3(0.8, 0.2, 2), 0.5));
-	world.add(make_shared<sphere>(point3(0.6, -0.3, 1), 0.25));
-	world.add(make_shared<sphere>(point3(1, -1, 1), 0.25));
+	world.add(make_shared<sphere>(point3(-0.45, 0.3, 0.75), 0.3));
+	world.add(make_shared<sphere>(point3(0.8, 0.2, 1.7), 0.5));
+	world.add(make_shared<sphere>(point3(0, -100.5, 1), 100));
 
 	std::cout << "P3\n" << imageWidth << ' ' << imageHeight << "\n255\n";
 
 	for (int i = 0; i < imageHeight; i++)
 	{
-		std::clog << "\rScanlines remaining" << (imageHeight - i) << std::flush;
+		std::clog << "\rScanlines remaining: " << (imageHeight - i) << std::flush;
 
 		for (int j = 0; j < imageWidth; j++)
 		{

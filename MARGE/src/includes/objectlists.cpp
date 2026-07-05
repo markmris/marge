@@ -16,15 +16,15 @@ void objectlist::clear()
     this->objects.clear();
 }
 
-bool objectlist::hit(const ray& r, double rayTmin, double rayTmax, hitdata& hd) const
+bool objectlist::hit(const ray& r, interval rayt, hitdata& hd) const
 {
     hitdata hdTemp;
     bool hitAnything = false;
-    auto closestObj = rayTmax;
+    auto closestObj = rayt.max;
 
     for (const auto& object : objects)
     {
-        if (object->hit(r, rayTmin, closestObj, hdTemp))
+        if (object->hit(r, interval(rayt.min, closestObj), hdTemp))
         {
             hitAnything = true;
             closestObj = hdTemp.t;
