@@ -4,6 +4,7 @@
 #include <cmath>
 #include <memory>
 #include <limits>
+#include <random>
 
 #include "vector3.h"
 #include "ray.h"
@@ -13,10 +14,9 @@
 using std::make_shared;
 using std::shared_ptr;
 
-const double infinity = std::numeric_limits<double>::infinity();
-const double pi = 3.1415926535897932385;
+const double infinity;
+const double pi;
 
-inline double degAsRad(double degrees)
-{
-    return (degrees * pi) / 180;
-}
+inline double degAsRad(double degrees);
+inline double randomDouble();
+inline double randomDouble(double min, double max);
