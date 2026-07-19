@@ -5,7 +5,6 @@ void camera::initialize()
 	cameraPoint = point3(0, 0, 0);
 	focalLength = 1.0;
 
-	maxPixelSamples = 0;
 	pixelSamplesScale = 1.0 / maxPixelSamples;
 
 	aspectRatio = 16.0 / 9.0;
