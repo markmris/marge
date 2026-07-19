@@ -1,4 +1,4 @@
-# MARGE (v0.5)
+# MARGE (v0.6) - Antialiasing Update
 
 *MARGE - Modular Advanced Raytracing & Graphics Engine*
 
@@ -21,6 +21,7 @@ At this stage, the focus is correctness and structure, not feature completeness.
 - Simple Camera Object
 - Ray-Sphere Intersection
 - Minimal Rendering Pipeline (Ray -> Math -> Pixel)
+- Antialiasing
 
 ## Future/Planned Features
 - Different Materials (Reflective/Mirrors, Diffuse)
