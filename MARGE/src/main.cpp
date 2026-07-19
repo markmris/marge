@@ -12,6 +12,9 @@
 
 int main()
 {
+	std::ios::sync_with_stdio(false);
+	std::cin.tie(nullptr);
+
 	camera camera;
 
 	camera.aspectRatio = 16.0 / 9.0;
