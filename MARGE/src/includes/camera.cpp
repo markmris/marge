@@ -5,6 +5,9 @@ void camera::initialize()
 	cameraPoint = point3(0, 0, 0);
 	focalLength = 1.0;
 
+	maxPixelSamples = 0;
+	pixelSamplesScale = 1.0 / maxPixelSamples;
+
 	aspectRatio = 16.0 / 9.0;
 	imageHeight = int(imageWidth / aspectRatio);
 	imageHeight = (imageHeight < 1) ? 1 : imageHeight;
@@ -31,18 +34,22 @@ void camera::render(const hittable& world)
 
 		for (int j = 0; j < imageWidth; j++)
 		{
-			point3 pixelCenter = viewportOrigin + (i * pixelDeltaY) + (j * pixelDeltaX);
-			vector3 rayDirection = pixelCenter - cameraPoint;
-			ray raycast(cameraPoint, rayDirection);
+			color3 pixelColor(0, 0, 0);
 
-			writecolor(std::cout, rayColor(raycast, world));
+			for (int sample = 0; sample < maxPixelSamples; sample++)
+			{
+				ray r = getRay(j, i);
+				pixelColor = rayColor(r, world) + pixelColor;
+			}
+			
+			writeColor(std::cout, pixelColor * pixelSamplesScale);
 		}
 	}
 
 	std::clog << "\r---------------------- DONE ----------------------\n";
 }
 
-color3 camera::rayColor(const ray& r, const hittable& world)
+color3 camera::rayColor(const ray& r, const hittable& world) const
 {
 	hitdata hd;
 
@@ -54,4 +61,20 @@ color3 camera::rayColor(const ray& r, const hittable& world)
 	vector3 normalDirection = normalized(r.direction);
 	auto a = 0.5 * (normalDirection.y + 1.0);
 	return (1.0 - a) * color3(1, 1, 1) + a * color3(0.5, 0.7, 1.0);
+}
+
+ray camera::getRay(int j, int i) const
+{
+	vector3 offset = samplePixel();
+	point3 pixelSample = viewportOrigin + ((j + offset.x) * pixelDeltaX) + ((i + offset.y) * pixelDeltaY);
+
+	point3 rayOrigin = cameraPoint;
+	vector3 rayDirection = pixelSample - rayOrigin;
+
+	return ray(rayOrigin, rayDirection);
+}
+
+vector3 camera::samplePixel() const
+{
+	return vector3(randomDouble() - 0.5, randomDouble() - 0.5, 0);
 }
