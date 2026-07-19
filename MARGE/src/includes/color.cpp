@@ -1,7 +1,8 @@
 #include <algorithm>
 #include "color.h"
+#include "interval.h"
 
-void writecolor(std::ostream& out, const color3 &color)
+void writeColor(std::ostream& out, const color3 &color)
 {
     auto r = color.x;
     auto g = color.y;

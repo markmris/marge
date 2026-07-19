@@ -127,7 +127,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\includes\camera.cpp" />
+    <ClCompile Include="src\includes\color.cpp" />
+    <ClCompile Include="src\includes\hittable.cpp" />
+    <ClCompile Include="src\includes\interval.cpp" />
+    <ClCompile Include="src\includes\marge.cpp" />
+    <ClCompile Include="src\includes\objectlists.cpp" />
+    <ClCompile Include="src\includes\objects.cpp" />
+    <ClCompile Include="src\includes\ray.cpp" />
+    <ClCompile Include="src\includes\vector3.cpp" />
     <ClCompile Include="src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\includes\camera.h" />
+    <ClInclude Include="src\includes\color.h" />
+    <ClInclude Include="src\includes\hittable.h" />
+    <ClInclude Include="src\includes\interval.h" />
+    <ClInclude Include="src\includes\marge.h" />
+    <ClInclude Include="src\includes\objectlists.h" />
+    <ClInclude Include="src\includes\objects.h" />
+    <ClInclude Include="src\includes\ray.h" />
+    <ClInclude Include="src\includes\vector3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

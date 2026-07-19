@@ -14,9 +14,9 @@
 using std::make_shared;
 using std::shared_ptr;
 
-const double infinity;
-const double pi;
+extern const double infinity;
+extern const double pi;
 
-inline double degAsRad(double degrees);
-inline double randomDouble();
-inline double randomDouble(double min, double max);
+double degAsRad(double degrees);
+double randomDouble();
+double randomDouble(double min, double max);
