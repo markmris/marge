@@ -27,3 +27,6 @@ std::ostream& operator<<(const std::ostream& out, const vector3 &v);
 double dot(const vector3& v1, const vector3& v2);
 
 vector3 cross(const vector3 &a, const vector3 &b);
+
+vector3 randomVector();
+vector3 randomVector(double min, double max);

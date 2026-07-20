@@ -62,3 +62,13 @@ vector3 cross(const vector3 &a, const vector3 &b) {
 		a.x * b.y - a.y * b.x
 	);
 }
+
+vector3 randomVector()
+{
+	return vector3(randomDouble(), randomDouble(), randomDouble());
+}
+
+vector3 randomVector(double min, double max)
+{
+	return vector3(randomDouble(min, max), randomDouble(min, max), randomDouble(min, max));
+}
