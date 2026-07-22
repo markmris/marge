@@ -38,7 +38,7 @@ void camera::render(const hittable& world)
 			for (int sample = 0; sample < maxPixelSamples; sample++)
 			{
 				ray r = getRay(j, i);
-				pixelColor = rayColor(r, world) + pixelColor;
+				pixelColor = rayColor(r, maxDepth, world) + pixelColor;
 			}
 			
 			writeColor(std::cout, pixelColor * pixelSamplesScale);
@@ -48,13 +48,17 @@ void camera::render(const hittable& world)
 	std::clog << "\r---------------------- DONE ----------------------\n";
 }
 
-color3 camera::rayColor(const ray& r, const hittable& world) const
+color3 camera::rayColor(const ray& r, const int& depth, const hittable& world) const
 {
+	if (depth <= 0)
+		return color3(0, 0, 0);
+
 	hitdata hd;
 
 	if (world.hit(r, interval(0, infinity), hd))
 	{
-		return 0.5 * (hd.normal + color3(1, 1, 1));
+		vector3 direction = onHemisphere(hd.normal);
+		return 0.5 * rayColor(ray(hd.point, direction), maxDepth - 1, world);
 	}
 
 	vector3 normalDirection = normalized(r.direction);
