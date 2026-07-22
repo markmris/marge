@@ -72,3 +72,17 @@ vector3 randomVector(double min, double max)
 {
 	return vector3(randomDouble(min, max), randomDouble(min, max), randomDouble(min, max));
 }
+
+vector3 randomNormalVector()
+{
+	while (true)
+	{
+		vector3 p = randomVector(-1, 1);
+		auto lensq = p.magnitudeSqr();
+
+		if (lensq <= 1)
+		{
+			return p / sqrt(lensq);
+		}
+	}
+}
