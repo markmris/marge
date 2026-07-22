@@ -80,7 +80,7 @@ vector3 randomNormalVector()
 		vector3 p = randomVector(-1, 1);
 		auto lensq = p.magnitudeSqr();
 
-		if (lensq <= 1)
+		if (1e-160 < lensq && lensq <= 1)
 		{
 			return p / sqrt(lensq);
 		}
