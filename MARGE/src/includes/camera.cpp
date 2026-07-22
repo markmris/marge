@@ -58,7 +58,7 @@ color3 camera::rayColor(const ray& r, const int& depth, const hittable& world) c
 	if (world.hit(r, interval(0.002, infinity), hd))
 	{
 		vector3 direction = onHemisphere(hd.normal);
-		return 0.5 * rayColor(ray(hd.point, direction), maxDepth - 1, world);
+		return 0.5 * rayColor(ray(hd.point, direction), depth - 1, world);
 	}
 
 	vector3 normalDirection = normalized(r.direction);
