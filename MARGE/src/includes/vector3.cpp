@@ -86,3 +86,17 @@ vector3 randomNormalVector()
 		}
 	}
 }
+
+vector3 onHemisphere(const vector3& normal)
+{
+	vector3 onUnitSphere = randomNormalVector();
+
+	if (dot(normal, onUnitSphere) > 0.0)
+	{
+		return onUnitSphere;
+	}
+	else
+	{
+		return -1 * onUnitSphere;
+	}
+}
