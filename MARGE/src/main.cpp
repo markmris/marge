@@ -18,7 +18,7 @@ int main()
 	camera camera;
 	camera.aspectRatio = 16.0 / 9.0;
 	camera.imageWidth = 1080;
-	camera.maxPixelSamples = 2;
+	camera.maxPixelSamples = 100;
 	camera.maxDepth = 10;
 
 	// World Creation
