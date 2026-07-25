@@ -1,4 +1,4 @@
-# MARGE (v0.6.1) - Antialiasing Update
+# MARGE (v0.7) - Diffuse Material Update
 
 *MARGE - Modular Advanced Raytracing & Graphics Engine*
 
@@ -12,7 +12,7 @@ MARGE is a lightweight raytracing graphics engine built from scratch in raw C++.
 MARGE's goal is to build a clean, lightweight, easy-to-use, open-source graphics engine from the ground up, starting with single-image generation and gradually expanding into a frame-based renderer that can be used for game engines, CAD software, etc.
 
 ## Current Status
-MARGE is in early development (v0.6.1).  
+MARGE is in early development (v0.7).  
 At this stage, the focus is correctness and structure, not feature completeness.
 
 ## Current Features
@@ -20,11 +20,11 @@ At this stage, the focus is correctness and structure, not feature completeness.
 - Single PPM Image Output
 - Simple Camera Object
 - Ray-Sphere Intersection
-- Minimal Rendering Pipeline (Ray -> Math -> Pixel)
 - Antialiasing
+- Diffuse Materials
 
 ## Future/Planned Features
-- Different Materials (Reflective/Mirrors, Diffuse)
+- Additional Materials (Reflective, Glass, etc)
 - Various Different Shapes (Planes, Triangles, Boxes, etc.)
 - Lighting/Shadows
 - Performance Improvements
