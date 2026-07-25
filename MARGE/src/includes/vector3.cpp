@@ -62,3 +62,41 @@ vector3 cross(const vector3 &a, const vector3 &b) {
 		a.x * b.y - a.y * b.x
 	);
 }
+
+vector3 randomVector()
+{
+	return vector3(randomDouble(), randomDouble(), randomDouble());
+}
+
+vector3 randomVector(double min, double max)
+{
+	return vector3(randomDouble(min, max), randomDouble(min, max), randomDouble(min, max));
+}
+
+vector3 randomNormalVector()
+{
+	while (true)
+	{
+		vector3 p = randomVector(-1, 1);
+		auto lensq = p.magnitudeSqr();
+
+		if (1e-160 < lensq && lensq <= 1)
+		{
+			return p / sqrt(lensq);
+		}
+	}
+}
+
+vector3 onHemisphere(const vector3& normal)
+{
+	vector3 onUnitSphere = randomNormalVector();
+
+	if (dot(normal, onUnitSphere) > 0.0)
+	{
+		return onUnitSphere;
+	}
+	else
+	{
+		return -1 * onUnitSphere;
+	}
+}
