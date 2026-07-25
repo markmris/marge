@@ -32,7 +32,7 @@ At this stage, the focus is correctness and structure, not feature completeness.
 
 ## Build and Run
 
-*Warning: MARGE may not perform well on Windows. MacOS compatibility has not been tested. Linux is completely compatible.*
+*Warning: MARGE compatibility with MacOS has not yet been tested. MARGE is fully compatible with Windows and Linux.*
 
 MARGE uses a simple C++ build process with no external dependencies.
 
