@@ -34,3 +34,5 @@ vector3 randomVector(double min, double max);
 vector3 randomNormalVector();
 
 vector3 onHemisphere(const vector3& normal);
+
+vector3 reflect(const vector3& v, const vector3& n);

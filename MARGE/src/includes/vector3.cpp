@@ -107,3 +107,8 @@ vector3 onHemisphere(const vector3& normal)
 		return -1 * onUnitSphere;
 	}
 }
+
+vector3 reflect(const vector3& v, const vector3& n)
+{
+	return v - 2 * dot(v, n) * n;
+}
