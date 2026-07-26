@@ -3,9 +3,9 @@
 *MARGE - Modular Advanced Raytracing & Graphics Engine*
 
 ## Changes
-This update brings Gamma Correction into the engine. This highly increases the color accuracy and intensity in all renders.
+This update brings a brand new material into the engine, Metal. As of now, it just looks like a mirror. Fuzzy metal is the next step under development.
 
-<img width="1053" height="590" alt="Screenshot_2026-07-05_00-17-20" src="https://github.com/user-attachments/assets/6e81d30f-c862-436b-b5e9-5c3442a5f075" />
+<img width="2197" height="1236" alt="Screenshot 2026-07-26 133818" src="https://github.com/user-attachments/assets/5e27b8b5-2ef9-4cf0-a829-cc5624ed1798" />
 
 MARGE is a lightweight raytracing graphics engine built from scratch in raw C++. It's current main focus is building a solid understanding of graphics and rendering through minimal, controlled implementation of new concepts such as math, data types, etc.
 
