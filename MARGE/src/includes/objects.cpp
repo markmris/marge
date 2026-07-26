@@ -1,7 +1,7 @@
 #include "marge.h"
 #include "objects.h"
 
-sphere::sphere(const point3& position, double radius) : position(position), radius(std::fmax(0, radius)) {}
+sphere::sphere(const point3& position, double radius, shared_ptr<::material> material) : position(position), radius(std::fmax(0, radius)), material(material) {}
 
 bool sphere::hit(const ray& r, interval rayt, hitdata& hd) const
 {
