@@ -6,6 +6,7 @@ bool material::scatter(const ray& rayIn, const hitdata& hd, color3& attenuation,
 }
 
 diffuse::diffuse(const color3& albedo) : albedo(albedo) {}
+metal::metal(const color3& albedo) : albedo(albedo) {}
 
 bool diffuse::scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, ray& scattered) const
 {
@@ -15,6 +16,15 @@ bool diffuse::scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, 
 		scatterDirection = hd.normal;
 
 	scattered = ray(hd.point, scatterDirection);
+	attenuation = albedo;
+
+	return true;
+}
+
+bool metal::scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, ray& scattered) const
+{
+	vector3 reflected = reflect(rayIn.direction, hd.normal);
+	scattered = ray(hd.point, reflected);
 	attenuation = albedo;
 
 	return true;

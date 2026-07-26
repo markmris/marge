@@ -16,3 +16,11 @@ struct diffuse : public material
 	diffuse(const color3& albedo);
 	bool scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, ray& scattered) const override;
 };
+
+struct metal : public material
+{
+	color3 albedo;
+
+	metal(const color3& albedo);
+	bool scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, ray& scattered) const override;
+};
