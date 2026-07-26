@@ -7,7 +7,7 @@ bool material::scatter(const ray& rayIn, const hitdata& hd, color3& attenuation,
 
 diffuse::diffuse(const color3& albedo) : albedo(albedo) {}
 
-bool diffuse::scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, ray& scattered) const override
+bool diffuse::scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, ray& scattered) const
 {
 	vector3 scatterDirection = hd.normal + randomNormalVector();
 
