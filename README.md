@@ -1,4 +1,4 @@
-# MARGE (v0.8) - Gamma Correction Update
+# MARGE (v0.9) - Metal Material Update
 
 *MARGE - Modular Advanced Raytracing & Graphics Engine*
 
@@ -15,7 +15,7 @@ MARGE is a lightweight raytracing graphics engine built from scratch in raw C++.
 MARGE's goal is to build a clean, lightweight, easy-to-use, open-source graphics engine from the ground up, starting with single-image generation and gradually expanding into a frame-based renderer that can be used for game engines, CAD software, etc.
 
 ## Current Status
-MARGE is in early development (v0.8).  
+MARGE is in early development (v0.9).  
 At this stage, the focus is correctness and structure, not feature completeness.
 
 ## Current Features
@@ -25,9 +25,10 @@ At this stage, the focus is correctness and structure, not feature completeness.
 - Ray-Sphere Intersection
 - Antialiasing
 - Diffuse Materials
+- Metal/Mirror Materials
 
 ## Future/Planned Features
-- Additional Materials (Reflective, Glass, etc)
+- Additional Materials (Glass, etc)
 - Various Different Shapes (Planes, Triangles, Boxes, etc.)
 - Lighting/Shadows
 - Performance Improvements
