@@ -1,6 +1,9 @@
-# MARGE (v0.7.1) - Diffuse Material Update
+# MARGE (v0.8) - Gamma Correction Update
 
 *MARGE - Modular Advanced Raytracing & Graphics Engine*
+
+## Changes
+This update brings Gamma Correction into the engine. This highly increases the color accuracy and intensity in all renders.
 
 <img width="1053" height="590" alt="Screenshot_2026-07-05_00-17-20" src="https://github.com/user-attachments/assets/6e81d30f-c862-436b-b5e9-5c3442a5f075" />
 
@@ -12,7 +15,7 @@ MARGE is a lightweight raytracing graphics engine built from scratch in raw C++.
 MARGE's goal is to build a clean, lightweight, easy-to-use, open-source graphics engine from the ground up, starting with single-image generation and gradually expanding into a frame-based renderer that can be used for game engines, CAD software, etc.
 
 ## Current Status
-MARGE is in early development (v0.7.1).  
+MARGE is in early development (v0.8).  
 At this stage, the focus is correctness and structure, not feature completeness.
 
 ## Current Features
