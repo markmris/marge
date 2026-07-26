@@ -9,10 +9,11 @@ struct vector3
 	vector3();
 	vector3(double x, double y, double z);
 
-	vector3 operator +(const vector3 &v) const;
-	vector3 operator -(const vector3 &v) const;
-	vector3 operator *(const double &n) const;
-	vector3 operator /(const double &n) const;
+	vector3 operator +(const vector3& v) const;
+	vector3 operator -(const vector3& v) const;
+	vector3 operator *(const double& n) const;
+	vector3 operator *(const vector3& v) const;
+	vector3 operator /(const double& n) const;
 
 	double magnitude() const;
 	double magnitudeSqr() const;
