@@ -16,6 +16,8 @@ struct vector3
 
 	double magnitude() const;
 	double magnitudeSqr() const;
+
+	bool nearZero() const;
 };
 
 vector3 normalized(const vector3& v);

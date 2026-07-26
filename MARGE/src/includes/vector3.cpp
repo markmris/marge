@@ -38,6 +38,13 @@ double vector3::magnitudeSqr() const
 	return (x * x + y * y + z * z);
 }
 
+bool vector3::nearZero() const
+{
+	auto s = 1e-8;
+
+	return (std::fabs(this->x) < s) && (std::fabs(this->y) < s) && (std::fabs(this->z) < s);
+}
+
 
 // Handle reversed vector multiplication
 vector3 operator *(const double &n, const vector3 &v)
