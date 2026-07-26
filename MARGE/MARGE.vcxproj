@@ -132,6 +132,7 @@
     <ClCompile Include="src\includes\hittable.cpp" />
     <ClCompile Include="src\includes\interval.cpp" />
     <ClCompile Include="src\includes\marge.cpp" />
+    <ClCompile Include="src\includes\material.cpp" />
     <ClCompile Include="src\includes\objectlists.cpp" />
     <ClCompile Include="src\includes\objects.cpp" />
     <ClCompile Include="src\includes\ray.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="src\includes\hittable.h" />
     <ClInclude Include="src\includes\interval.h" />
     <ClInclude Include="src\includes\marge.h" />
+    <ClInclude Include="src\includes\material.h" />
     <ClInclude Include="src\includes\objectlists.h" />
     <ClInclude Include="src\includes\objects.h" />
     <ClInclude Include="src\includes\ray.h" />
