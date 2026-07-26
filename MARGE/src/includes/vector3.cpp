@@ -3,22 +3,27 @@
 vector3::vector3() : x(0), y(0), z(0) {}
 vector3::vector3(double x, double y, double z) : x(x), y(y), z(z) {}
 
-vector3 vector3::operator +(const vector3 &v) const
+vector3 vector3::operator +(const vector3& v) const
 {
 	return vector3(x + v.x, y + v.y, z + v.z);
 }
 
-vector3 vector3::operator -(const vector3 &v) const
+vector3 vector3::operator -(const vector3& v) const
 {
 	return vector3(x - v.x, y - v.y, z - v.z);
 }
 
-vector3 vector3::operator *(const double &n) const
+vector3 vector3::operator *(const double& n) const
 {
 	return vector3(x * n, y * n, z * n);
 }
 
-vector3 vector3::operator /(const double &n) const
+vector3 vector3::operator *(const vector3& v) const
+{
+	return vector3(x * v.x, y * v.y, z * v.z);
+}
+
+vector3 vector3::operator /(const double& n) const
 {
 	return vector3(x / n, y / n, z / n);
 }
@@ -36,6 +41,13 @@ double vector3::magnitude() const
 double vector3::magnitudeSqr() const
 {
 	return (x * x + y * y + z * z);
+}
+
+bool vector3::nearZero() const
+{
+	auto s = 1e-8;
+
+	return (std::fabs(this->x) < s) && (std::fabs(this->y) < s) && (std::fabs(this->z) < s);
 }
 
 
@@ -99,4 +111,9 @@ vector3 onHemisphere(const vector3& normal)
 	{
 		return -1 * onUnitSphere;
 	}
+}
+
+vector3 reflect(const vector3& v, const vector3& n)
+{
+	return v - 2 * dot(v, n) * n;
 }

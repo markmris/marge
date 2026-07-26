@@ -1,4 +1,5 @@
 #include "camera.h"
+#include "material.h"
 
 void camera::initialize()
 {
@@ -57,8 +58,13 @@ color3 camera::rayColor(const ray& r, const int& depth, const hittable& world) c
 
 	if (world.hit(r, interval(0.002, infinity), hd))
 	{
-		vector3 direction = hd.normal + randomNormalVector();
-		return 0.5 * rayColor(ray(hd.point, direction), depth - 1, world);
+		ray scattered;
+		color3 attenuation;
+
+		if (hd.material->scatter(r, hd, attenuation, scattered))
+			return attenuation * rayColor(scattered, depth - 1, world);
+
+		return color3(0, 0, 0);
 	}
 
 	vector3 normalDirection = normalized(r.direction);

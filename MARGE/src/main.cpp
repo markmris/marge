@@ -3,6 +3,7 @@
 #include "includes/hittable.h"
 #include "includes/objects.h"
 #include "includes/objectlists.h"
+#include "includes/material.h"
 
 /*
 	X: Positive X to the right, Negative to the left
@@ -23,9 +24,14 @@ int main()
 
 	// World Creation
 	objectlist world;
-	world.add(make_shared<sphere>(point3(-0.45, 0.3, 0.75), 0.3));
-	world.add(make_shared<sphere>(point3(0.8, 0.2, 1.7), 0.5));
-	world.add(make_shared<sphere>(point3(0, -100.5, 1), 100));
+
+	auto groundMaterial = make_shared<diffuse>(color3(0.478, 0.859, 0.031));
+	auto diffuseSphereMaterial = make_shared<diffuse>(color3(0, 0.733, 1));
+	auto metalSphereMaterial = make_shared<metal>(color3(0.8, 0.8, 0.8));
+
+	world.add(make_shared<sphere>(point3(0.8, 0, 1.2), 0.5, diffuseSphereMaterial));
+	world.add(make_shared<sphere>(point3(-0.6, 0.15, 1.2), 0.65, metalSphereMaterial));
+	world.add(make_shared<sphere>(point3(0, -100.5, 1), 100, groundMaterial));
 
 	camera.render(world);
 

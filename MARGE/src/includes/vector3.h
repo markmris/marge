@@ -9,13 +9,16 @@ struct vector3
 	vector3();
 	vector3(double x, double y, double z);
 
-	vector3 operator +(const vector3 &v) const;
-	vector3 operator -(const vector3 &v) const;
-	vector3 operator *(const double &n) const;
-	vector3 operator /(const double &n) const;
+	vector3 operator +(const vector3& v) const;
+	vector3 operator -(const vector3& v) const;
+	vector3 operator *(const double& n) const;
+	vector3 operator *(const vector3& v) const;
+	vector3 operator /(const double& n) const;
 
 	double magnitude() const;
 	double magnitudeSqr() const;
+
+	bool nearZero() const;
 };
 
 vector3 normalized(const vector3& v);
@@ -32,3 +35,5 @@ vector3 randomVector(double min, double max);
 vector3 randomNormalVector();
 
 vector3 onHemisphere(const vector3& normal);
+
+vector3 reflect(const vector3& v, const vector3& n);

@@ -1,7 +1,7 @@
 #include "marge.h"
 #include "objects.h"
 
-sphere::sphere(const point3& position, double radius) : position(position), radius(std::fmax(0, radius)) {}
+sphere::sphere(const point3& position, double radius, shared_ptr<::material> material) : position(position), radius(std::fmax(0, radius)), material(material) {}
 
 bool sphere::hit(const ray& r, interval rayt, hitdata& hd) const
 {
@@ -28,6 +28,7 @@ bool sphere::hit(const ray& r, interval rayt, hitdata& hd) const
     hd.t = root; // Closest point in the acceptable range that the ray hit
     hd.point = r.at(hd.t); // The world position of the hit
     hd.setFaceNormal(r, (hd.point - position) / radius);
+    hd.material = material;
 
     return true;
 }
