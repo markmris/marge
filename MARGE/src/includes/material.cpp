@@ -1,4 +1,5 @@
 #include "material.h"
+#include <algorithm>
 
 bool material::scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, ray& scattered) const
 {
