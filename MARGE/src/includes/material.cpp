@@ -24,8 +24,9 @@ bool diffuse::scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, 
 bool metal::scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, ray& scattered) const
 {
 	vector3 reflected = reflect(rayIn.direction, hd.normal);
+	reflected = normalized(reflected) + (fuzz * randomNormalVector());
 	scattered = ray(hd.point, reflected);
 	attenuation = albedo;
 
-	return true;
+	return dot(scattered.direction, hd.normal);
 }
