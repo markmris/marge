@@ -27,10 +27,12 @@ int main()
 
 	auto groundMaterial = make_shared<diffuse>(color3(0.478, 0.859, 0.031));
 	auto diffuseSphereMaterial = make_shared<diffuse>(color3(0, 0.733, 1));
-	auto metalSphereMaterial = make_shared<metal>(color3(0.8, 0.8, 0.8));
+	auto metalSphereMaterial_1 = make_shared<metal>(color3(0.8, 0.8, 0.8), 0);
+	auto metalSphereMaterial_2 = make_shared<metal>(color3(0.988, 0.984, 0.569), 0.7);
 
-	world.add(make_shared<sphere>(point3(0.8, 0, 1.2), 0.5, diffuseSphereMaterial));
-	world.add(make_shared<sphere>(point3(-0.6, 0.15, 1.2), 0.65, metalSphereMaterial));
+	world.add(make_shared<sphere>(point3(0, -0.05, 1.2), 0.45, diffuseSphereMaterial));
+	world.add(make_shared<sphere>(point3(-1, 0.05, 1.2), 0.55, metalSphereMaterial_1));
+	world.add(make_shared<sphere>(point3(1, 0.05, 1.2), 0.55, metalSphereMaterial_2));
 	world.add(make_shared<sphere>(point3(0, -100.5, 1), 100, groundMaterial));
 
 	camera.render(world);
