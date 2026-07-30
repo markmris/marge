@@ -6,7 +6,7 @@ bool material::scatter(const ray& rayIn, const hitdata& hd, color3& attenuation,
 }
 
 diffuse::diffuse(const color3& albedo) : albedo(albedo) {}
-metal::metal(const color3& albedo) : albedo(albedo) {}
+metal::metal(const color3& albedo, double fuzz) : albedo(albedo), fuzz(std::clamp(fuzz, 0.0, 1.0)) {}
 
 bool diffuse::scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, ray& scattered) const
 {
