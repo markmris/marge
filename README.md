@@ -1,11 +1,11 @@
-# MARGE (v0.9) - Metal Material Update
+# MARGE (v0.9.1) - Metal Material Update
 
 *MARGE - Modular Advanced Raytracing & Graphics Engine*
 
 ## Changes
-This update brings a brand new material into the engine, Metal. As of now, it just looks like a mirror. Fuzzy metal is the next step under development.
+This update brings a brand new material into the engine, Metal. Fuzzy metal was introduced in v0.9.1.
 
-<img width="2197" height="1236" alt="Screenshot 2026-07-26 133818" src="https://github.com/user-attachments/assets/5e27b8b5-2ef9-4cf0-a829-cc5624ed1798" />
+<img width="2196" height="1234" alt="Screenshot 2026-07-30 192350" src="https://github.com/user-attachments/assets/e7b78a84-ae17-40ec-b334-b9bfebb42783" />
 
 MARGE is a lightweight raytracing graphics engine built from scratch in raw C++. It's current main focus is building a solid understanding of graphics and rendering through minimal, controlled implementation of new concepts such as math, data types, etc.
 
@@ -15,7 +15,7 @@ MARGE is a lightweight raytracing graphics engine built from scratch in raw C++.
 MARGE's goal is to build a clean, lightweight, easy-to-use, open-source graphics engine from the ground up, starting with single-image generation and gradually expanding into a frame-based renderer that can be used for game engines, CAD software, etc.
 
 ## Current Status
-MARGE is in early development (v0.9).  
+MARGE is in early development (v0.9.1).  
 At this stage, the focus is correctness and structure, not feature completeness.
 
 ## Current Features
@@ -25,7 +25,7 @@ At this stage, the focus is correctness and structure, not feature completeness.
 - Ray-Sphere Intersection
 - Antialiasing
 - Diffuse Materials
-- Metal/Mirror Materials
+- Metal/Mirror Materials (With fuzz)
 
 ## Future/Planned Features
 - Additional Materials (Glass, etc)
