@@ -1,5 +1,6 @@
 #include "camera.h"
 #include "material.h"
+#include <algorithm>
 
 void camera::initialize()
 {
@@ -10,7 +11,7 @@ void camera::initialize()
 
 	aspectRatio = 16.0 / 9.0;
 	imageHeight = int(imageWidth / aspectRatio);
-	imageHeight = (imageHeight < 1) ? 1 : imageHeight;
+	imageHeight = std::max(1, imageHeight);
 
 	viewportHeight = 2.0;
 	viewportWidth = viewportHeight * (double(imageWidth) / double(imageHeight));
