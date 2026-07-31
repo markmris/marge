@@ -6,8 +6,11 @@ bool material::scatter(const ray& rayIn, const hitdata& hd, color3& attenuation,
 	return false;
 }
 
+
 diffuse::diffuse(const color3& albedo) : albedo(albedo) {}
-metal::metal(const color3& albedo, double fuzz) : albedo(albedo), fuzz(std::clamp(fuzz, 0.0, 1.0)) {}
+metal::metal(const color3& albedo, double& fuzz) : albedo(albedo), fuzz(std::clamp(fuzz, 0.0, 1.0)) {}
+dielectric::dielectric(double& refractionIndex) : refractionIndex(refractionIndex) {}
+
 
 bool diffuse::scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, ray& scattered) const
 {
@@ -30,4 +33,16 @@ bool metal::scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, ra
 	attenuation = albedo;
 
 	return dot(scattered.direction, hd.normal);
+}
+
+bool dielectric::scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, ray& scattered) const
+{
+	attenuation = color3(1, 1, 1);
+	double ri = hd.frontFace ? (1.0 / refractionIndex) : refractionIndex;
+
+	vector3 normalDirection = normalized(rayIn.direction);
+	vector3 refracted = refract(normalDirection, hd.normal, ri);
+
+	scattered = ray(hd.point, refracted);
+	return true;
 }

@@ -22,6 +22,14 @@ struct metal : public material
 	color3 albedo;
 	double fuzz;
 
-	metal(const color3& albedo, double fuzz);
+	metal(const color3& albedo, double& fuzz);
+	bool scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, ray& scattered) const override;
+};
+
+struct dielectric : public material
+{
+	double refractionIndex;
+	
+	dielectric(double& refractionIndex);
 	bool scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, ray& scattered) const override;
 };
