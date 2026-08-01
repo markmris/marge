@@ -121,7 +121,7 @@ vector3 reflect(const vector3& v, const vector3& n)
 vector3 refract(const vector3& uv, const vector3& n, double etaiOverEtat)
 {
 	auto cosTheta = std::fmin(dot(-1 * uv, n), 1.0);
-	vector3 rayOutPerpendicular = etaiOverEtat * (uv * cosTheta * n);
+	vector3 rayOutPerpendicular = etaiOverEtat * (uv + cosTheta * n);
 	vector3 rayOutParallel = -std::sqrt(std::fabs(1.0 - rayOutPerpendicular.magnitudeSqr())) * n;
 
 	return rayOutPerpendicular + rayOutParallel;
