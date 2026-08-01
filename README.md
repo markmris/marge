@@ -1,9 +1,9 @@
-# MARGE (v0.9.2) - Metal Material Update
+# MARGE (v0.10.0) - Dielectrics Update
 
 *MARGE - Modular Advanced Raytracing & Graphics Engine*<br>
 
 ## Changes
-This update brings a brand new material into the engine, Metal. Fuzzy metal was introduced in v0.9.1. v0.9.2 introduces minor changes for optimization and readability.<br><br>
+This update brings a new category of materials into the engine, dielectrics. The first dielectric introduced is a solid glass sphere.<br><br>
 
 <img width="2196" height="1234" alt="Screenshot 2026-07-30 192350" src="https://github.com/user-attachments/assets/e7b78a84-ae17-40ec-b334-b9bfebb42783" /><br>
 
@@ -15,7 +15,7 @@ MARGE is a lightweight raytracing graphics engine built from scratch in raw C++.
 MARGE's goal is to build a clean, lightweight, easy-to-use, open-source graphics engine from the ground up, starting with single-image generation and gradually expanding into a frame-based renderer that can be used for game engines, CAD software, etc.
 
 ## Current Status
-MARGE is in early development (v0.9.2).  
+MARGE is in early development (v0.10.0).  
 At this stage, the focus is correctness and structure, not feature completeness.
 
 ## Current Features
@@ -26,9 +26,10 @@ At this stage, the focus is correctness and structure, not feature completeness.
 - Antialiasing
 - Diffuse Materials
 - Metal/Mirror Materials (With fuzz)
+- Dielectrics (Glass)
 
 ## Future/Planned Features
-- Additional Materials (Glass, etc)
+- Additional Materials
 - Various Different Shapes (Planes, Triangles, Boxes, etc.)
 - Lighting/Shadows
 - Major Performance Improvements
