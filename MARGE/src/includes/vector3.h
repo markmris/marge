@@ -37,3 +37,4 @@ vector3 randomNormalVector();
 vector3 onHemisphere(const vector3& normal);
 
 vector3 reflect(const vector3& v, const vector3& n);
+vector3 refract(const vector3& uv, const vector3& n, double etaiOverEtat);
