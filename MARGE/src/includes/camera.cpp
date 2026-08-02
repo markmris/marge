@@ -4,16 +4,19 @@
 
 void camera::initialize()
 {
-	cameraPoint = point3(0, 0, 0);
-	focalLength = 1.0;
-
 	pixelSamplesScale = 1.0 / maxPixelSamples;
 
 	aspectRatio = 16.0 / 9.0;
 	imageHeight = int(imageWidth / aspectRatio);
 	imageHeight = std::max(1, imageHeight);
 
-	viewportHeight = 2.0;
+	cameraPoint = point3(0, 0, 0);
+	focalLength = 1.0;
+
+	auto theta = degAsRad(fov);
+	auto height = std::tan(theta/2);
+
+	viewportHeight = 2 * height * focalLength;
 	viewportWidth = viewportHeight * (double(imageWidth) / double(imageHeight));
 	viewportX = vector3(viewportWidth, 0, 0);
 	viewportY = vector3(0, -viewportHeight, 0);
