@@ -5,6 +5,7 @@
 #include <memory>
 #include <limits>
 #include <random>
+#include <numbers>
 
 #include "vector3.h"
 #include "ray.h"
