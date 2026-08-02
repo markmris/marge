@@ -61,3 +61,11 @@ bool dielectric::scatter(const ray& rayIn, const hitdata& hd, color3& attenuatio
 
 	return true;
 }
+
+double dielectric::reflectance(double cosine, double refractionIndex)
+{
+	auto r0 = (1 - refractionIndex) / (1 + refractionIndex);
+	r0 = r0 * r0;
+
+	return r0 + (1 - r0) * std::pow((1 - cosine), 5);
+}

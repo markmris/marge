@@ -32,4 +32,5 @@ struct dielectric : public material
 	
 	dielectric(double refractionIndex);
 	bool scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, ray& scattered) const override;
+	static double reflectance(double cosine, double refractionIndex);
 };
