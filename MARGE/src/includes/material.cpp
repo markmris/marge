@@ -43,6 +43,21 @@ bool dielectric::scatter(const ray& rayIn, const hitdata& hd, color3& attenuatio
 	vector3 normalDirection = normalized(rayIn.direction);
 	vector3 refracted = refract(normalDirection, hd.normal, ri);
 
+	double cosTheta = std::fmin(dot(-1 * normalDirection, hd.normal), 1.0);
+	double sinTheta = std::sqrt(1.0 - cosTheta * cosTheta);
+
+	vector3 direction;
+
+	if (ri * sinTheta > 1.0)
+	{
+		direction = reflect(normalDirection, hd.normal);
+	}
+	else
+	{
+		direction = refract(normalDirection, hd.normal, ri);
+	}
+
 	scattered = ray(hd.point, refracted);
+
 	return true;
 }
