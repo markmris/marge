@@ -1,9 +1,9 @@
-# MARGE (v0.10.0) - Dielectrics Update
+# MARGE (v0.10.1) - Dielectrics Update
 
 *MARGE - Modular Advanced Raytracing & Graphics Engine*<br>
 
 ## Changes
-This update brings a new category of materials into the engine, dielectrics. The first dielectric introduced is a solid glass sphere.<br><br>
+This update brings a new category of materials into the engine, dielectrics. The first dielectric introduced is a solid glass sphere. v0.10.1 includes minor edge case handling and introduces Schlick Approximation.<br><br>
 
 <img width="2196" height="1234" alt="Screenshot 2026-07-30 192350" src="https://github.com/user-attachments/assets/e7b78a84-ae17-40ec-b334-b9bfebb42783" /><br>
 
@@ -15,7 +15,7 @@ MARGE is a lightweight raytracing graphics engine built from scratch in raw C++.
 MARGE's goal is to build a clean, lightweight, easy-to-use, open-source graphics engine from the ground up, starting with single-image generation and gradually expanding into a frame-based renderer that can be used for game engines, CAD software, etc.
 
 ## Current Status
-MARGE is in early development (v0.10.0).  
+MARGE is in early development (v0.10.1).  
 At this stage, the focus is correctness and structure, not feature completeness.
 
 ## Current Features
@@ -43,7 +43,7 @@ MARGE uses a simple C++ build process with no external dependencies.
 
 ### Requirements
 
-You need a C++ compiler with C++17 support:
+You need a C++ compiler with C++ 17 support:
 
 - **macOS:** Apple Clang (via Xcode Command Line Tools)
 - **Linux:** g++ (GCC)
