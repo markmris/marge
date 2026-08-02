@@ -17,11 +17,14 @@ int main()
 	std::cin.tie(nullptr);
 
 	camera camera;
+	camera.cameraPoint = point3(-1, 0.5, 0);
 	camera.aspectRatio = 16.0 / 9.0;
 	camera.imageWidth = 1080;
 	camera.maxPixelSamples = 100;
-	camera.maxDepth = 10;
+	camera.maxDepth = 20;
 	camera.fov = 90;
+	camera.yaw = 30;
+	camera.pitch = -15;
 
 	// World Creation
 	objectlist world;
@@ -34,7 +37,7 @@ int main()
 
 	world.add(make_shared<sphere>(point3(0, -0.05, 1.2), 0.45, diffuseSphereMaterial));
 	world.add(make_shared<sphere>(point3(-1, 0.05, 1.2), 0.55, outerGlassSphere));
-	world.add(make_shared<sphere>(point3(-1, 0.05, 1.2), 0.45, innerGlassSphere));
+	world.add(make_shared<sphere>(point3(-1, 0.05, 1.2), 0.4, innerGlassSphere));
 	world.add(make_shared<sphere>(point3(1, 0.05, 1.2), 0.55, metalSphereMaterial));
 	world.add(make_shared<sphere>(point3(0, -100.5, 1), 100, groundMaterial));
 

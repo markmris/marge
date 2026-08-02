@@ -6,23 +6,33 @@ void camera::initialize()
 {
 	pixelSamplesScale = 1.0 / maxPixelSamples;
 
-	aspectRatio = 16.0 / 9.0;
 	imageHeight = int(imageWidth / aspectRatio);
 	imageHeight = std::max(1, imageHeight);
 
-	cameraPoint = point3(0, 0, 0);
 	focalLength = 1.0;
+
+	vup = vector3(0, 1, 0);
+	pitch = std::clamp(pitch, -89.999, 89.999);
+	pitchRad = degAsRad(pitch);
+	yawRad = degAsRad(yaw);
+
+	forward.x = std::cos(pitchRad) * std::sin(yawRad);
+	forward.y = std::sin(pitchRad);
+	forward.z = std::cos(pitchRad) * std::cos(yawRad);
+	forward = normalized(forward);
+	localRight = normalized(cross(vup, forward));
+	localUp = cross(forward, localRight);
 
 	auto theta = degAsRad(fov);
 	auto height = std::tan(theta/2);
 
 	viewportHeight = 2 * height * focalLength;
 	viewportWidth = viewportHeight * (double(imageWidth) / double(imageHeight));
-	viewportX = vector3(viewportWidth, 0, 0);
-	viewportY = vector3(0, -viewportHeight, 0);
+	viewportX = viewportWidth * localRight;
+	viewportY = -viewportHeight * localUp;
 	pixelDeltaX = viewportX / imageWidth;
 	pixelDeltaY = viewportY / imageHeight;
-	viewportUpperLeft = (cameraPoint + vector3(0, 0, focalLength)) - (viewportX / 2) - (viewportY / 2);
+	viewportUpperLeft = (cameraPoint + focalLength * forward) - (viewportX / 2) - (viewportY / 2);
 	viewportOrigin = viewportUpperLeft + (0.5 * (pixelDeltaX + pixelDeltaY));
 }
 
