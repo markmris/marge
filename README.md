@@ -1,11 +1,11 @@
-# MARGE (v0.10.2) - Dielectrics Update
+# MARGE (v0.11.0) - Camera Update
 
 *MARGE - Modular Advanced Raytracing & Graphics Engine*<br>
 
 ## Changes
-This update brings a new category of materials into the engine, dielectrics. The first dielectric introduced is a solid glass sphere. v0.10.1 includes minor edge case handling and introduces Schlick Approximation.<br><br>
+This update majorly reworks the camera in the renderer. Each render, the camera can be positioned anywhere, rotated anyhow, and zoomed any amount.<br><br>
 
-<img width="2196" height="1234" alt="Screenshot 2026-07-30 192350" src="https://github.com/user-attachments/assets/e7b78a84-ae17-40ec-b334-b9bfebb42783" /><br>
+<img width="2199" height="1234" alt="Screenshot 2026-08-02 193004" src="https://github.com/user-attachments/assets/19910c2b-b9a8-4b88-a265-f07f5fa9952d" /><br>
 
 MARGE is a lightweight raytracing graphics engine built from scratch in raw C++. It's current main focus is building a solid understanding of graphics and rendering through minimal, controlled implementation of new concepts such as math, data types, etc.
 
@@ -15,7 +15,7 @@ MARGE is a lightweight raytracing graphics engine built from scratch in raw C++.
 MARGE's goal is to build a clean, lightweight, easy-to-use, open-source graphics engine from the ground up, starting with single-image generation and gradually expanding into a frame-based renderer that can be used for game engines, CAD software, etc.
 
 ## Current Status
-MARGE is in early development (v0.10.2).  
+MARGE is in early development (v0.11.0).  
 At this stage, the focus is correctness and structure, not feature completeness.
 
 ## Current Features
@@ -27,6 +27,7 @@ At this stage, the focus is correctness and structure, not feature completeness.
 - Diffuse Materials
 - Metal/Mirror Materials (With fuzz)
 - Dielectrics (Glass)
+- Positionable/Rotatable/Zoomable Camera
 
 ## Future/Planned Features
 - Additional Materials
