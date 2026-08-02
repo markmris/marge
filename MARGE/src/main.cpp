@@ -27,11 +27,13 @@ int main()
 
 	auto groundMaterial = make_shared<diffuse>(color3(0.478, 0.859, 0.031));
 	auto diffuseSphereMaterial = make_shared<diffuse>(color3(0, 0.733, 1));
-	auto glassSphereMaterial = make_shared<dielectric>(1.6);
+	auto outerGlassSphere = make_shared<dielectric>(1.6);
+	auto innerGlassSphere = make_shared<dielectric>(1.0 / 1.6);
 	auto metalSphereMaterial = make_shared<metal>(color3(0.988, 0.984, 0.569), 0.7);
 
 	world.add(make_shared<sphere>(point3(0, -0.05, 1.2), 0.45, diffuseSphereMaterial));
-	world.add(make_shared<sphere>(point3(-1, 0.05, 1.2), 0.55, glassSphereMaterial));
+	world.add(make_shared<sphere>(point3(-1, 0.05, 1.2), 0.55, outerGlassSphere));
+	world.add(make_shared<sphere>(point3(-1, 0.05, 1.2), 0.45, innerGlassSphere));
 	world.add(make_shared<sphere>(point3(1, 0.05, 1.2), 0.55, metalSphereMaterial));
 	world.add(make_shared<sphere>(point3(0, -100.5, 1), 100, groundMaterial));
 
