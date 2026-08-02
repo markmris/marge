@@ -21,6 +21,7 @@ int main()
 	camera.imageWidth = 1080;
 	camera.maxPixelSamples = 100;
 	camera.maxDepth = 10;
+	camera.fov = 90;
 
 	// World Creation
 	objectlist world;

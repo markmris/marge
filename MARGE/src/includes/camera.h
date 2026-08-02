@@ -10,6 +10,7 @@ public:
 	int maxPixelSamples;
 	double pixelSamplesScale;
 	int maxDepth;
+	double fov;
 
 	void render(const hittable& world);
 private:
