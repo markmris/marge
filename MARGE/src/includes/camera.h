@@ -5,18 +5,31 @@
 struct camera
 {
 public:
+	point3 cameraPoint;
+
 	double aspectRatio;
 	int imageWidth;
 	int maxPixelSamples;
 	double pixelSamplesScale;
 	int maxDepth;
 
+	double fov;
+
+	double pitch;
+	double yaw;
+
 	void render(const hittable& world);
 private:
-	point3 cameraPoint;
 	double focalLength;
 
 	int imageHeight;
+
+	double pitchRad;
+	double yawRad;
+	vector3 vup;
+	vector3 forward;
+	vector3 localRight;
+	vector3 localUp;
 
 	double viewportHeight, viewportWidth;
 	vector3 viewportX, viewportY;
