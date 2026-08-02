@@ -48,7 +48,7 @@ bool dielectric::scatter(const ray& rayIn, const hitdata& hd, color3& attenuatio
 
 	vector3 direction;
 
-	if (ri * sinTheta > 1.0)
+	if (ri * sinTheta > 1.0 || reflectance(cosTheta, ri) > randomDouble())
 	{
 		direction = reflect(normalDirection, hd.normal);
 	}
