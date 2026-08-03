@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
 	camera.defocusAngle = 0.6;
 	camera.focusDistance = 2.0;
 
-	initializeEngine(argc, argv);
+	initializeEngine(argc, argv, camera);
 
 	// World Creation
 	objectlist world;

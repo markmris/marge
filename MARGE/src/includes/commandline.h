@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string_view>
+#include "camera.h"
 
 enum struct args 
 {
@@ -13,6 +14,6 @@ enum struct args
 
 constexpr std::string_view enumToString(args arg);
 
-args enumFromString(std::string str);
+args enumFromString(auto str);
 
-void initializeEngine(int argc, char* argv[]);
+void initializeEngine(int argc, char* argv[], camera camera);

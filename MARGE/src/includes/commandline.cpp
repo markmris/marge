@@ -14,7 +14,7 @@ constexpr std::string_view enumToString(args arg)
 	}
 }
 
-args enumFromString(std::string str)
+args enumFromString(auto str)
 {
 	if (str == "marge") return args::marge;
 	else if (str == "--pixelsamples") return args::pixelsamples;
@@ -23,15 +23,20 @@ args enumFromString(std::string str)
 	else if (str == "--defocusangle") return args::defocusangle;
 }
 
-void initializeEngine(int argc, char* argv[])
+void initializeEngine(int argc, char* argv[], camera camera)
 {
-	if (argc == 1 && (argv[0]) == "marge")
-		return;
-	else
-		throw std::invalid_argument(std::format("Invalid argument: Unknown keyword '{}'", argv[0]));
-
-	for (int i = 1; i <= argc; i++)
+	for (int i = 0; i < argc; i++)
 	{
+		switch (enumFromString(std::string(argv[i])))
+		{
+		case args::marge:
+			if (argc == 1)
+				return;
+			else
+				continue;
 
+		case args::pixelsamples:
+			
+		}
 	}
 }
