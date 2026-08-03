@@ -9,7 +9,12 @@ enum struct args
 	pixelsamples,
 	raydepth,
 	focusdistance,
-	defocusangle
+	defocusangle,
+	fov,
+	yaw,
+	pitch,
+
+	value // For handling numbers in enumFromString
 };
 
 args enumFromString(auto str);

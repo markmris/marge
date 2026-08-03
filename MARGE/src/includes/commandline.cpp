@@ -10,6 +10,10 @@ args enumFromString(auto str)
 	else if (str == "--raydepth") return args::raydepth;
 	else if (str == "--focusdistance") return args::focusdistance;
 	else if (str == "--defocusangle") return args::defocusangle;
+	else if (str == "--fov") return args::fov;
+	else if (str == "--pitch") return args::pitch;
+	else if (str == "--yaw") return args::yaw;
+	else return args::value;
 }
 
 void initializeEngine(int argc, char* argv[], camera camera)
@@ -56,7 +60,31 @@ void initializeEngine(int argc, char* argv[], camera camera)
 
 			break;
 
-		default:
+		case args::fov:
+			if (argv[i + 1] != nullptr)
+				setValue(&camera.fov, argv[i + 1]);
+			else
+				throw std::invalid_argument(std::format("Error: Additional argument expected after '{}'", argv[i]));
+
+			break;
+
+		case args::pitch:
+			if (argv[i + 1] != nullptr)
+				setValue(&camera.pitch, argv[i + 1]);
+			else
+				throw std::invalid_argument(std::format("Error: Additional argument expected after '{}'", argv[i]));
+
+			break;
+
+		case args::yaw:
+			if (argv[i + 1] != nullptr)
+				setValue(&camera.yaw, argv[i + 1]);
+			else
+				throw std::invalid_argument(std::format("Error: Additional argument expected after '{}'", argv[i]));
+
+			break;
+
+		case args::value:
 			break;
 		}
 	}
