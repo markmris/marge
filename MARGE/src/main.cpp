@@ -6,6 +6,7 @@
 #include "includes/material.h"
 #include "includes/commandline.h"
 #include <fstream>
+#include <string>
 
 /*
 	X: Positive X to the right, Negative to the left
@@ -40,8 +41,23 @@ int main(int argc, char* argv[])
 
 		if (help)
 		{
+			std::ifstream inFile("helpmessage.txt");
+
+			if (!inFile.is_open())
+			{
+				std::cerr << "Internal error. Please try again.";
+				return 0;
+			}
+
+			std::string line;
 			std::cout.rdbuf(originalBuffer);
-			std::cout << helpMessage;
+
+			while (std::getline(inFile, line))
+			{
+				std::cout << line << '\n';
+			}
+
+			inFile.close();
 
 			return 0;
 		}
