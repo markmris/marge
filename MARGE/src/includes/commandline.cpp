@@ -2,6 +2,9 @@
 #include <iostream>
 #include <format>
 #include <string>
+#include <typeindex>
+
+const std::string helpMessage = "This is the help message. You're welcome!";
 
 args enumFromString(auto str)
 {
@@ -13,20 +16,36 @@ args enumFromString(auto str)
 	else if (str == "--fov") return args::fov;
 	else if (str == "--pitch") return args::pitch;
 	else if (str == "--yaw") return args::yaw;
-	else return args::value;
+
+	else
+	{
+		try
+		{
+			str = std::stod(str);
+			return args::value;
+		}
+		catch (const std::exception& e)
+		{
+			throw std::invalid_argument(std::format("Invalid argument '{}'", str));
+		}
+	}
 }
 
-void initializeEngine(int argc, char* argv[], camera& camera)
+bool initializeEngine(int argc, char* argv[], camera& camera)
 {
 	for (int i = 1; i < argc; i++)
 	{
 		switch (enumFromString(std::string(argv[i])))
 		{
 		case args::help:
-			if (argc == 1)
-				return;
+			if (argv[i + 1] == nullptr)
+			{
+				return true;
+			}
 			else
+			{
 				throw std::invalid_argument("Error: --help must be used by itself with no additional arguments.");
+			}
 				
 			break;
 
@@ -90,6 +109,8 @@ void initializeEngine(int argc, char* argv[], camera& camera)
 			break;
 		}
 	}
+
+	return false;
 }
 
 void setValue(int* var, const char* i)

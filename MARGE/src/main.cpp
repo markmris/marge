@@ -36,7 +36,15 @@ int main(int argc, char* argv[])
 
 	try
 	{
-		initializeEngine(argc, argv, camera);
+		bool help = initializeEngine(argc, argv, camera);
+
+		if (help)
+		{
+			std::cout.rdbuf(originalBuffer);
+			std::cout << helpMessage;
+
+			return 0;
+		}
 	}
 	catch (const std::exception& e)
 	{
@@ -44,7 +52,6 @@ int main(int argc, char* argv[])
 
 		return 0;
 	}
-	
 
 	// World Creation
 	objectlist world;
