@@ -5,6 +5,7 @@
 #include "includes/objectlists.h"
 #include "includes/material.h"
 #include "includes/commandline.h"
+#include <fstream>
 
 /*
 	X: Positive X to the right, Negative to the left
@@ -16,6 +17,10 @@ int main(int argc, char* argv[])
 {
 	std::ios::sync_with_stdio(false);
 	std::cin.tie(nullptr);
+
+	std::ofstream outFile("image.ppm");
+	std::streambuf* originalBuffer = std::cout.rdbuf();
+	std::cout.rdbuf(outFile.rdbuf());
 
 	camera camera;
 	camera.cameraPoint = point3(-1, 0.5, 0);
@@ -48,5 +53,6 @@ int main(int argc, char* argv[])
 
 	camera.render(world);
 
+	std::cout.rdbuf(originalBuffer);
 	return 0;
 }

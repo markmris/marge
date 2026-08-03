@@ -16,9 +16,9 @@ args enumFromString(auto str)
 	else return args::value;
 }
 
-void initializeEngine(int argc, char* argv[], camera camera)
+void initializeEngine(int argc, char* argv[], camera& camera)
 {
-	for (int i = 0; i < argc; i++)
+	for (int i = 1; i < argc; i++)
 	{
 		switch (enumFromString(std::string(argv[i])))
 		{
