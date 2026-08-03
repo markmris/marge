@@ -13,4 +13,6 @@ enum struct args
 
 constexpr std::string_view enumToString(args arg);
 
+args enumFromString(std::string str);
+
 void initializeEngine(int argc, char* argv[]);

@@ -14,6 +14,15 @@ constexpr std::string_view enumToString(args arg)
 	}
 }
 
+args enumFromString(std::string str)
+{
+	if (str == "marge") return args::marge;
+	else if (str == "--pixelsamples") return args::pixelsamples;
+	else if (str == "--raydepth") return args::raydepth;
+	else if (str == "--focusdistance") return args::focusdistance;
+	else if (str == "--defocusangle") return args::defocusangle;
+}
+
 void initializeEngine(int argc, char* argv[])
 {
 	if (argc == 1 && (argv[0]) == "marge")
