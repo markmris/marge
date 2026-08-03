@@ -4,7 +4,7 @@
 
 enum struct args 
 {
-	marge,
+	help,
 	pixelsamples,
 	raydepth,
 	focusdistance,

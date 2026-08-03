@@ -5,7 +5,7 @@
 
 args enumFromString(auto str)
 {
-	if (str == "marge") return args::marge;
+	if (str == "--help") return args::help;
 	else if (str == "--pixelsamples") return args::pixelsamples;
 	else if (str == "--raydepth") return args::raydepth;
 	else if (str == "--focusdistance") return args::focusdistance;
@@ -22,11 +22,13 @@ void initializeEngine(int argc, char* argv[], camera& camera)
 	{
 		switch (enumFromString(std::string(argv[i])))
 		{
-		case args::marge:
+		case args::help:
 			if (argc == 1)
 				return;
 			else
-				break;
+				throw std::invalid_argument("Error: --help must be used by itself with no additional arguments.");
+				
+			break;
 
 		case args::pixelsamples:
 			if (argv[i + 1] != nullptr)

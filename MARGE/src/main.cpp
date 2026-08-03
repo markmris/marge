@@ -34,7 +34,17 @@ int main(int argc, char* argv[])
 	camera.defocusAngle = 0.6;
 	camera.focusDistance = 2.0;
 
-	initializeEngine(argc, argv, camera);
+	try
+	{
+		initializeEngine(argc, argv, camera);
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+
+		return 0;
+	}
+	
 
 	// World Creation
 	objectlist world;
