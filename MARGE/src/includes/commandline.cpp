@@ -3,18 +3,6 @@
 #include <format>
 #include <string>
 
-constexpr std::string_view enumToString(args arg)
-{
-	switch (arg)
-	{
-	case args::marge: return "marge";
-	case args::pixelsamples: return "--pixelsamples";
-	case args::raydepth: return "--raydepth";
-	case args::focusdistance: return "--focusdistance";
-	case args::defocusangle: return "--defocusangle";
-	}
-}
-
 args enumFromString(auto str)
 {
 	if (str == "marge") return args::marge;

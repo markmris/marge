@@ -12,8 +12,6 @@ enum struct args
 	defocusangle
 };
 
-constexpr std::string_view enumToString(args arg);
-
 args enumFromString(auto str);
 
 void initializeEngine(int argc, char* argv[], camera camera);
