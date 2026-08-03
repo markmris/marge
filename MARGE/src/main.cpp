@@ -6,8 +6,6 @@
 #include "includes/material.h"
 #include "includes/commandline.h"
 
-#include <format>
-
 /*
 	X: Positive X to the right, Negative to the left
 	Y: Positive Y upward, Negative Y downward, except viewport coordinates are inverted
