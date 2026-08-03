@@ -99,6 +99,17 @@ vector3 randomNormalVector()
 	}
 }
 
+vector3 randomInNormalDisk()
+{
+	while (true)
+	{
+		auto v = vector3(randomDouble(-1, 1), randomDouble(-1, 1), 0);
+
+		if (v.magnitudeSqr() < 1)
+			return v;
+	}
+}
+
 vector3 onHemisphere(const vector3& normal)
 {
 	vector3 onUnitSphere = randomNormalVector();

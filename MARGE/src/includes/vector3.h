@@ -33,6 +33,7 @@ vector3 cross(const vector3 &a, const vector3 &b);
 vector3 randomVector();
 vector3 randomVector(double min, double max);
 vector3 randomNormalVector();
+vector3 randomInNormalDisk();
 
 vector3 onHemisphere(const vector3& normal);
 
