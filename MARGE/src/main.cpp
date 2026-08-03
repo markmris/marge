@@ -25,6 +25,8 @@ int main()
 	camera.fov = 90;
 	camera.yaw = 30;
 	camera.pitch = -15;
+	camera.defocusAngle = 0.6;
+	camera.focusDistance = 2.0;
 
 	// World Creation
 	objectlist world;

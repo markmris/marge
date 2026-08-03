@@ -9,8 +9,6 @@ void camera::initialize()
 	imageHeight = int(imageWidth / aspectRatio);
 	imageHeight = std::max(1, imageHeight);
 
-	focalLength = 1.0;
-
 	vup = vector3(0, 1, 0);
 	pitch = std::clamp(pitch, -89.999, 89.999);
 	pitchRad = degAsRad(pitch);
@@ -24,16 +22,20 @@ void camera::initialize()
 	localUp = cross(forward, localRight);
 
 	auto theta = degAsRad(fov);
-	auto height = std::tan(theta/2);
+	auto height = std::tan(theta / 2);
 
-	viewportHeight = 2 * height * focalLength;
+	viewportHeight = 2 * height * focusDistance;
 	viewportWidth = viewportHeight * (double(imageWidth) / double(imageHeight));
 	viewportX = viewportWidth * localRight;
 	viewportY = -viewportHeight * localUp;
 	pixelDeltaX = viewportX / imageWidth;
 	pixelDeltaY = viewportY / imageHeight;
-	viewportUpperLeft = (cameraPoint + focalLength * forward) - (viewportX / 2) - (viewportY / 2);
+	viewportUpperLeft = (cameraPoint + focusDistance * forward) - (viewportX / 2) - (viewportY / 2);
 	viewportOrigin = viewportUpperLeft + (0.5 * (pixelDeltaX + pixelDeltaY));
+
+	auto defocusRadius = focusDistance * std::tan(degAsRad(defocusAngle / 2));
+	defocusDiskX = localRight * defocusRadius;
+	defocusDiskY = localUp * defocusRadius;
 }
 
 void camera::render(const hittable& world)
@@ -91,7 +93,7 @@ ray camera::getRay(int j, int i) const
 	vector3 offset = samplePixel();
 	point3 pixelSample = viewportOrigin + ((j + offset.x) * pixelDeltaX) + ((i + offset.y) * pixelDeltaY);
 
-	point3 rayOrigin = cameraPoint;
+	point3 rayOrigin = (defocusAngle <= 0) ? cameraPoint : defocusDiskSample();
 	vector3 rayDirection = pixelSample - rayOrigin;
 
 	return ray(rayOrigin, rayDirection);
@@ -100,4 +102,11 @@ ray camera::getRay(int j, int i) const
 vector3 camera::samplePixel() const
 {
 	return vector3(randomDouble() - 0.5, randomDouble() - 0.5, 0);
+}
+
+point3 camera::defocusDiskSample() const
+{
+	auto v = randomInNormalDisk();
+
+	return cameraPoint + (v.x * defocusDiskX) + (v.y * defocusDiskY);
 }
