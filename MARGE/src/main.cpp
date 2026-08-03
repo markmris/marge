@@ -4,6 +4,9 @@
 #include "includes/objects.h"
 #include "includes/objectlists.h"
 #include "includes/material.h"
+#include "includes/commandline.h"
+
+#include <format>
 
 /*
 	X: Positive X to the right, Negative to the left
@@ -11,7 +14,7 @@
 	Z: Positive Z forward, Negative Z backward
 */
 
-int main()
+int main(int argc, char* argv[])
 {
 	std::ios::sync_with_stdio(false);
 	std::cin.tie(nullptr);
@@ -27,6 +30,8 @@ int main()
 	camera.pitch = -15;
 	camera.defocusAngle = 0.6;
 	camera.focusDistance = 2.0;
+
+	initializeEngine(argc, argv);
 
 	// World Creation
 	objectlist world;
