@@ -2,6 +2,18 @@
 #include <iostream>
 #include <format>
 
+constexpr std::string_view enumToString(args arg)
+{
+	switch (arg)
+	{
+	case args::marge: return "marge";
+	case args::pixelsamples: return "--pixelsamples";
+	case args::raydepth: return "--raydepth";
+	case args::focusdistance: return "--focusdistance";
+	case args::defocusangle: return "--defocusangle";
+	}
+}
+
 void initializeEngine(int argc, char* argv[])
 {
 	if (argc == 1 && (argv[0]) == "marge")

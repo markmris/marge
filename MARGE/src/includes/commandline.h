@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string_view>
+
 enum struct args 
 {
 	marge,
@@ -8,5 +10,7 @@ enum struct args
 	focusdistance,
 	defocusangle
 };
+
+constexpr std::string_view enumToString(args arg);
 
 void initializeEngine(int argc, char* argv[]);
