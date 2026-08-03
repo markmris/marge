@@ -4,8 +4,6 @@
 #include <string>
 #include <typeindex>
 
-const std::string helpMessage = "This is the help message. You're welcome!";
-
 args enumFromString(auto str)
 {
 	if (str == "--help") return args::help;

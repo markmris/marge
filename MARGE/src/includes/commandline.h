@@ -2,8 +2,6 @@
 
 #include "camera.h"
 
-extern const std::string helpMessage;
-
 enum struct args 
 {
 	help,
