@@ -1,9 +1,9 @@
-# MARGE (v0.11.0) - Camera Update
+# MARGE (v0.12.0) - Camera Update v2
 
 *MARGE - Modular Advanced Raytracing & Graphics Engine*<br>
 
 ## Changes
-This update majorly reworks the camera in the renderer. Each render, the camera can be positioned anywhere, rotated anyhow, and zoomed any amount.<br><br>
+This update introduces camera blur to the engine. Blur is modifiable based on focus distance and lens size.<br><br>
 
 <img width="2199" height="1234" alt="Screenshot 2026-08-02 193004" src="https://github.com/user-attachments/assets/19910c2b-b9a8-4b88-a265-f07f5fa9952d" /><br>
 
@@ -15,7 +15,7 @@ MARGE is a lightweight raytracing graphics engine built from scratch in raw C++.
 MARGE's goal is to build a clean, lightweight, easy-to-use, open-source graphics engine from the ground up, starting with single-image generation and gradually expanding into a frame-based renderer that can be used for game engines, CAD software, etc.
 
 ## Current Status
-MARGE is in early development (v0.11.0).  
+MARGE is in early development (v0.12.0).  
 At this stage, the focus is correctness and structure, not feature completeness.
 
 ## Current Features
