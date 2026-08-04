@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
 	camera.maxDepth = 20;
 	camera.fov = 90;
 	camera.yaw = 0;
-	camera.pitch = -15;
+	camera.pitch = -25;
 	camera.defocusAngle = 0.6;
 	camera.focusDistance = 2.0;
 
@@ -77,14 +77,27 @@ int main(int argc, char* argv[])
 	auto groundMaterial = make_shared<diffuse>(color3(0.5, 0.5, 0.5));
 	world.add(make_shared<sphere>(point3(0, -1000.5, 1), 1000, groundMaterial));
 
-	point3 objectOrigin = camera.cameraPoint + camera.getForward() * 15;
+	hitdata hd;
+	ray objectOriginRay = ray(camera.cameraPoint, camera.getForward() - vector3(0, 0.1, 0));
+	point3 objectOrigin;
+	
+	if (world.hit(objectOriginRay, interval(0.01, infinity), hd))
+	{
+		objectOrigin = hd.point - normalized(objectOriginRay.direction) * 0.5;
+	}
+	else
+	{
+		std::cerr << "Scene generation failed. Please try again. (Maybe you modified pitch/yaw incorrectly?)";
+		return 0;
+	}
+	
 
 	for (int i = 0; i < globalObjectCount; i++)
 	{
 		auto randomMaterial = randomDouble();
 		shared_ptr<material> objectMaterial;
-		double radius = randomDouble(0.5, 1.5);
-		point3 position = point3(objectOrigin.x + randomDouble(-8, 8), radius, objectOrigin.z + randomDouble(-8, 8));
+		double radius = randomDouble(0.2, 0.8);
+		point3 position = point3(objectOrigin.x + randomDouble(-3, 3), radius, objectOrigin.z + randomDouble(-3, 3));
 
 		if (randomMaterial < 0.4) // Diffuse
 		{
