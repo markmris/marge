@@ -21,7 +21,9 @@ public:
 	double defocusAngle;
 	double focusDistance;
 
+	void initialize();
 	void render(const hittable& world);
+	vector3 getForward();
 private:
 	int imageHeight;
 
@@ -40,7 +42,6 @@ private:
 	vector3 defocusDiskX;
 	vector3 defocusDiskY;
 
-	void initialize();
 	color3 rayColor(const ray& r, const int& depth, const hittable& world) const;
 	vector3 samplePixel() const;
 	ray getRay(int j, int i) const;

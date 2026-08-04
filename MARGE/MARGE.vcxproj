@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="src\includes\camera.cpp" />
     <ClCompile Include="src\includes\color.cpp" />
+    <ClCompile Include="src\includes\commandline.cpp" />
     <ClCompile Include="src\includes\hittable.cpp" />
     <ClCompile Include="src\includes\interval.cpp" />
     <ClCompile Include="src\includes\marge.cpp" />
@@ -142,6 +143,7 @@
   <ItemGroup>
     <ClInclude Include="src\includes\camera.h" />
     <ClInclude Include="src\includes\color.h" />
+    <ClInclude Include="src\includes\commandline.h" />
     <ClInclude Include="src\includes\hittable.h" />
     <ClInclude Include="src\includes\interval.h" />
     <ClInclude Include="src\includes\marge.h" />

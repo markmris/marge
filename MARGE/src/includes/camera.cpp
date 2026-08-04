@@ -2,6 +2,8 @@
 #include "material.h"
 #include <algorithm>
 
+vector3 camera::getForward() { return forward; }
+
 void camera::initialize()
 {
 	pixelSamplesScale = 1.0 / maxPixelSamples;
@@ -40,8 +42,6 @@ void camera::initialize()
 
 void camera::render(const hittable& world)
 {
-	initialize();
-
 	std::cout << "P3\n" << imageWidth << ' ' << imageHeight << "\n255\n";
 
 	for (int i = 0; i < imageHeight; i++)
