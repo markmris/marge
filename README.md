@@ -21,7 +21,7 @@ This is a major update that brings custom command line parsing and random scene 
 
 --pitch (decimal) The up-down rotation of the camera. Set in degrees. Default set to -40.<br><br>
 
-<img width="2199" height="1234" alt="Screenshot 2026-08-02 193004" src="https://github.com/user-attachments/assets/19910c2b-b9a8-4b88-a265-f07f5fa9952d" /><br>
+<img width="2201" height="1232" alt="Screenshot 2026-08-04 152148" src="https://github.com/user-attachments/assets/90da2aa2-700d-449e-89ac-31e1440684c0" /><br>
 
 MARGE is a lightweight raytracing graphics engine built from scratch in raw C++. It's current main focus is building a solid understanding of graphics and rendering through minimal, controlled implementation of new concepts such as math, data types, etc.
 
