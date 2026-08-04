@@ -2,6 +2,8 @@
 #include "material.h"
 #include <algorithm>
 
+vector3 camera::getForward() { return forward; }
+
 void camera::initialize()
 {
 	pixelSamplesScale = 1.0 / maxPixelSamples;

@@ -22,6 +22,7 @@ public:
 	double focusDistance;
 
 	void render(const hittable& world);
+	vector3 getForward();
 private:
 	int imageHeight;
 
