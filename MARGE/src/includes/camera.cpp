@@ -42,8 +42,6 @@ void camera::initialize()
 
 void camera::render(const hittable& world)
 {
-	initialize();
-
 	std::cout << "P3\n" << imageWidth << ' ' << imageHeight << "\n255\n";
 
 	for (int i = 0; i < imageHeight; i++)
