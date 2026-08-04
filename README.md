@@ -1,9 +1,25 @@
-# MARGE (v0.12.0) - Camera Update v2
+# MARGE (v0.13.0) - Command Line and Scene Generation
 
 *MARGE - Modular Advanced Raytracing & Graphics Engine*<br>
 
 ## Changes
-This update introduces camera blur to the engine. Blur is modifiable based on focus distance and lens size.<br><br>
+This is a major update that brings custom command line parsing and random scene generation into the engine. Commands modify internal variables. The options are:
+
+--objectcount (integer) The amount of objects to be rendered in the scene. Has some performance impact the higher it is. Default set to 20
+
+--pixelsamples (integer). The higher this number is, the better the image looks, but the longer it takes to render. Default set to 32. Anything around 25 looks pretty good.
+
+--rayDepth (integer). The higher this is, the more realistic reflections will look. Default set to 13.
+
+--focusDistance (decimal) The distance from the camera where objects are perfectly in focus. This is disabled when defocusAngle is set to 0. Default set to 8.0.
+
+--defocusAngle (decimal). The higher this number is, the more blurred objects will look the further they are from the focus distance. Default set to 0.6.
+
+--fov (decimal). The lower this number is, the more zoomed in the camera is. Default set to 90.
+
+--yaw (decimal). The left-right rotation of the camera. Set in degrees. Default set to 0.
+
+--pitch (decimal) The up-down rotation of the camera. Set in degrees. Default set to -40.<br><br>
 
 <img width="2199" height="1234" alt="Screenshot 2026-08-02 193004" src="https://github.com/user-attachments/assets/19910c2b-b9a8-4b88-a265-f07f5fa9952d" /><br>
 
@@ -15,7 +31,7 @@ MARGE is a lightweight raytracing graphics engine built from scratch in raw C++.
 MARGE's goal is to build a clean, lightweight, easy-to-use, open-source graphics engine from the ground up, starting with single-image generation and gradually expanding into a frame-based renderer that can be used for game engines, CAD software, etc.
 
 ## Current Status
-MARGE is in early development (v0.12.0).  
+MARGE is in early development (v0.13.0).  
 At this stage, the focus is correctness and structure, not feature completeness.
 
 ## Current Features
@@ -28,6 +44,8 @@ At this stage, the focus is correctness and structure, not feature completeness.
 - Metal/Mirror Materials (With fuzz)
 - Dielectrics (Glass)
 - Positionable/Rotatable/Zoomable Camera
+- Camera Blur
+- Random scene generation
 
 ## Future/Planned Features
 - Additional Materials
