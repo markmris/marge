@@ -24,18 +24,18 @@ int main(int argc, char* argv[])
 	std::cout.rdbuf(outFile.rdbuf());
 
 	camera camera;
-	camera.cameraPoint = point3(13, 2, 3);
+	camera.cameraPoint = point3(13, 1.5, 3);
 	camera.aspectRatio = 16.0 / 9.0;
 	camera.imageWidth = 1080;
-	camera.maxPixelSamples = 100;
+	camera.maxPixelSamples = 32;
 	camera.maxDepth = 20;
 	camera.fov = 90;
 	camera.yaw = 0;
-	camera.pitch = -35;
+	camera.pitch = -45;
 	camera.defocusAngle = 0.6;
-	camera.focusDistance = 2.0;
+	camera.focusDistance = 8.0;
 
-	int globalObjectCount = 15;
+	int globalObjectCount = 20;
 
 	try
 	{
@@ -82,9 +82,6 @@ int main(int argc, char* argv[])
 	hitdata hd;
 	ray objectOriginRay = ray(camera.cameraPoint, camera.getForward());
 	point3 objectOrigin;
-	
-	vector3 f = camera.getForward();
-	std::clog << f.x << ' ' << f.y << ' ' << f.z;
 
 	if (world.hit(objectOriginRay, interval(0.01, infinity), hd))
 	{
@@ -95,33 +92,34 @@ int main(int argc, char* argv[])
 		std::cerr << "Scene generation failed. Please try again. (Maybe you modified pitch/yaw incorrectly?)";
 		return 0;
 	}
-	
-	world.add(make_shared<sphere>(objectOrigin, 1, make_shared<diffuse>(color3(1, 0 ,0))));
 
-	for (int i = 0; i < globalObjectCount; i++)
+	for (int x = -globalObjectCount / 4; x < globalObjectCount / 4; x++)
 	{
-		auto randomMaterial = randomDouble();
-		shared_ptr<material> objectMaterial;
-		double radius = randomDouble(0.2, 0.8);
-		point3 position = point3(objectOrigin.x + randomDouble(-3, 3), radius, objectOrigin.z + randomDouble(-3, 3));
+		for (int z = -globalObjectCount / 4; z < globalObjectCount / 4; z++)
+		{
+			auto randomMaterial = randomDouble();
+			shared_ptr<material> objectMaterial;
+			double radius = randomDouble(0.15, 0.5);
+			point3 position = point3(objectOrigin.x + x + randomDouble(-0.5, 0.5), radius, objectOrigin.z + z + randomDouble(-0.5, 0.5));
 
-		if (randomMaterial < 0.4) // Diffuse
-		{
-			auto albedo = color3(1, 1, 1) * randomNormalVector();
-			objectMaterial = make_shared<diffuse>(albedo);
-		}
-		else if (randomMaterial < 0.6) // Metal
-		{
-			auto albedo = color3(randomDouble(0, 0.51), randomDouble(0, 0.51), randomDouble(0, 0.51));
-			auto fuzz = randomDouble(0, 0.5);
-			objectMaterial = make_shared<metal>(albedo, fuzz);
-		}
-		else // Dielectric
-		{
-			objectMaterial = make_shared<dielectric>(randomDouble(1.5, 1.71));
-		}
+			if (randomMaterial < 0.4) // Diffuse
+			{
+				auto albedo = color3(1, 1, 1) * randomNormalVector();
+				objectMaterial = make_shared<diffuse>(albedo);
+			}
+			else if (randomMaterial < 0.6) // Metal
+			{
+				auto albedo = color3(randomDouble(0, 0.51), randomDouble(0, 0.51), randomDouble(0, 0.51));
+				auto fuzz = randomDouble(0, 0.5);
+				objectMaterial = make_shared<metal>(albedo, fuzz);
+			}
+			else // Dielectric
+			{
+				objectMaterial = make_shared<dielectric>(randomDouble(1.5, 1.71));
+			}
 
-		world.add(make_shared<sphere>(position, radius, objectMaterial));
+			world.add(make_shared<sphere>(position, radius, objectMaterial));
+		}
 	}
 	
 
