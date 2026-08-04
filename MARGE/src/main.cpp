@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
 	camera.aspectRatio = 16.0 / 9.0;
 	camera.imageWidth = 1080;
 	camera.maxPixelSamples = 32;
-	camera.maxDepth = 20;
+	camera.maxDepth = 13;
 	camera.fov = 90;
 	camera.yaw = 0;
 	camera.pitch = -45;
