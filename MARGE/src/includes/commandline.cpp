@@ -136,7 +136,7 @@ void setValue(double* var, const char* i, bool signPresent)
 {
 	try
 	{
-		signPresent ? *var = std::stod(i) : *var = std::abs(std::stod(i));
+		signPresent ? *var = std::stod(i) : *var = std::fabs(std::stod(i));
 		
 	}
 	catch (const std::exception& e)
