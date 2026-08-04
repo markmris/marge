@@ -24,13 +24,13 @@ int main(int argc, char* argv[])
 	std::cout.rdbuf(outFile.rdbuf());
 
 	camera camera;
-	camera.cameraPoint = point3(-1, 0.5, 0);
+	camera.cameraPoint = point3(13, 2, 3);
 	camera.aspectRatio = 16.0 / 9.0;
 	camera.imageWidth = 1080;
 	camera.maxPixelSamples = 100;
 	camera.maxDepth = 20;
 	camera.fov = 90;
-	camera.yaw = 30;
+	camera.yaw = 0;
 	camera.pitch = -15;
 	camera.defocusAngle = 0.6;
 	camera.focusDistance = 2.0;
@@ -77,15 +77,33 @@ int main(int argc, char* argv[])
 	auto groundMaterial = make_shared<diffuse>(color3(0.5, 0.5, 0.5));
 	world.add(make_shared<sphere>(point3(0, -1000.5, 1), 1000, groundMaterial));
 
-	auto diffuseSphereMaterial = make_shared<diffuse>(color3(0, 0.733, 1));
-	auto outerGlassSphere = make_shared<dielectric>(1.6);
-	auto innerGlassSphere = make_shared<dielectric>(1.0 / 1.6);
-	auto metalSphereMaterial = make_shared<metal>(color3(0.988, 0.984, 0.569), 0.7);
+	point3 objectOrigin = camera.cameraPoint + camera.getForward() * 15;
 
-	world.add(make_shared<sphere>(point3(0, -0.05, 1.2), 0.45, diffuseSphereMaterial));
-	world.add(make_shared<sphere>(point3(-1, 0.05, 1.2), 0.55, outerGlassSphere));
-	world.add(make_shared<sphere>(point3(-1, 0.05, 1.2), 0.4, innerGlassSphere));
-	world.add(make_shared<sphere>(point3(1, 0.05, 1.2), 0.55, metalSphereMaterial));
+	for (int i = 0; i < globalObjectCount; i++)
+	{
+		auto randomMaterial = randomDouble();
+		shared_ptr<material> objectMaterial;
+		double radius = randomDouble(0.5, 1.5);
+		point3 position = point3(objectOrigin.x + randomDouble(-8, 8), radius, objectOrigin.z + randomDouble(-8, 8));
+
+		if (randomMaterial < 0.4) // Diffuse
+		{
+			auto albedo = color3(1, 1, 1) * randomNormalVector();
+			objectMaterial = make_shared<diffuse>(albedo);
+		}
+		else if (randomMaterial < 0.6) // Metal
+		{
+			auto albedo = color3(randomDouble(0, 0.51), randomDouble(0, 0.51), randomDouble(0, 0.51));
+			auto fuzz = randomDouble(0, 0.5);
+			objectMaterial = make_shared<metal>(albedo, fuzz);
+		}
+		else // Dielectric
+		{
+			objectMaterial = make_shared<dielectric>(randomDouble(1.5, 1.71));
+		}
+
+		world.add(make_shared<sphere>(position, radius, objectMaterial));
+	}
 	
 
 	camera.render(world);
