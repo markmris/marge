@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
 	camera.maxDepth = 20;
 	camera.fov = 90;
 	camera.yaw = 0;
-	camera.pitch = -25;
+	camera.pitch = -35;
 	camera.defocusAngle = 0.6;
 	camera.focusDistance = 2.0;
 
@@ -71,6 +71,8 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
+	camera.initialize();
+
 	// World Creation
 	objectlist world;
 
@@ -78,9 +80,12 @@ int main(int argc, char* argv[])
 	world.add(make_shared<sphere>(point3(0, -1000.5, 1), 1000, groundMaterial));
 
 	hitdata hd;
-	ray objectOriginRay = ray(camera.cameraPoint, camera.getForward() - vector3(0, 0.1, 0));
+	ray objectOriginRay = ray(camera.cameraPoint, camera.getForward());
 	point3 objectOrigin;
 	
+	vector3 f = camera.getForward();
+	std::clog << f.x << ' ' << f.y << ' ' << f.z;
+
 	if (world.hit(objectOriginRay, interval(0.01, infinity), hd))
 	{
 		objectOrigin = hd.point - normalized(objectOriginRay.direction) * 0.5;
@@ -91,6 +96,7 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 	
+	world.add(make_shared<sphere>(objectOrigin, 1, make_shared<diffuse>(color3(1, 0 ,0))));
 
 	for (int i = 0; i < globalObjectCount; i++)
 	{
