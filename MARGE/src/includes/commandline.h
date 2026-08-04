@@ -12,12 +12,13 @@ enum struct args
 	fov,
 	yaw,
 	pitch,
+	objectcount,
 
 	value // For handling numbers in enumFromString
 };
 
 args enumFromString(auto str);
 
-bool initializeEngine(int argc, char* argv[], camera& camera);
+bool initializeEngine(int argc, char* argv[], camera& camera, int& globalObjectCount);
 void setValue(int* var, const char* i);
 void setValue(double* var, const char* i);

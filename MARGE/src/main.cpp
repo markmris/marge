@@ -35,9 +35,11 @@ int main(int argc, char* argv[])
 	camera.defocusAngle = 0.6;
 	camera.focusDistance = 2.0;
 
+	int globalObjectCount = 15;
+
 	try
 	{
-		bool help = initializeEngine(argc, argv, camera);
+		bool help = initializeEngine(argc, argv, camera, globalObjectCount);
 
 		if (help)
 		{
@@ -72,7 +74,9 @@ int main(int argc, char* argv[])
 	// World Creation
 	objectlist world;
 
-	auto groundMaterial = make_shared<diffuse>(color3(0.478, 0.859, 0.031));
+	auto groundMaterial = make_shared<diffuse>(color3(0.5, 0.5, 0.5));
+	world.add(make_shared<sphere>(point3(0, -1000.5, 1), 1000, groundMaterial));
+
 	auto diffuseSphereMaterial = make_shared<diffuse>(color3(0, 0.733, 1));
 	auto outerGlassSphere = make_shared<dielectric>(1.6);
 	auto innerGlassSphere = make_shared<dielectric>(1.0 / 1.6);
@@ -82,7 +86,7 @@ int main(int argc, char* argv[])
 	world.add(make_shared<sphere>(point3(-1, 0.05, 1.2), 0.55, outerGlassSphere));
 	world.add(make_shared<sphere>(point3(-1, 0.05, 1.2), 0.4, innerGlassSphere));
 	world.add(make_shared<sphere>(point3(1, 0.05, 1.2), 0.55, metalSphereMaterial));
-	world.add(make_shared<sphere>(point3(0, -100.5, 1), 100, groundMaterial));
+	
 
 	camera.render(world);
 

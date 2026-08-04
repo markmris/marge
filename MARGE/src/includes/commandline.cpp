@@ -14,6 +14,7 @@ args enumFromString(auto str)
 	else if (str == "--fov") return args::fov;
 	else if (str == "--pitch") return args::pitch;
 	else if (str == "--yaw") return args::yaw;
+	else if (str == "--objectcount") return args::objectcount;
 
 	else
 	{
@@ -29,7 +30,7 @@ args enumFromString(auto str)
 	}
 }
 
-bool initializeEngine(int argc, char* argv[], camera& camera)
+bool initializeEngine(int argc, char* argv[], camera& camera, int& globalObjectCount)
 {
 	for (int i = 1; i < argc; i++)
 	{
@@ -102,6 +103,12 @@ bool initializeEngine(int argc, char* argv[], camera& camera)
 				throw std::invalid_argument(std::format("Error: Additional argument expected after '{}'", argv[i]));
 
 			break;
+
+		case args::objectcount:
+			if (argv[i + 1] != nullptr)
+				setValue(&globalObjectCount, argv[i + 1]);
+			else
+				throw std::invalid_argument(std::format("Error: Additional argument expected after '{}'", argv[i]));
 
 		case args::value:
 			break;
