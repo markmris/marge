@@ -110,6 +110,8 @@ bool initializeEngine(int argc, char* argv[], camera& camera, int& globalObjectC
 			else
 				throw std::invalid_argument(std::format("Error: Additional argument expected after '{}'", argv[i]));
 
+			break;
+
 		case args::value:
 			break;
 		}
