@@ -53,17 +53,28 @@ At this stage, the focus is correctness and structure, not feature completeness.
 - Lighting/Shadows
 - Major Performance Improvements
 - Frame-Based Rendering
+- MacOS Compatibility
 
-## Build and Run
+## Install and Run
 
-*Warning: MARGE compatibility with MacOS has not yet been tested. MARGE is fully compatible with Windows and Linux.*
+*MARGE does not have a readily available MacOS executable yet. There are executables available for Windows and Debian (.deb) Linux systems.*<br>
 
-MARGE uses a simple C++ build process with no external dependencies.
+### Step 1: 
+Go to the latest release page (https://github.com/markmris/marge/releases/tag/v0.13.0) and download MARGE.zip for windows or MARGE.tar.gz for Linux.<br>
 
-### Requirements
+### Step 2:
+Extract the file wherever.<br>
 
-You need a C++ compiler with C++ 20 support:
+### Step 3:
+Open a terminal and run this command:
+`
+cd ~/path-to/MARGE
+` (Replace path-to with the file path to the folder. For example, Documents/"Hack Club"/MARGE)<br>
 
-- **macOS:** Apple Clang (via Xcode Command Line Tools)
-- **Linux:** g++ (GCC)
-- **Windows:** MinGW-w64 or MSYS2 (g++)
+### Step 4:
+Run this command FIRST to gain a short overview on how to use MARGE: 
+`
+./MARGE --help
+`<br>
+
+## Step 5: Use MARGE however you like!
