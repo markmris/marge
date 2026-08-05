@@ -7,7 +7,7 @@ This is a major update that brings custom command line parsing and random scene 
 
 --objectcount (integer) The amount of objects to be rendered in the scene. Has some performance impact the higher it is. Default set to 20
 
---pixelsamples (integer). The higher this number is, the better the image looks, but the longer it takes to render. Default set to 32. Anything around 25 looks pretty good.
+--pixelsamples (integer). The higher this number is, the better the image looks, but the longer it takes to render. Default set to 32. Anything around 50 looks pretty good.
 
 --rayDepth (integer). The higher this is, the more realistic reflections will look. Default set to 13.
 
