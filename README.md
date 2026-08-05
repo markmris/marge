@@ -77,4 +77,7 @@ Run this command FIRST to gain a short overview on how to use MARGE:
 ./MARGE --help
 `<br>
 
-## Step 5: Use MARGE however you like!
+## Step 5:
+In the MARGE folder, look for a new file called "image.ppm". Open it (Note: On Windows, you will need an app that supports .ppm image files, GIMP, Portable Images Viewer, and Krita are free ones that work.)
+
+## Step 6: Use MARGE however you like!
