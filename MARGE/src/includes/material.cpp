@@ -19,7 +19,7 @@ bool diffuse::scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, 
 	if (scatterDirection.nearZero())
 		scatterDirection = hd.normal;
 
-	scattered = ray(hd.point, scatterDirection);
+	scattered = ray(hd.point, scatterDirection, rayIn.time);
 	attenuation = albedo;
 
 	return true;
@@ -29,7 +29,7 @@ bool metal::scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, ra
 {
 	vector3 reflected = reflect(rayIn.direction, hd.normal);
 	reflected = normalized(reflected) + (fuzz * randomNormalVector());
-	scattered = ray(hd.point, reflected);
+	scattered = ray(hd.point, reflected, rayIn.time);
 	attenuation = albedo;
 
 	return dot(scattered.direction, hd.normal);
@@ -57,7 +57,7 @@ bool dielectric::scatter(const ray& rayIn, const hitdata& hd, color3& attenuatio
 		direction = refract(normalDirection, hd.normal, ri);
 	}
 
-	scattered = ray(hd.point, refracted);
+	scattered = ray(hd.point, refracted, rayIn.time);
 
 	return true;
 }

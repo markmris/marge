@@ -6,8 +6,8 @@ void getSphereUV(const point3& point, double& horizontalCoord, double& verticalC
     auto theta = std::acos(-point.y);
     auto phi = std::atan2(-point.z, -point.x) + pi;
 
-    u = phi / (2 * pi);
-    v = theta / pi;
+    horizontalCoord = phi / (2 * pi);
+    verticalCoord = theta / pi;
 }
 
 sphere::sphere(const point3& position, double radius, shared_ptr<::material> material) : position(position, vector3(0, 0, 0)), radius(std::fmax(0, radius)), material(material) {}
