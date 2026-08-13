@@ -1,7 +1,7 @@
 #include "marge.h"
 #include "objects.h"
 
-void getSphereUV(const point3& point, double& u, double& v)
+void getSphereUV(const point3& point, double& horizontalCoord, double& verticalCoord)
 {
     auto theta = std::acos(-point.y);
     auto phi = std::atan2(-point.z, -point.x) + pi;
