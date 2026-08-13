@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
 	camera.yaw = 0;
 	camera.pitch = -45;
 	camera.defocusAngle = 0.6;
-	camera.focusDistance = 8.0;
+	camera.focusDistance = 2.5;
 
 	int globalObjectCount = 20;
 
@@ -93,12 +93,13 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
+	shared_ptr<material> objectMaterial;
+
 	for (int x = -globalObjectCount / 4; x < globalObjectCount / 4; x++)
 	{
 		for (int z = -globalObjectCount / 4; z < globalObjectCount / 4; z++)
 		{
 			auto randomMaterial = randomDouble();
-			shared_ptr<material> objectMaterial;
 			double radius = randomDouble(0.15, 0.5);
 			point3 position = point3(objectOrigin.x + x + randomDouble(-0.5, 0.5), radius, objectOrigin.z + z + randomDouble(-0.5, 0.5));
 
