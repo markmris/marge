@@ -16,6 +16,9 @@ struct hitdata
 
     shared_ptr<::material> material;
 
+    double horizontalCoord;
+    double verticalCoord;
+
     // Determines whether the ray hit the inside or the outside of the sphere.
     void setFaceNormal(const ray& r, const vector3& outwardNormal);
 };

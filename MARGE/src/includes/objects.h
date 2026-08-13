@@ -2,7 +2,7 @@
 
 #include "hittable.h"
 
-void getSphereUV(const point3& point, double& u, double& v);
+void getSphereUV(const point3& point, double& horizontalCoord, double& verticalCoord);
 
 struct sphere : public hittable
 {
