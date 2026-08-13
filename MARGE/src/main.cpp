@@ -99,19 +99,23 @@ int main(int argc, char* argv[])
 	{
 		for (int z = -globalObjectCount / 4; z < globalObjectCount / 4; z++)
 		{
-			auto randomMaterial = randomDouble();
+			double randomMaterial = randomDouble();
 			double radius = randomDouble(0.15, 0.5);
 			point3 position = point3(objectOrigin.x + x + randomDouble(-0.5, 0.5), radius, objectOrigin.z + z + randomDouble(-0.5, 0.5));
 
-			if (randomMaterial < 0.4) // Diffuse
+			if (randomMaterial < 0.75) // Diffuse
 			{
-				auto albedo = color3(1, 1, 1) * randomNormalVector();
+				color3 albedo = color3(1, 1, 1) * randomNormalVector();
 				objectMaterial = make_shared<diffuse>(albedo);
+				point3 position2 = position + vector3(0, randomDouble(0, 0.5), 0);
+				
+				world.add(make_shared<sphere>(position, position2, radius, objectMaterial));
+				continue;
 			}
-			else if (randomMaterial < 0.6) // Metal
+			else if (randomMaterial < 0.85) // Metal
 			{
-				auto albedo = color3(randomDouble(0, 0.51), randomDouble(0, 0.51), randomDouble(0, 0.51));
-				auto fuzz = randomDouble(0, 0.5);
+				color3 albedo = color3(randomDouble(0, 0.51), randomDouble(0, 0.51), randomDouble(0, 0.51));
+				double fuzz = randomDouble(0, 0.5);
 				objectMaterial = make_shared<metal>(albedo, fuzz);
 			}
 			else // Dielectric
