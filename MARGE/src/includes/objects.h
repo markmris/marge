@@ -2,6 +2,8 @@
 
 #include "hittable.h"
 
+void getSphereUV(const point3& point, double& u, double& v);
+
 struct sphere : public hittable
 {
     ray position;
