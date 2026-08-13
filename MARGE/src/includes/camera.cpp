@@ -95,8 +95,9 @@ ray camera::getRay(int j, int i) const
 
 	point3 rayOrigin = (defocusAngle <= 0) ? cameraPoint : defocusDiskSample();
 	vector3 rayDirection = pixelSample - rayOrigin;
+	double rayTime = randomDouble();
 
-	return ray(rayOrigin, rayDirection);
+	return ray(rayOrigin, rayDirection, rayTime);
 }
 
 vector3 camera::samplePixel() const
