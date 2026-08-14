@@ -43,23 +43,9 @@ int main(int argc, char* argv[])
 
 		if (help)
 		{
-			std::ifstream inFile("helpmessage.txt");
-
-			if (!inFile.is_open())
-			{
-				std::cerr << "Internal error. Please try again.";
-				return 0;
-			}
-
-			std::string line;
 			std::cout.rdbuf(originalBuffer);
-
-			while (std::getline(inFile, line))
-			{
-				std::cout << line << '\n';
-			}
-
-			inFile.close();
+			
+			std::cout << helpmessage;
 
 			return 0;
 		}
