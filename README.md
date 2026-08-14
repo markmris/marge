@@ -41,28 +41,28 @@ At this stage, the focus is correctness and structure, not feature completeness.
 
 ### v0.13.0 introduced custom commands for MARGE to be run from the terminal. Instead of modifying variables and recompiling, variables are now modifiable through the command line. The options are:
 
---objectcount (integer) The amount of objects to be rendered in the scene. Has some performance impact the higher it is. Default set to 20
+objectcount (integer) The amount of objects to be rendered in the scene. Has some performance impact the higher it is. Default set to 20
 
---pixelsamples (integer). The higher this number is, the better the image looks, but the longer it takes to render. Default set to 32. Anything around 50 looks pretty good.
+pixelsamples (integer). The higher this number is, the better the image looks, but the longer it takes to render. Default set to 32. Anything around 50 looks pretty good.
 
---rayDepth (integer). The higher this is, the more realistic reflections will look. Default set to 13.
+rayDepth (integer). The higher this is, the more realistic reflections will look. Default set to 13.
 
---focusDistance (decimal) The distance from the camera where objects are perfectly in focus. This is disabled when defocusAngle is set to 0. Default set to 8.0.
+focusDistance (decimal) The distance from the camera where objects are perfectly in focus. This is disabled when defocusAngle is set to 0. Default set to 8.0.
 
---defocusAngle (decimal). The higher this number is, the more blurred objects will look the further they are from the focus distance. Default set to 0.6.
+defocusAngle (decimal). The higher this number is, the more blurred objects will look the further they are from the focus distance. Default set to 0.6.
 
---fov (decimal). The lower this number is, the more zoomed in the camera is. Default set to 90.
+fov (decimal). The lower this number is, the more zoomed in the camera is. Default set to 90.
 
---yaw (decimal). The left-right rotation of the camera. Set in degrees. Default set to 0.
+yaw (decimal). The left-right rotation of the camera. Set in degrees. Default set to 0.
 
---pitch (decimal) The up-down rotation of the camera. Set in degrees. Default set to -40.<br><br>
+pitch (decimal) The up-down rotation of the camera. Set in degrees. Default set to -40.<br><br>
 
 ## Install and Run
 
 *MARGE does not have a readily available MacOS executable yet. There are executables available for Windows and Debian (.deb) Linux systems.*<br>
 
 ### Step 1: 
-Go to the latest release page (https://github.com/markmris/marge/releases/tag/v0.13.0) and download MARGE.zip for windows or MARGE.tar.gz for Linux.<br>
+***(For Hack Club reviewers, please download v0.13.0)***<br> Go to the latest release page (https://github.com/markmris/marge/releases/tag/v0.13.0) and download MARGE.zip for windows or MARGE.tar.gz for Linux.<br>
 
 ### Step 2:
 Extract the file wherever.<br>
