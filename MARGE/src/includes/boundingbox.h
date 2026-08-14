@@ -12,5 +12,5 @@ struct boundingbox
 
 	const interval& axisInterval(int& n) const;
 
-	bool hit(const ray& r, interval rayT) const;
+	bool hit(const ray& r, interval& rayT) const;
 };

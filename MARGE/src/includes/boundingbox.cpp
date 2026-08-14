@@ -16,3 +16,30 @@ const interval& boundingbox::axisInterval(int& n) const
 	else if (n == 1) return y;
 	else return z;
 }
+
+bool boundingbox::hit(const ray& r, interval& rayT) const
+{
+	for (int axis = 0; axis < 3; axis++)
+	{
+		const interval& ax = axisInterval(axis);
+		const double adinv = 1.0 / r.direction[axis];
+
+		double intersection1 = (ax.min - r.origin[axis]) * adinv;
+		double intersection2 = (ax.max - r.origin[axis]) * adinv;
+
+		if (intersection1 < intersection2)
+		{
+			if (intersection1 > rayT.min) rayT.min = intersection1;
+			if (intersection1 < rayT.max) rayT.max = intersection1;
+		}
+		else
+		{
+			if (intersection2 > rayT.min) rayT.min = intersection2;
+			if (intersection2 < rayT.max) rayT.max = intersection2;
+		}
+
+		if (rayT.max <= rayT.min) return false;
+	}
+
+	return true;
+}
