@@ -4,6 +4,36 @@
 #include <string>
 #include <typeindex>
 
+const std::string helpmessage = R"(
+------------------- HELP MENU ---------------------------
+
+How to use the MARGE command line:
+The MARGE command line was designed for simplicity and ease of use. Each command must start with the executable's name which varies for each operating system.
+
+EXAMPLE USAGE:
+Windows - ./MARGE.exe --pixelsamples 20 --focusDistance 7.5
+Linux - ./MARGE.exe --pixelsamples 20 --focusDistance 7.5
+MacOS - NOT YET COMPATIBLE
+
+You can modify any of the following interal variables:
+(Note that variables are reset each time MARGE finishes rendering. If you want to reuse or modify a specific line, press the up arrow on your keyboard.)
+
+--objectcount (integer) The amount of objects to be rendered in the scene. Has some performance impact the higher it is. Default set to 20
+--pixelsamples (integer). The higher this number is, the better the image looks, but the longer it takes to render. Default set to 32. Anything around 50 looks pretty good, but takes a while.
+--rayDepth (integer). The higher this is, the more realistic reflections will look. Default set to 13.
+--focusDistance (decimal) The distance from the camera where objects are perfectly in focus. This is disabled when defocusAngle is set to 0. Default set to 8.0.
+--defocusAngle (decimal). The higher this number is, the more blurred objects will look the further they are from the focus distance. Default set to 0.6.
+--fov (decimal). The lower this number is, the more zoomed in the camera is. Default set to 90.
+
+WARNING: MARGE is still in early development and is heavily unoptimized. Expect slow rendering, even on high-end computers.
+
+WARNING: These variables are hard to control and are recommended to be left untouched.
+--yaw (decimal). The left-right rotation of the camera. Set in degrees. Default set to 0.
+--pitch (decimal) The up-down rotation of the camera. Set in degrees. Default set to -40.
+
+--------------------------------------------------------- 
+)";
+
 args enumFromString(auto str)
 {
 	if (str == "--help") return args::help;
