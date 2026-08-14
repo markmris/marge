@@ -1,9 +1,45 @@
-# MARGE (v0.13.0) - Command Line and Scene Generation
+# MARGE (v0.14.0) - Motion Blur Update
 
 *MARGE - Modular Advanced Raytracing & Graphics Engine*<br>
 
 ## Changes
-This is a major update that brings custom command line parsing and random scene generation into the engine. Commands modify internal variables. The options are:
+This update introduces object motion into the engine. As of now, object blur depends on distance being covered and "fps" (sort of). Speed is not yet a factor.
+
+<img width="2201" height="1232" alt="Screenshot 2026-08-04 152148" src="https://github.com/user-attachments/assets/90da2aa2-700d-449e-89ac-31e1440684c0" /><br>
+
+MARGE is a lightweight raytracing graphics engine built from scratch in raw C++. It's current main focus is building a solid understanding of graphics and rendering through minimal, controlled implementation of new concepts such as math, data types, etc.
+
+***DISCLAIMER: MARGE is not entirely my own work. It is being built by following along with the Raytracing in One Weekend series by Peter Shirley, Trevor David Brown, and Steve Hollasch, although I do my best to make it my own by using different standard practices, data types, definitions, naming conventions, and modern C++ features that the book does not use.***
+
+## Goal
+MARGE's goal is to build a clean, lightweight, easy-to-use, open-source graphics engine from the ground up, starting with single-image generation and gradually expanding into a frame-based renderer that can be used for game engines, CAD software, etc.
+
+## Current Status
+MARGE is in early development (v0.14.0).  
+At this stage, the focus is correctness and structure, not feature completeness.
+
+## Current Features
+- Basic Scene Setup
+- Single PPM Image Output
+- Simple Camera Object
+- Ray-Sphere Intersection
+- Antialiasing
+- Diffuse Materials
+- Metal/Mirror Materials (With fuzz)
+- Dielectrics (Glass)
+- Positionable/Rotatable/Zoomable Camera
+- Defocus Blur/Motion Blur
+- Random scene generation
+
+## Future/Planned Features
+- Additional Materials
+- Various Different Shapes (Planes, Triangles, Boxes, etc.)
+- Lighting/Shadows
+- Major Performance Improvements
+- Frame-Based Rendering
+- MacOS Compatibility<br><br>
+
+### v0.13.0 introduced custom commands for MARGE to be run from the terminal. Instead of modifying variables and recompiling, variables are now modifiable through the command line. The options are:
 
 --objectcount (integer) The amount of objects to be rendered in the scene. Has some performance impact the higher it is. Default set to 20
 
@@ -20,40 +56,6 @@ This is a major update that brings custom command line parsing and random scene 
 --yaw (decimal). The left-right rotation of the camera. Set in degrees. Default set to 0.
 
 --pitch (decimal) The up-down rotation of the camera. Set in degrees. Default set to -40.<br><br>
-
-<img width="2201" height="1232" alt="Screenshot 2026-08-04 152148" src="https://github.com/user-attachments/assets/90da2aa2-700d-449e-89ac-31e1440684c0" /><br>
-
-MARGE is a lightweight raytracing graphics engine built from scratch in raw C++. It's current main focus is building a solid understanding of graphics and rendering through minimal, controlled implementation of new concepts such as math, data types, etc.
-
-***DISCLAIMER: MARGE is not entirely my own work. It is being built by following along with the Raytracing in One Weekend series by Peter Shirley, Trevor David Brown, and Steve Hollasch, although I do my best to make it my own by using different standard practices, data types, definitions, naming conventions, and modern C++ features that the book does not use.***
-
-## Goal
-MARGE's goal is to build a clean, lightweight, easy-to-use, open-source graphics engine from the ground up, starting with single-image generation and gradually expanding into a frame-based renderer that can be used for game engines, CAD software, etc.
-
-## Current Status
-MARGE is in early development (v0.13.0).  
-At this stage, the focus is correctness and structure, not feature completeness.
-
-## Current Features
-- Basic Scene Setup
-- Single PPM Image Output
-- Simple Camera Object
-- Ray-Sphere Intersection
-- Antialiasing
-- Diffuse Materials
-- Metal/Mirror Materials (With fuzz)
-- Dielectrics (Glass)
-- Positionable/Rotatable/Zoomable Camera
-- Camera Blur
-- Random scene generation
-
-## Future/Planned Features
-- Additional Materials
-- Various Different Shapes (Planes, Triangles, Boxes, etc.)
-- Lighting/Shadows
-- Major Performance Improvements
-- Frame-Based Rendering
-- MacOS Compatibility
 
 ## Install and Run
 
