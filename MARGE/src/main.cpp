@@ -105,7 +105,7 @@ int main(int argc, char* argv[])
 
 			if (randomMaterial < 0.75) // Diffuse
 			{
-				color3 albedo = color3(1, 1, 1) * randomNormalVector();
+				color3 albedo = randomColor() * randomColor();
 				objectMaterial = make_shared<diffuse>(albedo);
 				point3 position2 = position + vector3(0, randomDouble(0, 0.5), 0);
 				
@@ -114,8 +114,8 @@ int main(int argc, char* argv[])
 			}
 			else if (randomMaterial < 0.85) // Metal
 			{
-				color3 albedo = color3(randomDouble(0, 0.51), randomDouble(0, 0.51), randomDouble(0, 0.51));
-				double fuzz = randomDouble(0, 0.5);
+				color3 albedo = randomColor(0, 0.51) * randomColor(0, 0.51);
+				double fuzz = randomDouble(0, 0.501);
 				objectMaterial = make_shared<metal>(albedo, fuzz);
 			}
 			else // Dielectric
