@@ -28,6 +28,13 @@ vector3 vector3::operator /(const double& n) const
 	return vector3(x / n, y / n, z / n);
 }
 
+double vector3::operator [](const int& n) const
+{
+	if (n == 0) return x;
+	else if (n == 1) return y;
+	else return z;
+}
+
 vector3 normalized(const vector3 &v)
 {
 	return v / v.magnitude();
