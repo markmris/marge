@@ -1,9 +1,9 @@
-# MARGE (v0.14.1) - Motion Blur Update
+# MARGE (v0.14.2) - Motion Blur Update
 
 *MARGE - Modular Advanced Raytracing & Graphics Engine*<br>
 
 ## Changes
-This update introduces object motion into the engine. As of now, object blur depends on distance being covered and "fps" (sort of). Speed is not yet a factor. v0.14.1 fixed a color generation bug.
+This update introduces object motion into the engine. As of now, object blur depends on distance being covered and "fps" (sort of). Speed is not yet a factor. v0.14.1 fixed a color generation bug. v0.14.2 changed the help message feature to avoid external file usage.
 
 <img width="2201" height="1232" alt="Screenshot 2026-08-04 152148" src="https://github.com/user-attachments/assets/90da2aa2-700d-449e-89ac-31e1440684c0" /><br>
 
@@ -15,7 +15,7 @@ MARGE is a lightweight raytracing graphics engine built from scratch in raw C++.
 MARGE's goal is to build a clean, lightweight, easy-to-use, open-source graphics engine from the ground up, starting with single-image generation and gradually expanding into a frame-based renderer that can be used for game engines, CAD software, etc.
 
 ## Current Status
-MARGE is in early development (v0.14.1).  
+MARGE is in early development (v0.14.2).  
 At this stage, the focus is correctness and structure, not feature completeness.
 
 ## Current Features
