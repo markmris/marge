@@ -10,7 +10,12 @@ void getSphereUV(const point3& point, double& horizontalCoord, double& verticalC
     verticalCoord = theta / pi;
 }
 
-sphere::sphere(const point3& position, double radius, shared_ptr<::material> material) : position(position, vector3(0, 0, 0)), radius(std::fmax(0, radius)), material(material) {}
+sphere::sphere(const point3& staticPosition, double radius, shared_ptr<::material> material) : position(staticPosition, vector3(0, 0, 0)), radius(std::fmax(0, radius)), material(material)
+{
+    vector3 rvector = vector3(radius, radius, radius);
+    bbox = boundingbox(staticPosition - rvector, staticPosition + rvector);
+}
+
 sphere::sphere(const point3& position1, const point3& position2, double radius, shared_ptr<::material> material) : position(position1, position2 - position1), radius(radius), material(material) {}
 
 bool sphere::hit(const ray& r, interval rayt, hitdata& hd) const

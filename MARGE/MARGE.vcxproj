@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\includes\boundingbox.cpp" />
     <ClCompile Include="src\includes\camera.cpp" />
     <ClCompile Include="src\includes\color.cpp" />
     <ClCompile Include="src\includes\commandline.cpp" />
@@ -141,6 +142,7 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\includes\boundingbox.h" />
     <ClInclude Include="src\includes\camera.h" />
     <ClInclude Include="src\includes\color.h" />
     <ClInclude Include="src\includes\commandline.h" />
