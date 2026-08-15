@@ -17,7 +17,7 @@ boundingbox::boundingbox(const boundingbox& box1, const boundingbox& box2)
 	z = interval(box1.z, box2.z);
 }
 
-const interval& boundingbox::axisInterval(int& n) const
+const interval& boundingbox::axisInterval(const int& n) const
 {
 	if (n == 0) return x;
 	else if (n == 1) return y;

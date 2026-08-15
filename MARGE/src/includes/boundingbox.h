@@ -11,7 +11,7 @@ struct boundingbox
 	boundingbox(const point3& a, const point3& b);
 	boundingbox(const boundingbox& box1, const boundingbox& box2);
 
-	const interval& axisInterval(int& n) const;
+	const interval& axisInterval(const int& n) const;
 
 	bool hit(const ray& r, interval& rayT) const;
 };
