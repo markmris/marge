@@ -10,6 +10,10 @@ bool bvhnode::boxCompare(const shared_ptr<hittable>& a, const shared_ptr<hittabl
 	return axisIntervalA.min < axisIntervalB.min;
 }
 
+bool bvhnode::compareBoxX(const shared_ptr<hittable>& a, const shared_ptr<hittable>& b) { boxCompare(a, b, 0); }
+bool bvhnode::compareBoxY(const shared_ptr<hittable>& a, const shared_ptr<hittable>& b) { boxCompare(a, b, 1); }
+bool bvhnode::compareBoxZ(const shared_ptr<hittable>& a, const shared_ptr<hittable>& b) { boxCompare(a, b, 2); }
+
 bool bvhnode::hit(const ray& r, interval rayT, hitdata& hd) const
 {
 	if (!bbox.hit(r, rayT)) return false;
