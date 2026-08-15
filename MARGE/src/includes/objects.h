@@ -6,9 +6,12 @@ void getSphereUV(const point3& point, double& horizontalCoord, double& verticalC
 
 struct sphere : public hittable
 {
+private:
+    boundingbox bbox;
+
+public:
     ray position;
     double radius;
-    boundingbox bbox;
 
     shared_ptr<::material> material;
 
@@ -16,4 +19,5 @@ struct sphere : public hittable
     sphere(const point3& position1,const point3& position2, double radius, shared_ptr<::material> material);
 
     virtual bool hit(const ray& r, interval rayt, hitdata& hd) const override;
+    virtual boundingbox getBoundingBox() const override;
 };

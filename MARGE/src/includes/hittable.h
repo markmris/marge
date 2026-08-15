@@ -29,4 +29,5 @@ struct hittable
     virtual ~hittable() = default;
 
     virtual bool hit(const ray& r, interval rayt, hitdata& hd) const = 0;
+    virtual boundingbox getBoundingBox() const = 0;
 };

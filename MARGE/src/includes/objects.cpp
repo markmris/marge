@@ -50,3 +50,5 @@ bool sphere::hit(const ray& r, interval rayt, hitdata& hd) const
 
     return true;
 }
+
+boundingbox sphere::getBoundingBox() const { return bbox; }
