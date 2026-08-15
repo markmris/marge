@@ -16,7 +16,13 @@ sphere::sphere(const point3& staticPosition, double radius, shared_ptr<::materia
     bbox = boundingbox(staticPosition - rvector, staticPosition + rvector);
 }
 
-sphere::sphere(const point3& position1, const point3& position2, double radius, shared_ptr<::material> material) : position(position1, position2 - position1), radius(radius), material(material) {}
+sphere::sphere(const point3& position1, const point3& position2, double radius, shared_ptr<::material> material) : position(position1, position2 - position1), radius(radius), material(material)
+{
+    vector3 rvector = vector3(radius, radius, radius);
+    boundingbox box1(position.at(0) - rvector, position.at(0) + rvector);
+    boundingbox box2(position.at(1) - rvector, position.at(1) + rvector);
+    bbox = boundingbox(box1, box2);
+}
 
 bool sphere::hit(const ray& r, interval rayt, hitdata& hd) const
 {
