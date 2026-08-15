@@ -33,5 +33,8 @@ int randomInt()
 
 int randomInt(int min, int max)
 {
-    return min + (max - min) * randomInt();
+    static thread_local std::mt19937 generator(std::random_device{}());
+    static thread_local std::uniform_int_distribution<int> distribution(min, max);
+
+    return distribution(generator);
 }
