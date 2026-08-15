@@ -15,7 +15,7 @@ struct objectlist : public hittable
     void clear();
 
     bool hit(const ray& r, interval rayt, hitdata& hd) const override;
-    virtual boundingbox getBoundingBox() const override;
+    boundingbox getBoundingBox() const override;
 
 private:
     boundingbox bbox;
