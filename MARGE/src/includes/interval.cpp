@@ -2,6 +2,7 @@
 
 interval::interval() : min(infinity), max(-infinity) {};
 interval::interval(double min, double max) : min(min), max(max) {};
+
 interval::interval(const interval& a, const interval& b)
 {
     min = std::fmin(a.min, b.min);

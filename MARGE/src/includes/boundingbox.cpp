@@ -10,6 +10,13 @@ boundingbox::boundingbox(const point3& a, const point3& b)
 	z = interval(std::fmin(a.z, b.z), std::fmax(a.z, b.z));
 }
 
+boundingbox::boundingbox(const boundingbox& box1, const boundingbox& box2)
+{
+	x = interval(box1.x, box2.x);
+	y = interval(box1.y, box2.y);
+	z = interval(box1.z, box2.z);
+}
+
 const interval& boundingbox::axisInterval(int& n) const
 {
 	if (n == 0) return x;
