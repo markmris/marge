@@ -9,6 +9,7 @@ objectlist::objectlist(shared_ptr<hittable> object) { add(object); }
 void objectlist::add(shared_ptr<hittable> object)
 {
     this->objects.push_back(object);
+    bbox = boundingbox(bbox, object->getBoundingBox());
 }
 
 void objectlist::clear()
@@ -34,3 +35,5 @@ bool objectlist::hit(const ray& r, interval rayt, hitdata& hd) const
 
     return hitAnything;
 }
+
+boundingbox objectlist::getBoundingBox() const { return bbox; }
