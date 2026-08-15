@@ -1,6 +1,7 @@
 #pragma once
 
 #include "marge.h"
+#include "boundingbox.h"
 
 struct material;
 
@@ -28,4 +29,6 @@ struct hittable
     virtual ~hittable() = default;
 
     virtual bool hit(const ray& r, interval rayt, hitdata& hd) const = 0;
+
+    virtual boundingbox newBoundingBox() const = 0;
 };
