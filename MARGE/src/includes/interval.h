@@ -6,6 +6,7 @@ struct interval
 
     interval();
     interval(double min, double max);
+    interval(const interval& a, const interval& b);
 
     double size() const;
     bool contains(double x) const;
