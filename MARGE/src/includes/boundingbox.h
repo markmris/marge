@@ -1,0 +1,21 @@
+#pragma once
+
+#include "marge.h"
+
+struct boundingbox
+{
+	interval x, y, z;
+
+	boundingbox();
+	boundingbox(const interval& x, const interval& y, const interval& z);
+	boundingbox(const point3& a, const point3& b);
+	boundingbox(const boundingbox& box1, const boundingbox& box2);
+
+	const interval& axisInterval(const int& n) const;
+
+	int getLongestAxis() const;
+
+	bool hit(const ray& r, interval& rayT) const;
+
+	static const boundingbox empty, universe;
+};

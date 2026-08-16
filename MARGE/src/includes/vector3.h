@@ -14,6 +14,7 @@ struct vector3
 	vector3 operator *(const double& n) const;
 	vector3 operator *(const vector3& v) const;
 	vector3 operator /(const double& n) const;
+	double operator [](const int& n) const;
 
 	double magnitude() const;
 	double magnitudeSqr() const;

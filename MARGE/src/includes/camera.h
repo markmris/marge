@@ -23,7 +23,7 @@ public:
 
 	void initialize();
 	void render(const hittable& world);
-	vector3 getForward();
+	vector3 getForward() const;
 private:
 	int imageHeight;
 

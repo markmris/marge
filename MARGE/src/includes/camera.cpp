@@ -2,7 +2,7 @@
 #include "material.h"
 #include <algorithm>
 
-vector3 camera::getForward() { return forward; }
+vector3 camera::getForward() const { return forward; }
 
 void camera::initialize()
 {

@@ -21,3 +21,5 @@ extern const double pi;
 double degAsRad(double degrees);
 double randomDouble();
 double randomDouble(double min, double max);
+int randomInt();
+int randomInt(int min, int max);

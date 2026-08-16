@@ -17,8 +17,24 @@ double randomDouble()
     return distribution(generator);
 }
 
-// Generator a random real number in [min, max)
+// Generate a random real number in [min, max)
 double randomDouble(double min, double max)
 {
     return min + (max - min) * randomDouble();
+}
+
+int randomInt()
+{
+    static thread_local std::mt19937 generator(std::random_device{}());
+    static thread_local std::uniform_int_distribution<int> distribution(0, 1);
+
+    return distribution(generator);
+}
+
+int randomInt(int min, int max)
+{
+    static thread_local std::mt19937 generator(std::random_device{}());
+    static thread_local std::uniform_int_distribution<int> distribution(min, max);
+
+    return distribution(generator);
 }
