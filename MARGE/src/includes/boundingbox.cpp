@@ -37,12 +37,12 @@ bool boundingbox::hit(const ray& r, interval& rayT) const
 		if (intersection1 < intersection2)
 		{
 			if (intersection1 > rayT.min) rayT.min = intersection1;
-			if (intersection1 < rayT.max) rayT.max = intersection1;
+			if (intersection2 < rayT.max) rayT.max = intersection2;
 		}
 		else
 		{
 			if (intersection2 > rayT.min) rayT.min = intersection2;
-			if (intersection2 < rayT.max) rayT.max = intersection2;
+			if (intersection1 < rayT.max) rayT.max = intersection1;
 		}
 
 		if (rayT.max <= rayT.min) return false;

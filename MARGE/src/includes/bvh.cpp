@@ -25,7 +25,7 @@ bvhnode::bvhnode(std::vector<shared_ptr<hittable>>& objects, size_t start, size_
 		std::sort(std::begin(objects) + start, std::begin(objects) + end, comparator);
 
 		auto middle = start + objectSpan / 2;
-		left = make_shared<bvhnode>(objects, start, end);
+		left = make_shared<bvhnode>(objects, start, middle);
 		right = make_shared<bvhnode>(objects, middle, end);
 	}
 
@@ -40,16 +40,16 @@ bool bvhnode::boxCompare(const shared_ptr<hittable>& a, const shared_ptr<hittabl
 	return axisIntervalA.min < axisIntervalB.min;
 }
 
-bool bvhnode::compareBoxX(const shared_ptr<hittable>& a, const shared_ptr<hittable>& b) { boxCompare(a, b, 0); }
-bool bvhnode::compareBoxY(const shared_ptr<hittable>& a, const shared_ptr<hittable>& b) { boxCompare(a, b, 1); }
-bool bvhnode::compareBoxZ(const shared_ptr<hittable>& a, const shared_ptr<hittable>& b) { boxCompare(a, b, 2); }
+bool bvhnode::compareBoxX(const shared_ptr<hittable>& a, const shared_ptr<hittable>& b) { return boxCompare(a, b, 0); }
+bool bvhnode::compareBoxY(const shared_ptr<hittable>& a, const shared_ptr<hittable>& b) { return boxCompare(a, b, 1); }
+bool bvhnode::compareBoxZ(const shared_ptr<hittable>& a, const shared_ptr<hittable>& b) { return boxCompare(a, b, 2); }
 
 bool bvhnode::hit(const ray& r, interval rayT, hitdata& hd) const
 {
 	if (!bbox.hit(r, rayT)) return false;
 
 	bool leftHit = left->hit(r, rayT, hd);
-	bool rightHit = right->hit(r, rayT, hd);
+	bool rightHit = right->hit(r, interval(rayT.min, leftHit ? hd.t : rayT.max), hd);
 
 	return leftHit || rightHit;
 }

@@ -5,6 +5,7 @@
 #include "includes/objectlists.h"
 #include "includes/material.h"
 #include "includes/commandline.h"
+#include "includes/bvh.h"
 #include <fstream>
 #include <string>
 
@@ -112,7 +113,8 @@ int main(int argc, char* argv[])
 			world.add(make_shared<sphere>(position, radius, objectMaterial));
 		}
 	}
-	
+
+	world = objectlist(make_shared<bvhnode>(world));
 
 	camera.render(world);
 
