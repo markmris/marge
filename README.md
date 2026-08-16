@@ -1,11 +1,11 @@
-# MARGE (v0.12.0) - Camera Update v2
+# MARGE (v0.14.2) - Motion Blur Update
 
 *MARGE - Modular Advanced Raytracing & Graphics Engine*<br>
 
 ## Changes
-This update introduces camera blur to the engine. Blur is modifiable based on focus distance and lens size.<br><br>
+This update introduces object motion into the engine. As of now, object blur depends on distance being covered and "fps" (sort of). Speed is not yet a factor. v0.14.1 fixed a color generation bug. v0.14.2 changed the help message feature to avoid external file usage.
 
-<img width="2199" height="1234" alt="Screenshot 2026-08-02 193004" src="https://github.com/user-attachments/assets/19910c2b-b9a8-4b88-a265-f07f5fa9952d" /><br>
+<img width="2201" height="1232" alt="Screenshot 2026-08-04 152148" src="https://github.com/user-attachments/assets/90da2aa2-700d-449e-89ac-31e1440684c0" /><br>
 
 MARGE is a lightweight raytracing graphics engine built from scratch in raw C++. It's current main focus is building a solid understanding of graphics and rendering through minimal, controlled implementation of new concepts such as math, data types, etc.
 
@@ -15,7 +15,7 @@ MARGE is a lightweight raytracing graphics engine built from scratch in raw C++.
 MARGE's goal is to build a clean, lightweight, easy-to-use, open-source graphics engine from the ground up, starting with single-image generation and gradually expanding into a frame-based renderer that can be used for game engines, CAD software, etc.
 
 ## Current Status
-MARGE is in early development (v0.12.0).  
+MARGE is in early development (v0.14.2).  
 At this stage, the focus is correctness and structure, not feature completeness.
 
 ## Current Features
@@ -28,6 +28,8 @@ At this stage, the focus is correctness and structure, not feature completeness.
 - Metal/Mirror Materials (With fuzz)
 - Dielectrics (Glass)
 - Positionable/Rotatable/Zoomable Camera
+- Defocus Blur/Motion Blur
+- Random scene generation
 
 ## Future/Planned Features
 - Additional Materials
@@ -35,17 +37,49 @@ At this stage, the focus is correctness and structure, not feature completeness.
 - Lighting/Shadows
 - Major Performance Improvements
 - Frame-Based Rendering
+- MacOS Compatibility<br><br>
 
-## Build and Run
+### v0.13.0 introduced custom commands for MARGE to be run from the terminal. Instead of modifying variables and recompiling, variables are now modifiable through the command line. The options are:
 
-*Warning: MARGE compatibility with MacOS has not yet been tested. MARGE is fully compatible with Windows and Linux.*
+objectcount (integer) The amount of objects to be rendered in the scene. Has some performance impact the higher it is. Default set to 20
 
-MARGE uses a simple C++ build process with no external dependencies.
+pixelsamples (integer). The higher this number is, the better the image looks, but the longer it takes to render. Default set to 32. Anything around 50 looks pretty good.
 
-### Requirements
+rayDepth (integer). The higher this is, the more realistic reflections will look. Default set to 13.
 
-You need a C++ compiler with C++ 20 support:
+focusDistance (decimal) The distance from the camera where objects are perfectly in focus. This is disabled when defocusAngle is set to 0. Default set to 8.0.
 
-- **macOS:** Apple Clang (via Xcode Command Line Tools)
-- **Linux:** g++ (GCC)
-- **Windows:** MinGW-w64 or MSYS2 (g++)
+defocusAngle (decimal). The higher this number is, the more blurred objects will look the further they are from the focus distance. Default set to 0.6.
+
+fov (decimal). The lower this number is, the more zoomed in the camera is. Default set to 90.
+
+yaw (decimal). The left-right rotation of the camera. Set in degrees. Default set to 0.
+
+pitch (decimal) The up-down rotation of the camera. Set in degrees. Default set to -40.<br><br>
+
+## Install and Run
+
+*MARGE does not have a readily available MacOS executable yet. There are executables available for Windows and Debian (.deb) Linux systems.*<br>
+
+### Step 1: 
+***(For Hack Club reviewers, please download v0.13.0)***<br> Go to the latest release page (https://github.com/markmris/marge/releases/tag/v0.13.0) and download MARGE.zip for windows or MARGE.tar.gz for Linux.<br>
+
+### Step 2:
+Extract the file wherever.<br>
+
+### Step 3:
+Open a terminal and run this command:
+`
+cd ~/path-to/MARGE
+` (Replace path-to with the file path to the folder. For example, Documents/"Hack Club"/MARGE)<br>
+
+### Step 4:
+Run this command FIRST to gain a short overview on how to use MARGE: 
+`
+./MARGE --help
+`<br>
+
+## Step 5:
+In the MARGE folder, look for a new file called "image.ppm". Open it (Note: On Windows, you will need an app that supports .ppm image files, GIMP, Portable Images Viewer, and Krita are free ones that work.)
+
+## Step 6: Use MARGE however you like!
