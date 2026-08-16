@@ -56,3 +56,6 @@ bool boundingbox::hit(const ray& r, interval& rayT) const
 
 	return true;
 }
+
+const boundingbox boundingbox::empty = boundingbox(interval::empty, interval::empty, interval::empty);
+const boundingbox boundingbox::universe = boundingbox(interval::universe, interval::universe, interval::universe);

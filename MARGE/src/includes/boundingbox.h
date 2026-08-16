@@ -16,4 +16,6 @@ struct boundingbox
 	int getLongestAxis() const;
 
 	bool hit(const ray& r, interval& rayT) const;
+
+	static const boundingbox empty, universe;
 };
