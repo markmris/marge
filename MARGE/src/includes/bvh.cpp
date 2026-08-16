@@ -4,7 +4,14 @@ bvhnode::bvhnode(objectlist list) : bvhnode(list.objects, 0, list.objects.size()
 
 bvhnode::bvhnode(std::vector<shared_ptr<hittable>>& objects, size_t start, size_t end)
 {
-	int axis = randomInt(0, 2);
+	bbox = boundingbox::empty;
+
+	for (size_t objectIndex = start; objectIndex < end; objectIndex++)
+	{
+		bbox = boundingbox(bbox, objects[objectIndex]->getBoundingBox());
+	}
+
+	int axis = bbox.getLongestAxis();
 
 	auto comparator = (axis == 0) ? compareBoxX :
 		(axis == 1) ? compareBoxY : compareBoxZ;
@@ -28,8 +35,6 @@ bvhnode::bvhnode(std::vector<shared_ptr<hittable>>& objects, size_t start, size_
 		left = make_shared<bvhnode>(objects, start, middle);
 		right = make_shared<bvhnode>(objects, middle, end);
 	}
-
-	bbox = boundingbox(left->getBoundingBox(), right->getBoundingBox());
 }
 
 bool bvhnode::boxCompare(const shared_ptr<hittable>& a, const shared_ptr<hittable>& b, int axisIndex)
