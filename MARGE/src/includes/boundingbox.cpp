@@ -24,6 +24,12 @@ const interval& boundingbox::axisInterval(const int& n) const
 	else return z;
 }
 
+int boundingbox::getLongestAxis() const
+{
+	if (x.size() > y.size()) return x.size() > z.size() ? 0 : 2;
+	else return y.size() > z.size() ? 1 : 2;
+}
+
 bool boundingbox::hit(const ray& r, interval& rayT) const
 {
 	for (int axis = 0; axis < 3; axis++)

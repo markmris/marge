@@ -13,5 +13,7 @@ struct boundingbox
 
 	const interval& axisInterval(const int& n) const;
 
+	int getLongestAxis() const;
+
 	bool hit(const ray& r, interval& rayT) const;
 };
