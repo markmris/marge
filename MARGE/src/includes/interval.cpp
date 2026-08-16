@@ -28,7 +28,7 @@ interval interval::expand(double delta) const
 {
     double padding = delta / 2;
 
-    return interval(min - padding, max - padding);
+    return interval(min - padding, max + padding);
 }
 
 const interval interval::empty = interval(infinity, -infinity);
