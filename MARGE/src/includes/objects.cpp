@@ -1,13 +1,13 @@
 #include "marge.h"
 #include "objects.h"
 
-void getSphereUV(const point3& point, double& horizontalCoord, double& verticalCoord)
+void getSphereUV(const point3& point, double& horizontalTexture, double& verticalTexture)
 {
     auto theta = std::acos(-point.y);
     auto phi = std::atan2(-point.z, -point.x) + pi;
 
-    horizontalCoord = phi / (2 * pi);
-    verticalCoord = theta / pi;
+    horizontalTexture = phi / (2 * pi);
+    verticalTexture = theta / pi;
 }
 
 sphere::sphere(const point3& staticPosition, double radius, shared_ptr<::material> material) : position(staticPosition, vector3(0, 0, 0)), radius(std::fmax(0, radius)), material(material)
