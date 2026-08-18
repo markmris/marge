@@ -5,7 +5,7 @@
 ## Changes
 This update introduces Bounding Volume Hierarchies (BVH), a method of optimization which roughly doubles render speed in default settings.
 
-<img width="2201" height="1232" alt="Screenshot 2026-08-04 152148" src="https://github.com/user-attachments/assets/90da2aa2-700d-449e-89ac-31e1440684c0" /><br>
+<img width="2202" height="1235" alt="Screenshot 2026-08-18 190544" src="https://github.com/user-attachments/assets/fada54cd-b9b5-4b83-81b7-c761aa46a1b0" /><br>
 
 MARGE is a lightweight raytracing graphics engine built from scratch in raw C++. It's current main focus is building a solid understanding of graphics and rendering through minimal, controlled implementation of new concepts such as math, data types, etc.
 
