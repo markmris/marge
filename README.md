@@ -1,9 +1,9 @@
-# MARGE (v0.14.2) - Motion Blur Update
+# MARGE (v0.15.0) - BVH Update
 
 *MARGE - Modular Advanced Raytracing & Graphics Engine*<br>
 
 ## Changes
-This update introduces object motion into the engine. As of now, object blur depends on distance being covered and "fps" (sort of). Speed is not yet a factor. v0.14.1 fixed a color generation bug. v0.14.2 changed the help message feature to avoid external file usage.
+This update introduces Bounding Volume Hierarchies (BVH), a method of optimization which roughly doubles render speed in default settings.
 
 <img width="2201" height="1232" alt="Screenshot 2026-08-04 152148" src="https://github.com/user-attachments/assets/90da2aa2-700d-449e-89ac-31e1440684c0" /><br>
 
@@ -15,7 +15,7 @@ MARGE is a lightweight raytracing graphics engine built from scratch in raw C++.
 MARGE's goal is to build a clean, lightweight, easy-to-use, open-source graphics engine from the ground up, starting with single-image generation and gradually expanding into a frame-based renderer that can be used for game engines, CAD software, etc.
 
 ## Current Status
-MARGE is in early development (v0.14.2).  
+MARGE is in early development (v0.15.0).  
 At this stage, the focus is correctness and structure, not feature completeness.
 
 ## Current Features
@@ -30,6 +30,7 @@ At this stage, the focus is correctness and structure, not feature completeness.
 - Positionable/Rotatable/Zoomable Camera
 - Defocus Blur/Motion Blur
 - Random scene generation
+- Bounding Volume Hierarchies (BVH)
 
 ## Future/Planned Features
 - Additional Materials
@@ -62,7 +63,7 @@ pitch (decimal) The up-down rotation of the camera. Set in degrees. Default set 
 *MARGE does not have a readily available MacOS executable yet. There are executables available for Windows and Debian (.deb) Linux systems.*<br>
 
 ### Step 1: 
-***(For Hack Club reviewers, please download v0.13.0)***<br> Go to the latest release page (https://github.com/markmris/marge/releases/tag/v0.13.0) and download MARGE.zip for windows or MARGE.tar.gz for Linux.<br>
+Go to the latest release page (https://github.com/markmris/marge/releases/tag/v0.13.0) and download MARGE.zip for windows or MARGE.tar.gz for Linux.<br>
 
 ### Step 2:
 Extract the file wherever.<br>
