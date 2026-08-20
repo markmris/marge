@@ -1,15 +1,6 @@
 #include "marge.h"
 #include "objects.h"
 
-void getSphereUV(const point3& point, double& horizontalTexture, double& verticalTexture)
-{
-    auto theta = std::acos(-point.y);
-    auto phi = std::atan2(-point.z, -point.x) + pi;
-
-    horizontalTexture = phi / (2 * pi);
-    verticalTexture = theta / pi;
-}
-
 sphere::sphere(const point3& staticPosition, double radius, shared_ptr<::material> material) : position(staticPosition, vector3(0, 0, 0)), radius(std::fmax(0, radius)), material(material)
 {
     vector3 rvector = vector3(radius, radius, radius);
@@ -22,6 +13,15 @@ sphere::sphere(const point3& position1, const point3& position2, double radius, 
     boundingbox box1(position.at(0) - rvector, position.at(0) + rvector);
     boundingbox box2(position.at(1) - rvector, position.at(1) + rvector);
     bbox = boundingbox(box1, box2);
+}
+
+void sphere::getSphereUV(const point3& point, double& horizontalTexture, double& verticalTexture)
+{
+    auto theta = std::acos(-point.y);
+    auto phi = std::atan2(-point.z, -point.x) + pi;
+
+    horizontalTexture = phi / (2 * pi);
+    verticalTexture = theta / pi;
 }
 
 bool sphere::hit(const ray& r, interval rayt, hitdata& hd) const
