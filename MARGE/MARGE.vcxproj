@@ -139,6 +139,7 @@
     <ClCompile Include="src\includes\objectlists.cpp" />
     <ClCompile Include="src\includes\objects.cpp" />
     <ClCompile Include="src\includes\ray.cpp" />
+    <ClCompile Include="src\includes\texture.cpp" />
     <ClCompile Include="src\includes\vector3.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
@@ -155,6 +156,7 @@
     <ClInclude Include="src\includes\objectlists.h" />
     <ClInclude Include="src\includes\objects.h" />
     <ClInclude Include="src\includes\ray.h" />
+    <ClInclude Include="src\includes\texture.h" />
     <ClInclude Include="src\includes\vector3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
