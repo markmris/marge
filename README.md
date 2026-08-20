@@ -1,11 +1,11 @@
-# MARGE (v0.15.0) - BVH Update
+# MARGE (v0.16.0) - Texture Update
 
 *MARGE - Modular Advanced Raytracing & Graphics Engine*<br>
 
 ## Changes
-This update introduces Bounding Volume Hierarchies (BVH), a method of optimization which roughly doubles render speed in default settings.
+This update introduces basic textures. The first texture of which added is a checkerboard texture.
 
-<img width="2202" height="1235" alt="Screenshot 2026-08-18 190544" src="https://github.com/user-attachments/assets/fada54cd-b9b5-4b83-81b7-c761aa46a1b0" /><br>
+<img width="2199" height="1236" alt="image" src="https://github.com/user-attachments/assets/ee2b9cda-d049-4d16-8cc5-24a22b710779" /><br>
 
 MARGE is a lightweight raytracing graphics engine built from scratch in raw C++. It's current main focus is building a solid understanding of graphics and rendering through minimal, controlled implementation of new concepts such as math, data types, etc.
 
@@ -15,8 +15,8 @@ MARGE is a lightweight raytracing graphics engine built from scratch in raw C++.
 MARGE's goal is to build a clean, lightweight, easy-to-use, open-source graphics engine from the ground up, starting with single-image generation and gradually expanding into a frame-based renderer that can be used for game engines, CAD software, etc.
 
 ## Current Status
-MARGE is in early development (v0.15.0).  
-At this stage, the focus is correctness and structure, not feature completeness.
+MARGE is in early development (v0.16.0).  
+At this stage, the focus is correctness and structure, not feature completeness. MARGE is currently run entirely on the CPU, but will be transformed into a GPU renderer in the future.
 
 ## Current Features
 - Basic Scene Setup
@@ -31,9 +31,10 @@ At this stage, the focus is correctness and structure, not feature completeness.
 - Defocus Blur/Motion Blur
 - Random scene generation
 - Bounding Volume Hierarchies (BVH)
+- Basic Textures
 
 ## Future/Planned Features
-- Additional Materials
+- Additional Materials/Textures
 - Various Different Shapes (Planes, Triangles, Boxes, etc.)
 - Lighting/Shadows
 - Major Performance Improvements
