@@ -14,6 +14,8 @@ struct hitdata
     // The surface the ray hit
     bool frontFace;
     vector3 normal;
+    double horizontalTexture;
+    double verticalTexture;
 
     shared_ptr<::material> material;
 

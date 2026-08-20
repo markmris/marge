@@ -1,6 +1,7 @@
 #pragma once
 
 #include "hittable.h"
+#include "texture.h"
 
 struct material
 {
@@ -12,8 +13,10 @@ struct material
 struct diffuse : public material
 {
 	color3 albedo;
+	shared_ptr<texture> surfaceTexture;
 
 	diffuse(const color3& albedo);
+	diffuse(shared_ptr<texture> surfaceTexture);
 	bool scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, ray& scattered) const override;
 };
 

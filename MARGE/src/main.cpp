@@ -6,6 +6,7 @@
 #include "includes/material.h"
 #include "includes/commandline.h"
 #include "includes/bvh.h"
+#include "includes/texture.h"
 #include <fstream>
 #include <string>
 
@@ -63,7 +64,9 @@ int main(int argc, char* argv[])
 	// World Creation
 	objectlist world;
 
-	auto groundMaterial = make_shared<diffuse>(color3(0.5, 0.5, 0.5));
+	auto checkerTexture = make_shared<checkertexture>(0.3, color3(1, 0.486, 0), color3(.9, .9, .9));
+
+	auto groundMaterial = make_shared<diffuse>(checkerTexture);
 	world.add(make_shared<sphere>(point3(0, -1000.5, 1), 1000, groundMaterial));
 
 	hitdata hd;
@@ -87,8 +90,8 @@ int main(int argc, char* argv[])
 		for (int z = -globalObjectCount / 4; z < globalObjectCount / 4; z++)
 		{
 			double randomMaterial = randomDouble();
-			double radius = randomDouble(0.15, 0.5);
-			point3 position = point3(objectOrigin.x + x + randomDouble(-0.5, 0.5), radius, objectOrigin.z + z + randomDouble(-0.5, 0.5));
+			double radius = randomDouble(0.15, 0.35);
+			point3 position = point3(objectOrigin.x + x + randomDouble(-0.3, 0.3), radius, objectOrigin.z + z + randomDouble(-0.3, 0.3));
 
 			if (randomMaterial < 0.75) // Diffuse
 			{

@@ -5,11 +5,11 @@
 
 void writeColor(std::ostream& out, const color3& color)
 {
-    int rbyte = std::clamp(int(255.999 * linearToGamma(color.x)), 0, 255);
-    int gbyte = std::clamp(int(255.999 * linearToGamma(color.y)), 0, 255);
-    int bbyte = std::clamp(int(255.999 * linearToGamma(color.z)), 0, 255);
+    int redByte = std::clamp(int(255.999 * linearToGamma(color.x)), 0, 255);
+    int greenByte = std::clamp(int(255.999 * linearToGamma(color.y)), 0, 255);
+    int blueByte = std::clamp(int(255.999 * linearToGamma(color.z)), 0, 255);
 
-    out << rbyte << ' ' << gbyte << ' ' << bbyte << '\n';
+    out << redByte << ' ' << greenByte << ' ' << blueByte << '\n';
 }
 
 double linearToGamma(double linearComponent)

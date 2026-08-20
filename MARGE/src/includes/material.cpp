@@ -7,7 +7,8 @@ bool material::scatter(const ray& rayIn, const hitdata& hd, color3& attenuation,
 }
 
 
-diffuse::diffuse(const color3& albedo) : albedo(albedo) {}
+diffuse::diffuse(const color3& albedo) : diffuse(make_shared<solidcolor>(albedo)) {}
+diffuse::diffuse(shared_ptr<texture> surfaceTexture) : surfaceTexture(surfaceTexture) {}
 metal::metal(const color3& albedo, double fuzz) : albedo(albedo), fuzz(std::clamp(fuzz, 0.0, 1.0)) {}
 dielectric::dielectric(double refractionIndex) : refractionIndex(refractionIndex) {}
 
@@ -20,7 +21,7 @@ bool diffuse::scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, 
 		scatterDirection = hd.normal;
 
 	scattered = ray(hd.point, scatterDirection, rayIn.time);
-	attenuation = albedo;
+	attenuation = surfaceTexture->value(hd.horizontalCoord, hd.verticalCoord, hd.point);
 
 	return true;
 }
