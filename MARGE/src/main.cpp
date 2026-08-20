@@ -1,12 +1,12 @@
-#include "includes/marge.h"
-#include "includes/camera.h"
-#include "includes/hittable.h"
-#include "includes/objects.h"
-#include "includes/objectlists.h"
-#include "includes/material.h"
-#include "includes/commandline.h"
-#include "includes/bvh.h"
-#include "includes/texture.h"
+#include "marge.h"
+#include "camera.h"
+#include "hittable.h"
+#include "objects.h"
+#include "objectlists.h"
+#include "material.h"
+#include "commandline.h"
+#include "bvh.h"
+#include "texture.h"
 #include <fstream>
 #include <string>
 
