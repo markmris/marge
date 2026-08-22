@@ -19,17 +19,14 @@ MARGE is in early development (v0.16.0).
 At this stage, the focus is correctness and structure, not feature completeness. MARGE is currently run entirely on the CPU, but will be transformed into a GPU renderer in the future.
 
 ## Current Features
-- Basic Scene Setup
+- Random scene generation
 - Single PPM Image Output
-- Simple Camera Object
-- Ray-Sphere Intersection
+- Positionable/Rotatable/Zoomable Camera
 - Antialiasing
 - Diffuse Materials
 - Metal/Mirror Materials (With fuzz)
 - Dielectrics (Glass)
-- Positionable/Rotatable/Zoomable Camera
 - Defocus Blur/Motion Blur
-- Random scene generation
 - Bounding Volume Hierarchies (BVH)
 - Basic Textures
 
