@@ -58,10 +58,12 @@ struct image
 		static unsigned char magenta[] = { 255, 0, 255 };
 		if (bdata == nullptr) return magenta;
 
-		x = std::clamp(x, 0, imageWidth);
-		y = std::clamp(y, 0, imageHeight);
+		x = std::clamp(x, 0, imageWidth - 1);
+		y = std::clamp(y, 0, imageHeight - 1);
 
-		return bdata + y * bytesPerScanline + x * bytesPerScanline;
+		const size_t offset = static_cast<size_t>(y) * bytesPerScanline + static_cast<size_t>(x) * bytesPerPixel;
+
+		return &bdata[offset];
 	}
 
 	static unsigned char floatToByte(float value)
@@ -86,6 +88,6 @@ struct image
 	}
 };
 
-#ifdef _MSVC_VER
+#ifdef _MSC_VER
 	#pragma warning (pop)
 #endif
