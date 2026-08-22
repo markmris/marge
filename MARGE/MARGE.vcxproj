@@ -131,6 +131,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\boundingbox.cpp" />
+    <ClCompile Include="src\bvh.cpp" />
+    <ClCompile Include="src\camera.cpp" />
+    <ClCompile Include="src\color.cpp" />
+    <ClCompile Include="src\commandline.cpp" />
+    <ClCompile Include="src\hittable.cpp" />
     <ClCompile Include="src\includes\boundingbox.cpp" />
     <ClCompile Include="src\includes\bvh.cpp" />
     <ClCompile Include="src\includes\camera.cpp" />
@@ -145,9 +151,32 @@
     <ClCompile Include="src\includes\ray.cpp" />
     <ClCompile Include="src\includes\texture.cpp" />
     <ClCompile Include="src\includes\vector3.cpp" />
+    <ClCompile Include="src\interval.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\marge.cpp" />
+    <ClCompile Include="src\material.cpp" />
+    <ClCompile Include="src\objectlists.cpp" />
+    <ClCompile Include="src\objects.cpp" />
+    <ClCompile Include="src\ray.cpp" />
+    <ClCompile Include="src\stbimage.cpp" />
+    <ClCompile Include="src\texture.cpp" />
+    <ClCompile Include="src\vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\boundingbox.h" />
+    <ClInclude Include="include\bvh.h" />
+    <ClInclude Include="include\camera.h" />
+    <ClInclude Include="include\color.h" />
+    <ClInclude Include="include\commandline.h" />
+    <ClInclude Include="include\hittable.h" />
+    <ClInclude Include="include\interval.h" />
+    <ClInclude Include="include\marge.h" />
+    <ClInclude Include="include\material.h" />
+    <ClInclude Include="include\objectlists.h" />
+    <ClInclude Include="include\objects.h" />
+    <ClInclude Include="include\ray.h" />
+    <ClInclude Include="include\texture.h" />
+    <ClInclude Include="include\vector3.h" />
     <ClInclude Include="src\includes\boundingbox.h" />
     <ClInclude Include="src\includes\bvh.h" />
     <ClInclude Include="src\includes\camera.h" />
