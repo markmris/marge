@@ -84,18 +84,34 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
-	shared_ptr<material> objectMaterial;
-	color3 albedo;
-
-	shared_ptr<texture> earthTexture = make_shared<imagetexture>("earth.jpg");
-
+	const std::string supportedFiles[4] = { "jpg", "jpeg", "png", "tga"};
 	std::vector<shared_ptr<imagetexture>> images;
 
 	for (const auto& img : std::filesystem::directory_iterator(textureDir))
 	{
-		images.push_back(make_shared<imagetexture>(img.path().filename().string()));
-		std::clog << img.path().filename().string() << '\n';
+		std::string filename = img.path().filename().string();
+
+		size_t index;
+		for (const std::string& extension : supportedFiles)
+		{
+			index = filename.find(extension);
+
+			if (index != std::string::npos)
+				break;
+		}
+
+		if (index == std::string::npos)
+		{
+			std::cerr << "Filetype for file " << filename << " is not supported.";
+			return 0;
+		}
+
+		images.push_back(make_shared<imagetexture>(filename));
 	}
+
+
+	shared_ptr<material> objectMaterial;
+	color3 albedo;
 
 	for (int x = -globalObjectCount / 4; x < globalObjectCount / 4; x++)
 	{
@@ -133,7 +149,6 @@ int main(int argc, char* argv[])
 
 				case 3:
 					int imageIndex = randomInt(0, images.size() - 1);
-					std::clog << imageIndex << '\n' << images.size();
 					world.add(make_shared<sphere>(position, radius, make_shared<diffuse>(images[imageIndex])));
 
 					break;
