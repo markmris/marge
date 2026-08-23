@@ -58,10 +58,10 @@ pitch (decimal) The up-down rotation of the camera. Set in degrees. Default set 
 
 ## Install and Run
 
-*MARGE does not have a readily available MacOS executable yet. There are executables available for Windows and Debian (.deb) Linux systems.*<br>
+*MARGE does not have a readily available MacOS executable yet. Linux compatibility has been halted for the time being.*<br>
 
 ### Step 1: 
-Go to the latest release page (https://github.com/markmris/marge/releases/tag/v0.13.0) and download MARGE.zip for windows or MARGE.tar.gz for Linux.<br>
+Go to the latest release page (https://github.com/markmris/marge/releases/tag/v0.16.2) and download MARGE.zip for windows or MARGE.tar.gz for Linux.<br>
 
 ### Step 2:
 Extract the file wherever.<br>
@@ -73,12 +73,15 @@ cd ~/path-to/MARGE
 ` (Replace path-to with the file path to the folder. For example, Documents/"Hack Club"/MARGE)<br>
 
 ### Step 4:
+Add any .jpg, .png, or .tga file that you would like to be rendered onto some spheres to the textures folder.
+
+### Step 5:
 Run this command FIRST to gain a short overview on how to use MARGE: 
 `
 ./MARGE --help
 `<br>
 
-## Step 5:
+## Step 6:
 In the MARGE folder, look for a new file called "image.ppm". Open it (Note: On Windows, you will need an app that supports .ppm image files, GIMP, Portable Images Viewer, and Krita are free ones that work.)
 
-## Step 6: Use MARGE however you like!
+## Step 7: Use MARGE however you like!
