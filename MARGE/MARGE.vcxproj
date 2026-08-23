@@ -158,7 +158,7 @@
     <ClCompile Include="src\objectlists.cpp" />
     <ClCompile Include="src\objects.cpp" />
     <ClCompile Include="src\ray.cpp" />
-    <ClCompile Include="src\stbimage.cpp" />
+    <ClCompile Include="src\margestbimage.cpp" />
     <ClCompile Include="src\texture.cpp" />
     <ClCompile Include="src\vector3.cpp" />
   </ItemGroup>
@@ -171,6 +171,7 @@
     <ClInclude Include="include\hittable.h" />
     <ClInclude Include="include\interval.h" />
     <ClInclude Include="include\marge.h" />
+    <ClInclude Include="include\margestbimage.h" />
     <ClInclude Include="include\material.h" />
     <ClInclude Include="include\objectlists.h" />
     <ClInclude Include="include\objects.h" />

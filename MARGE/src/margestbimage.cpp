@@ -4,10 +4,10 @@
 
 #define STB_IMAGE_IMPLEMENTATION
 #define STBI_FAILURE_USERMSG
+
 #include "margestbimage.h"
 
 const std::filesystem::path textureDir = "textures/";
-
 
 constexpr int image::bytesPerPixel = 3;
 
