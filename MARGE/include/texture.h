@@ -1,6 +1,7 @@
 #pragma once
 
 #include "marge.h"
+#include "margestbimage.h"
 
 struct texture
 {
@@ -33,4 +34,13 @@ public:
 	checkertexture(double scale, const color3& c1, const color3& c2);
 
 	color3 value(const double horizontalTexture, const double verticalTexture, const point3& point) const override;
+};
+
+struct imagetexture : public texture
+{
+	image img;
+
+	imagetexture(const std::string fileName);
+
+	color3 value(double horizontalCoord, double verticalCoord, const point3& point) const override;
 };

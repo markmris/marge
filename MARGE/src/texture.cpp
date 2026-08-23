@@ -21,3 +21,21 @@ color3 checkertexture::value(const double horizontalCoord, const double vertical
 
 	return isEven ? even->value(horizontalCoord, verticalCoord, point) : odd->value(horizontalCoord, verticalCoord, point);
 }
+
+imagetexture::imagetexture(const std::string fileName) : img(fileName) {}
+
+color3 imagetexture::value(double horizontalCoord, double verticalCoord, const point3& point) const
+{
+	if (img.imageHeight <= 0) return color3(0, 1, 1);
+
+	horizontalCoord = interval(0, 1).clamp(horizontalCoord);
+	verticalCoord = 1.0 - interval(0, 1).clamp(verticalCoord);
+
+	int x = int(horizontalCoord * img.imageWidth);
+	int y = int(verticalCoord * img.imageHeight);
+	const unsigned char* pixel = img.pixelData(x, y);
+
+	double colorScale = 1.0 / 255.0;
+
+	return color3(colorScale * pixel[0], colorScale * pixel[1], colorScale * pixel[2]);
+}

@@ -84,6 +84,9 @@ int main(int argc, char* argv[])
 	}
 
 	shared_ptr<material> objectMaterial;
+	color3 albedo;
+
+	shared_ptr<texture> earthTexture = make_shared<imagetexture>("earth.jpg");
 
 	for (int x = -globalObjectCount / 4; x < globalObjectCount / 4; x++)
 	{
@@ -92,17 +95,38 @@ int main(int argc, char* argv[])
 			double randomMaterial = randomDouble();
 			double radius = randomDouble(0.15, 0.35);
 			point3 position = point3(objectOrigin.x + x + randomDouble(-0.3, 0.3), radius, objectOrigin.z + z + randomDouble(-0.3, 0.3));
+			point3 position2;
 
-			if (randomMaterial < 0.75) // Diffuse
+			if (randomMaterial < 0.8) // Diffuse
 			{
-				color3 albedo = randomColor() * randomColor();
-				objectMaterial = make_shared<diffuse>(albedo);
-				point3 position2 = position + vector3(0, randomDouble(0, 0.5), 0);
+				int sphereType = randomInt(1, 3);
+
+				switch (sphereType)
+				{
+				case 1:
+					albedo = randomColor() * randomColor();
+					objectMaterial = make_shared<diffuse>(albedo);
+					world.add(make_shared<sphere>(position, radius, objectMaterial));
+
+					break;
+
+				case 2:
+					position2 = position + vector3(0, randomDouble(0, 0.5), 0);
+					albedo = randomColor() * randomColor();
+					objectMaterial = make_shared<diffuse>(albedo);
+					world.add(make_shared<sphere>(position, position2, radius, objectMaterial));
+
+					break;
+
+				case 3:
+					world.add(make_shared<sphere>(position, radius, make_shared<diffuse>(earthTexture)));
+
+					break;
+				}
 				
-				world.add(make_shared<sphere>(position, position2, radius, objectMaterial));
 				continue;
 			}
-			else if (randomMaterial < 0.85) // Metal
+			else if (randomMaterial < 0.9) // Metal
 			{
 				color3 albedo = randomColor(0, 0.51) * randomColor(0, 0.51);
 				double fuzz = randomDouble(0, 0.501);
