@@ -35,6 +35,8 @@ image::image(const std::string& imageFileName)
 	}
 
 	bytesPerScanline = imageWidth * bytesPerPixel;
+
+	convertToBytes();
 }
 
 image::~image()
