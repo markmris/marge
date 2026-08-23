@@ -148,7 +148,7 @@ int main(int argc, char* argv[])
 					break;
 
 				case 3:
-					int imageIndex = randomInt(0, images.size() - 1);
+					int imageIndex = randomInt(0, static_cast<int>(images.size() - 1));
 					world.add(make_shared<sphere>(position, radius, make_shared<diffuse>(images[imageIndex])));
 
 					break;
