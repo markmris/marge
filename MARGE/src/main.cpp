@@ -9,6 +9,7 @@
 #include "texture.h"
 #include <fstream>
 #include <string>
+#include <filesystem>
 
 /*
 	X: Positive X to the right, Negative to the left
@@ -88,6 +89,14 @@ int main(int argc, char* argv[])
 
 	shared_ptr<texture> earthTexture = make_shared<imagetexture>("earth.jpg");
 
+	std::vector<shared_ptr<imagetexture>> images;
+
+	for (const auto& img : std::filesystem::directory_iterator(textureDir))
+	{
+		images.push_back(make_shared<imagetexture>(img.path().filename().string()));
+		std::clog << img.path().filename().string() << '\n';
+	}
+
 	for (int x = -globalObjectCount / 4; x < globalObjectCount / 4; x++)
 	{
 		for (int z = -globalObjectCount / 4; z < globalObjectCount / 4; z++)
@@ -99,7 +108,11 @@ int main(int argc, char* argv[])
 
 			if (randomMaterial < 0.8) // Diffuse
 			{
-				int sphereType = randomInt(1, 3);
+				int sphereType;
+				if (images.empty())
+					sphereType = randomInt(1, 2);
+				else
+					sphereType = randomInt(1, 3);
 
 				switch (sphereType)
 				{
@@ -119,7 +132,9 @@ int main(int argc, char* argv[])
 					break;
 
 				case 3:
-					world.add(make_shared<sphere>(position, radius, make_shared<diffuse>(earthTexture)));
+					int imageIndex = randomInt(0, images.size() - 1);
+					std::clog << imageIndex << '\n' << images.size();
+					world.add(make_shared<sphere>(position, radius, make_shared<diffuse>(images[imageIndex])));
 
 					break;
 				}
