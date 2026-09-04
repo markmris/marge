@@ -39,3 +39,10 @@ color3 imagetexture::value(double horizontalCoord, double verticalCoord, const p
 
 	return color3(colorScale * pixel[0], colorScale * pixel[1], colorScale * pixel[2]);
 }
+
+perlintexture::perlintexture() {}
+
+color3 perlintexture::value(double horizontalCoord, double verticalCoord, const point3& point) const
+{
+	return color3(1, 1, 1) * noise.noise(point);
+}

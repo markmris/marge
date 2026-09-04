@@ -13,7 +13,7 @@ perlin::perlin()
 	generatePerm(permZ);
 }
 
-double perlin::noise(const point3& point)
+double perlin::noise(const point3& point) const
 {
 	int x = int(4 * point.x) & 255;
 	int y = int(4 * point.y) & 255;

@@ -12,7 +12,7 @@ struct perlin
 
 	perlin();
 
-	double noise(const point3& point);
+	double noise(const point3& point) const;
 	static void generatePerm(int* p);
 	static void permute(int* p, int n);
 };
