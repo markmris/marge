@@ -1,6 +1,6 @@
 #pragma once
 
-#include "vector3.h"
+#include "ray.h"
 
 struct perlin
 {

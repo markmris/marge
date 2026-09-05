@@ -21,6 +21,6 @@ enum struct args
 
 args enumFromString(auto str);
 
-bool initializeEngine(int argc, char* argv[], camera& camera, int& globalObjectCount);
+bool parseCommands(int argc, char* argv[], camera& camera, int& globalObjectCount);
 void setValue(int* var, const char* i, bool signPresent);
 void setValue(double* var, const char* i, bool signPresent);

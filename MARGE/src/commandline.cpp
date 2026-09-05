@@ -60,7 +60,7 @@ args enumFromString(auto str)
 	}
 }
 
-bool initializeEngine(int argc, char* argv[], camera& camera, int& globalObjectCount)
+bool parseCommands(int argc, char* argv[], camera& camera, int& globalObjectCount)
 {
 	for (int i = 1; i < argc; i++)
 	{
