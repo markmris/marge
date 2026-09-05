@@ -3,7 +3,7 @@
 
 perlin::perlin()
 {
-	for (double d : randDouble)
+	for (double& d : randDouble)
 	{
 		d = randomDouble();
 	}
@@ -36,7 +36,7 @@ void perlin::permute(int* p, int n)
 {
 	for (int i = n - 1; i > 0; i--)
 	{
-		int target = randomInt(0, 1);
+		int target = randomInt(0, i);
 		int temp = p[i];
 		p[i] = p[target];
 		p[target] = temp;

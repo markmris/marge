@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
 	camera.cameraPoint = point3(13, 1.5, 3);
 	camera.aspectRatio = 16.0 / 9.0;
 	camera.imageWidth = 1080;
-	camera.maxPixelSamples = 32;
+	camera.maxPixelSamples = 4;
 	camera.maxDepth = 13;
 	camera.fov = 90;
 	camera.yaw = 0;
@@ -84,31 +84,40 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
-	const std::string supportedFiles[4] = { "jpg", "jpeg", "png", "tga"};
 	std::vector<shared_ptr<imagetexture>> images;
 
-	for (const auto& img : std::filesystem::directory_iterator(textureDir))
+	if (std::filesystem::exists(textureDir))
 	{
-		std::string filename = img.path().filename().string();
+		const std::string supportedFiles[4] = { "jpg", "jpeg", "png", "tga" };
 
-		size_t index;
-		for (const std::string& extension : supportedFiles)
+		for (const auto& img : std::filesystem::directory_iterator(textureDir))
 		{
-			index = filename.find(extension);
+			std::string filename = img.path().filename().string();
 
-			if (index != std::string::npos)
-				break;
+			size_t index;
+			for (const std::string& extension : supportedFiles)
+			{
+				index = filename.find(extension);
+
+				if (index != std::string::npos)
+					break;
+			}
+
+			if (index == std::string::npos)
+			{
+				std::cerr << "Filetype for file " << filename << " is not supported.";
+				return 0;
+			}
+
+			images.push_back(make_shared<imagetexture>(filename));
 		}
-
-		if (index == std::string::npos)
-		{
-			std::cerr << "Filetype for file " << filename << " is not supported.";
-			return 0;
-		}
-
-		images.push_back(make_shared<imagetexture>(filename));
+	}
+	else
+	{
+		std::clog << "No textures folder found. Image textures will not render." << '\n';
 	}
 
+	
 
 	shared_ptr<material> objectMaterial;
 	color3 albedo;
@@ -126,9 +135,9 @@ int main(int argc, char* argv[])
 			{
 				int sphereType;
 				if (images.empty())
-					sphereType = randomInt(1, 2);
-				else
 					sphereType = randomInt(1, 3);
+				else
+					sphereType = randomInt(1, 4);
 
 				switch (sphereType)
 				{
@@ -148,6 +157,12 @@ int main(int argc, char* argv[])
 					break;
 
 				case 3:
+					objectMaterial = make_shared<diffuse>(make_shared<perlintexture>());
+					world.add(make_shared<sphere>(position, radius, objectMaterial));
+
+					break;
+
+				case 4:
 					int imageIndex = randomInt(0, static_cast<int>(images.size() - 1));
 					world.add(make_shared<sphere>(position, radius, make_shared<diffuse>(images[imageIndex])));
 
