@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <filesystem>
+#include <algorithm>
 
 extern const std::filesystem::path textureDir;
 
@@ -18,7 +19,7 @@ struct image
 	int imageHeight = 0;
 
 	image();
-	image(const std::string& iamgeFileName);
+	image(const std::string& imageFileName);
 	~image();
 
 	const unsigned char* pixelData(int x, int y) const;

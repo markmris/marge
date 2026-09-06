@@ -4,6 +4,8 @@
 #include "hittable.h"
 #include "objectlists.h"
 
+#include <algorithm>
+
 struct bvhnode : public hittable
 {
 	bvhnode(objectlist list);

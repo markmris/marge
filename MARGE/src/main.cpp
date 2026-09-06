@@ -60,6 +60,8 @@ int main(int argc, char* argv[])
 
 	std::vector<shared_ptr<imagetexture>> images;
 
+	getTextures(images);
+
 	shared_ptr<material> objectMaterial;
 	color3 albedo;
 
