@@ -10,6 +10,7 @@
 #include <fstream>
 #include <string>
 #include <filesystem>
+#include <cstdlib>
 
 /*
 	X: Positive X to the right, Negative to the left
@@ -17,55 +18,28 @@
 	Z: Positive Z forward, Negative Z backward
 */
 
+static void initializeEngine(int argc, char* argv[], camera& camera, int& globalObjectCount);
+static void getTextures(std::vector<shared_ptr<imagetexture>>& images);
+
+std::ofstream outFile("image.ppm");
+std::streambuf* originalBuffer = std::cout.rdbuf();
+
 int main(int argc, char* argv[])
 {
 	std::ios::sync_with_stdio(false);
 	std::cin.tie(nullptr);
 
-	std::ofstream outFile("image.ppm");
-	std::streambuf* originalBuffer = std::cout.rdbuf();
 	std::cout.rdbuf(outFile.rdbuf());
 
 	camera camera;
-	camera.cameraPoint = point3(13, 1.5, 3);
-	camera.aspectRatio = 16.0 / 9.0;
-	camera.imageWidth = 1080;
-	camera.maxPixelSamples = 32;
-	camera.maxDepth = 13;
-	camera.fov = 90;
-	camera.yaw = 0;
-	camera.pitch = -45;
-	camera.defocusAngle = 0.6;
-	camera.focusDistance = 2.5;
-
 	int globalObjectCount = 20;
 
-	try
-	{
-		bool help = initializeEngine(argc, argv, camera, globalObjectCount);
-
-		if (help)
-		{
-			std::cout.rdbuf(originalBuffer);
-			
-			std::cout << helpmessage;
-
-			return 0;
-		}
-	}
-	catch (const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-
-		return 0;
-	}
-
-	camera.initialize();
+	initializeEngine(argc, argv, camera, globalObjectCount);
 
 	// World Creation
 	objectlist world;
 
-	auto checkerTexture = make_shared<checkertexture>(0.3, color3(1, 0.486, 0), color3(.9, .9, .9));
+	auto checkerTexture = make_shared<checkertexture>(0.3, color3(1, 0, 0), color3(.9, .9, .9));
 
 	auto groundMaterial = make_shared<diffuse>(checkerTexture);
 	world.add(make_shared<sphere>(point3(0, -1000.5, 1), 1000, groundMaterial));
@@ -84,33 +58,12 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
-	const std::string supportedFiles[4] = { "jpg", "jpeg", "png", "tga"};
 	std::vector<shared_ptr<imagetexture>> images;
 
-	for (const auto& img : std::filesystem::directory_iterator(textureDir))
-	{
-		std::string filename = img.path().filename().string();
-
-		size_t index;
-		for (const std::string& extension : supportedFiles)
-		{
-			index = filename.find(extension);
-
-			if (index != std::string::npos)
-				break;
-		}
-
-		if (index == std::string::npos)
-		{
-			std::cerr << "Filetype for file " << filename << " is not supported.";
-			return 0;
-		}
-
-		images.push_back(make_shared<imagetexture>(filename));
-	}
-
+	getTextures(images);
 
 	shared_ptr<material> objectMaterial;
+	shared_ptr<texture> perlinTexture = make_shared<perlintexture>(4);
 	color3 albedo;
 
 	for (int x = -globalObjectCount / 4; x < globalObjectCount / 4; x++)
@@ -126,9 +79,9 @@ int main(int argc, char* argv[])
 			{
 				int sphereType;
 				if (images.empty())
-					sphereType = randomInt(1, 2);
-				else
 					sphereType = randomInt(1, 3);
+				else
+					sphereType = randomInt(1, 4);
 
 				switch (sphereType)
 				{
@@ -148,6 +101,12 @@ int main(int argc, char* argv[])
 					break;
 
 				case 3:
+					objectMaterial = make_shared<diffuse>(perlinTexture);
+					world.add(make_shared<sphere>(position, radius, objectMaterial));
+
+					break;
+
+				case 4:
 					int imageIndex = randomInt(0, static_cast<int>(images.size() - 1));
 					world.add(make_shared<sphere>(position, radius, make_shared<diffuse>(images[imageIndex])));
 
@@ -177,4 +136,75 @@ int main(int argc, char* argv[])
 
 	std::cout.rdbuf(originalBuffer);
 	return 0;
+}
+
+
+static void initializeEngine(int argc, char* argv[], camera& camera, int& globalObjectCount)
+{
+	camera.cameraPoint = point3(13, 1.5, 3);
+	camera.aspectRatio = 16.0 / 9.0;
+	camera.imageWidth = 1080;
+	camera.maxPixelSamples = 4;
+	camera.maxDepth = 13;
+	camera.fov = 90;
+	camera.yaw = 0;
+	camera.pitch = -45;
+	camera.defocusAngle = 0.6;
+	camera.focusDistance = 2.5;
+
+	try
+	{
+		bool help = parseCommands(argc, argv, camera, globalObjectCount);
+
+		if (help)
+		{
+			std::cout.rdbuf(originalBuffer);
+
+			std::cout << helpmessage;
+
+			std::exit(0);
+		}
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+
+		std::exit(0);
+	}
+
+	camera.initialize();
+}
+
+static void getTextures(std::vector<shared_ptr<imagetexture>>& images)
+{
+	if (std::filesystem::exists(textureDir))
+	{
+		const std::string supportedFiles[4] = { "jpg", "jpeg", "png", "tga" };
+
+		for (const auto& img : std::filesystem::directory_iterator(textureDir))
+		{
+			std::string filename = img.path().filename().string();
+
+			size_t index;
+			for (const std::string& extension : supportedFiles)
+			{
+				index = filename.find(extension);
+
+				if (index != std::string::npos)
+					break;
+			}
+
+			if (index == std::string::npos)
+			{
+				std::cerr << "Filetype for file " << filename << " is not supported. Will not be rendered.";
+				continue;
+			}
+
+			images.push_back(make_shared<imagetexture>(filename));
+		}
+	}
+	else
+	{
+		std::clog << "No textures folder found. Image textures will not render." << '\n';
+	}
 }

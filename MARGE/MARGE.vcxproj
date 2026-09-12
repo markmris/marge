@@ -143,6 +143,7 @@
     <ClCompile Include="src\material.cpp" />
     <ClCompile Include="src\objectlists.cpp" />
     <ClCompile Include="src\objects.cpp" />
+    <ClCompile Include="src\perlin.cpp" />
     <ClCompile Include="src\ray.cpp" />
     <ClCompile Include="src\margestbimage.cpp" />
     <ClCompile Include="src\texture.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="include\material.h" />
     <ClInclude Include="include\objectlists.h" />
     <ClInclude Include="include\objects.h" />
+    <ClInclude Include="include\perlin.h" />
     <ClInclude Include="include\ray.h" />
     <ClInclude Include="include\texture.h" />
     <ClInclude Include="include\vector3.h" />

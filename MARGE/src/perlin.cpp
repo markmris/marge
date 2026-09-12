@@ -1,0 +1,92 @@
+#include "perlin.h"
+#include "marge.h"
+
+perlin::perlin()
+{
+	for (vector3& v : randomVectors)
+	{
+		v = randomNormalVector();
+	}
+
+	generatePerm(permX);
+	generatePerm(permY);
+	generatePerm(permZ);
+}
+
+double perlin::noise(const point3& point) const
+{
+	double horizontal = point.x - std::floor(point.x);
+	double vertical = point.y - std::floor(point.y);
+	double width = point.z - std::floor(point.z);
+
+	int x = int(std::floor(point.x));
+	int y = int(std::floor(point.y));
+	int z = int(std::floor(point.z));
+
+	vector3 c[2][2][2];
+
+	for (int dx = 0; dx < 2; dx++)
+	{
+		for (int dy = 0; dy < 2; dy++)
+		{
+			for (int dz = 0; dz < 2; dz++)
+			{
+				c[dx][dy][dz] = randomVectors[
+					permX[(x + dx) & 255] ^
+					permY[(y + dy) & 255] ^
+					permZ[(z + dz) & 255]
+				];
+			}
+		}
+	}
+
+	return perlinlerp(c, horizontal, vertical, width);
+}
+
+void perlin::generatePerm(int* p)
+{
+	for (int i = 0; i < pointCount; i++)
+	{
+		p[i] = i;
+	}
+
+	permute(p, pointCount);
+}
+
+void perlin::permute(int* p, int n)
+{
+	for (int i = n - 1; i > 0; i--)
+	{
+		int target = randomInt(0, i);
+		int temp = p[i];
+		p[i] = p[target];
+		p[target] = temp;
+	}
+}
+
+double perlin::perlinlerp(const vector3 c[2][2][2], double horizontalCoord, double verticalCoord, double widthCoord)
+{
+	double accumulation = 0.0;
+	double horizontal = horizontalCoord * horizontalCoord * (3 - 2 * horizontalCoord);
+	double vertical = verticalCoord * verticalCoord * (3 - 2 * verticalCoord);
+	double width = widthCoord * widthCoord * (3 - 2 * widthCoord);
+
+	for (int x = 0; x < 2; x++)
+	{
+		for (int y = 0; y < 2; y++)
+		{
+			for (int z = 0; z < 2; z++)
+			{
+				vector3 weightV(horizontalCoord - x, verticalCoord - y, widthCoord - z);
+
+				accumulation +=
+					(x * horizontal + (1 - x) * (1 - horizontal)) *
+					(y * vertical + (1 - y) * (1 - vertical)) *
+					(z * width + (1 - z) * (1 - width)) *
+					dot(c[x][y][z], weightV);
+			}
+		}
+	}
+
+	return accumulation;
+}

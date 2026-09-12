@@ -2,6 +2,7 @@
 
 #include "marge.h"
 #include "margestbimage.h"
+#include "perlin.h"
 
 struct texture
 {
@@ -41,6 +42,16 @@ struct imagetexture : public texture
 	image img;
 
 	imagetexture(const std::string fileName);
+
+	color3 value(double horizontalCoord, double verticalCoord, const point3& point) const override;
+};
+
+struct perlintexture : public texture
+{
+	perlin noise;
+	double scale;
+
+	perlintexture(double scale);
 
 	color3 value(double horizontalCoord, double verticalCoord, const point3& point) const override;
 };
