@@ -19,7 +19,7 @@ You can modify any of the following interal variables:
 (Note that variables are reset each time MARGE finishes rendering. If you want to reuse or modify a specific line, press the up arrow on your keyboard.)
 
 --objectcount (integer) The amount of objects to be rendered in the scene. Has some performance impact the higher it is. Default set to 20
---pixelsamples (integer). The higher this number is, the better the image looks, but the longer it takes to render. Default set to 32. Anything around 50 looks pretty good, but takes a while.
+--pixelsamples (integer). The higher this number is, the better the image looks, but the longer it takes to render. Default set to 32. Anything around 50 looks pretty good, but takes a while to render.
 --rayDepth (integer). The higher this is, the more realistic reflections will look. Default set to 13.
 --focusDistance (decimal) The distance from the camera where objects are perfectly in focus. This is disabled when defocusAngle is set to 0. Default set to 8.0.
 --defocusAngle (decimal). The higher this number is, the more blurred objects will look the further they are from the focus distance. Default set to 0.6.
@@ -150,11 +150,11 @@ bool parseCommands(int argc, char* argv[], camera& camera, int& globalObjectCoun
 	return false;
 }
 
-void setValue(int* var, const char* i, bool signPresent)
+void setValue(int* var, const char* i, bool signRequired)
 {
 	try
 	{
-		signPresent ? *var = std::stoi(i) : *var = std::abs(std::stoi(i));
+		signRequired ? *var = std::stoi(i) : *var = std::abs(std::stoi(i));
 	}
 	catch (const std::exception& e)
 	{
@@ -162,11 +162,11 @@ void setValue(int* var, const char* i, bool signPresent)
 	}
 }
 
-void setValue(double* var, const char* i, bool signPresent)
+void setValue(double* var, const char* i, bool signRequired)
 {
 	try
 	{
-		signPresent ? *var = std::stod(i) : *var = std::fabs(std::stod(i));
+		signRequired ? *var = std::stod(i) : *var = std::fabs(std::stod(i));
 		
 	}
 	catch (const std::exception& e)

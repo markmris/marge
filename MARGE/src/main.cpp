@@ -144,7 +144,7 @@ static void initializeEngine(int argc, char* argv[], camera& camera, int& global
 	camera.cameraPoint = point3(13, 1.5, 3);
 	camera.aspectRatio = 16.0 / 9.0;
 	camera.imageWidth = 1080;
-	camera.maxPixelSamples = 4;
+	camera.maxPixelSamples = 32;
 	camera.maxDepth = 13;
 	camera.fov = 90;
 	camera.yaw = 0;
