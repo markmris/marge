@@ -1,9 +1,9 @@
-# MARGE (v0.16.2) - Texture Update
+# MARGE (v0.17.0) - Perlin Noise Update
 
 *MARGE - Modular Advanced Raytracing & Graphics Engine*<br>
 
 ## Changes
-This update introduces basic textures. The first texture of which added is a checkerboard texture. v0.16.1 introduces image textures. v0.16.2 introduced support for custom textures. Supported filetypes are: JPG/JPEG, PNG, TGA.
+This update introduces Perlin Noise. Spheres with a Perlin Noise texture will randomly be generated in the scene as of now.
 
 <img width="2202" height="1237" alt="image" src="https://github.com/user-attachments/assets/f0cdcc17-93dc-4919-9bf4-7211a532ddf0" /><br>
 
@@ -15,7 +15,7 @@ MARGE is a lightweight raytracing graphics engine built from scratch in raw C++.
 MARGE's goal is to build a clean, lightweight, easy-to-use, open-source graphics engine from the ground up, starting with single-image generation and gradually expanding into a frame-based renderer that can be used for game engines, CAD software, etc.
 
 ## Current Status
-MARGE is in early development (v0.16.2).  
+MARGE is in early development (v0.17.0).  
 At this stage, the focus is correctness and structure, not feature completeness. MARGE is currently run entirely on the CPU, but will be transformed into a GPU renderer in the future.
 
 ## Current Features
@@ -29,6 +29,7 @@ At this stage, the focus is correctness and structure, not feature completeness.
 - Defocus Blur/Motion Blur
 - Bounding Volume Hierarchies (BVH)
 - Basic Textures
+- Perlin Noise
 
 ## Future/Planned Features
 - Additional Materials/Textures
