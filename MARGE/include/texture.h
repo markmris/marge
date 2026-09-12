@@ -49,8 +49,9 @@ struct imagetexture : public texture
 struct perlintexture : public texture
 {
 	perlin noise;
+	double scale;
 
-	perlintexture();
+	perlintexture(double scale);
 
 	color3 value(double horizontalCoord, double verticalCoord, const point3& point) const override;
 };

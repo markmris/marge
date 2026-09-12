@@ -63,6 +63,7 @@ int main(int argc, char* argv[])
 	getTextures(images);
 
 	shared_ptr<material> objectMaterial;
+	shared_ptr<texture> perlinTexture = make_shared<perlintexture>(4);
 	color3 albedo;
 
 	for (int x = -globalObjectCount / 4; x < globalObjectCount / 4; x++)
@@ -100,7 +101,7 @@ int main(int argc, char* argv[])
 					break;
 
 				case 3:
-					objectMaterial = make_shared<diffuse>(make_shared<perlintexture>());
+					objectMaterial = make_shared<diffuse>(perlinTexture);
 					world.add(make_shared<sphere>(position, radius, objectMaterial));
 
 					break;

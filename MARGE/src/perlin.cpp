@@ -18,10 +18,13 @@ double perlin::noise(const point3& point) const
 	double horizontal = point.x - std::floor(point.x);
 	double vertical = point.y - std::floor(point.y);
 	double width = point.z - std::floor(point.z);
+	horizontal = horizontal * horizontal * (3 - 2 * horizontal);
+	vertical = vertical * vertical * (3 - 2 * vertical);
+	width = width * width * (3 - 2 * width);
 
-	int x = int(4 * point.x) & 255;
-	int y = int(4 * point.y) & 255;
-	int z = int(4 * point.z) & 255;
+	int x = int(std::floor(point.x));
+	int y = int(std::floor(point.y));
+	int z = int(std::floor(point.z));
 
 	double c[2][2][2];
 
