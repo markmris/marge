@@ -3,9 +3,9 @@
 
 perlin::perlin()
 {
-	for (double& d : randDouble)
+	for (vector3& v : randomVectors)
 	{
-		d = randomDouble();
+		v = randomNormalVector();
 	}
 
 	generatePerm(permX);
@@ -18,15 +18,12 @@ double perlin::noise(const point3& point) const
 	double horizontal = point.x - std::floor(point.x);
 	double vertical = point.y - std::floor(point.y);
 	double width = point.z - std::floor(point.z);
-	horizontal = horizontal * horizontal * (3 - 2 * horizontal);
-	vertical = vertical * vertical * (3 - 2 * vertical);
-	width = width * width * (3 - 2 * width);
 
 	int x = int(std::floor(point.x));
 	int y = int(std::floor(point.y));
 	int z = int(std::floor(point.z));
 
-	double c[2][2][2];
+	vector3 c[2][2][2];
 
 	for (int dx = 0; dx < 2; dx++)
 	{
@@ -34,7 +31,7 @@ double perlin::noise(const point3& point) const
 		{
 			for (int dz = 0; dz < 2; dz++)
 			{
-				c[dx][dy][dz] = randDouble[
+				c[dx][dy][dz] = randomVectors[
 					permX[(x + dx) & 255] ^
 					permY[(y + dy) & 255] ^
 					permZ[(z + dz) & 255]
@@ -43,7 +40,7 @@ double perlin::noise(const point3& point) const
 		}
 	}
 
-	return trilerp(c, horizontal, vertical, width);
+	return perlinlerp(c, horizontal, vertical, width);
 }
 
 void perlin::generatePerm(int* p)
@@ -67,9 +64,12 @@ void perlin::permute(int* p, int n)
 	}
 }
 
-double perlin::trilerp(double c[2][2][2], double horizontalCoord, double verticalCoord, double width)
+double perlin::perlinlerp(const vector3 c[2][2][2], double horizontalCoord, double verticalCoord, double widthCoord)
 {
 	double accumulation = 0.0;
+	double horizontal = horizontalCoord * horizontalCoord * (3 - 2 * horizontalCoord);
+	double vertical = verticalCoord * verticalCoord * (3 - 2 * verticalCoord);
+	double width = widthCoord * widthCoord * (3 - 2 * widthCoord);
 
 	for (int x = 0; x < 2; x++)
 	{
@@ -77,11 +77,13 @@ double perlin::trilerp(double c[2][2][2], double horizontalCoord, double vertica
 		{
 			for (int z = 0; z < 2; z++)
 			{
+				vector3 weightV(horizontalCoord - x, verticalCoord - y, widthCoord - z);
+
 				accumulation +=
-					(x * horizontalCoord + (1 - x) * (1 - horizontalCoord)) *
-					(y * verticalCoord + (1 - y) * (1 - verticalCoord)) *
+					(x * horizontal + (1 - x) * (1 - horizontal)) *
+					(y * vertical + (1 - y) * (1 - vertical)) *
 					(z * width + (1 - z) * (1 - width)) *
-					c[x][y][z];
+					dot(c[x][y][z], weightV);
 			}
 		}
 	}

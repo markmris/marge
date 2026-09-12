@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
 	// World Creation
 	objectlist world;
 
-	auto checkerTexture = make_shared<checkertexture>(0.3, color3(1, 0.486, 0), color3(.9, .9, .9));
+	auto checkerTexture = make_shared<checkertexture>(0.3, color3(1, 0, 0), color3(.9, .9, .9));
 
 	auto groundMaterial = make_shared<diffuse>(checkerTexture);
 	world.add(make_shared<sphere>(point3(0, -1000.5, 1), 1000, groundMaterial));

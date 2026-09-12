@@ -44,5 +44,5 @@ perlintexture::perlintexture(double scale) : scale(scale) {}
 
 color3 perlintexture::value(double horizontalCoord, double verticalCoord, const point3& point) const
 {
-	return color3(1, 1, 1) * noise.noise(point * scale);
+	return color3(1, 1, 1) * 0.5 * (1.0 + noise.noise(point * scale));
 }
