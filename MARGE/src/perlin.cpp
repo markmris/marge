@@ -15,11 +15,32 @@ perlin::perlin()
 
 double perlin::noise(const point3& point) const
 {
+	double horizontal = point.x - std::floor(point.x);
+	double vertical = point.y - std::floor(point.y);
+	double width = point.z - std::floor(point.z);
+
 	int x = int(4 * point.x) & 255;
 	int y = int(4 * point.y) & 255;
 	int z = int(4 * point.z) & 255;
 
-	return randDouble[permX[x] ^ permY[y] ^ permZ[z]];
+	double c[2][2][2];
+
+	for (int dx = 0; dx < 2; dx++)
+	{
+		for (int dy = 0; dy < 2; dy++)
+		{
+			for (int dz = 0; dz < 2; dz++)
+			{
+				c[dx][dy][dz] = randDouble[
+					permX[(x + dx) & 255] ^
+					permY[(y + dy) & 255] ^
+					permZ[(z + dz) & 255]
+				];
+			}
+		}
+	}
+
+	return trilerp(c, horizontal, vertical, width);
 }
 
 void perlin::generatePerm(int* p)
@@ -41,4 +62,26 @@ void perlin::permute(int* p, int n)
 		p[i] = p[target];
 		p[target] = temp;
 	}
+}
+
+double perlin::trilerp(double c[2][2][2], double horizontalCoord, double verticalCoord, double width)
+{
+	double accumulation = 0.0;
+
+	for (int x = 0; x < 2; x++)
+	{
+		for (int y = 0; y < 2; y++)
+		{
+			for (int z = 0; z < 2; z++)
+			{
+				accumulation +=
+					(x * horizontalCoord + (1 - x) * (1 - horizontalCoord)) *
+					(y * verticalCoord + (1 - y) * (1 - verticalCoord)) *
+					(z * width + (1 - z) * (1 - width)) *
+					c[x][y][z];
+			}
+		}
+	}
+
+	return accumulation;
 }

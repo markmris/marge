@@ -15,4 +15,5 @@ struct perlin
 	double noise(const point3& point) const;
 	static void generatePerm(int* p);
 	static void permute(int* p, int n);
+	static double trilerp(double c[2][2][2], double horizontalCoord, double verticalCoord, double width);
 };
