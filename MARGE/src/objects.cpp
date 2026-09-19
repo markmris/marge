@@ -66,6 +66,10 @@ boundingbox sphere::getBoundingBox() const { return bbox; }
 quadrilateral::quadrilateral(const point3& cornerOrigin, const vector3& horizontal, const vector3& vertical, shared_ptr<::material> material)
     : cornerOrigin(cornerOrigin), vertical(vertical), horizontal(horizontal), material(material) 
 {
+    vector3 n = cross(horizontal, vertical);
+    normal = n;
+    planeConst = dot(normal, cornerOrigin);
+
     setBoundingBox();
 }
 
@@ -79,7 +83,23 @@ void quadrilateral::setBoundingBox()
 
 bool quadrilateral::hit(const ray& r, interval rayT, hitdata& hd) const
 {
-    return false; // Will be implemented later
+    double denominator = dot(normal, r.direction);
+
+    if (std::fabs(denominator) < 1e-8)
+        return false;
+
+    double t = (planeConst - dot(normal, r.origin)) / denominator;
+    if (!rayT.contains(t))
+        return false;
+
+    point3 intersection = r.at(t);
+
+    hd.t = t;
+    hd.point = intersection;
+    hd.material = material;
+    hd.setFaceNormal(r, normal);
+
+    return true;
 }
 
 boundingbox quadrilateral::getBoundingBox() const { return bbox; }

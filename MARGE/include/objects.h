@@ -26,6 +26,8 @@ struct quadrilateral : public hittable
 {
 private:
     boundingbox bbox;
+    vector3 normal;
+    double planeConst;
 
 public:
     point3 cornerOrigin;
