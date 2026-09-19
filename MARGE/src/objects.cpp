@@ -1,6 +1,8 @@
 #include "marge.h"
 #include "objects.h"
 
+// Spheres
+
 sphere::sphere(const point3& staticPosition, double radius, shared_ptr<::material> material) : position(staticPosition, vector3(0, 0, 0)), radius(std::fmax(0, radius)), material(material)
 {
     vector3 rvector = vector3(radius, radius, radius);
@@ -58,3 +60,26 @@ bool sphere::hit(const ray& r, interval rayt, hitdata& hd) const
 }
 
 boundingbox sphere::getBoundingBox() const { return bbox; }
+
+// Quadrilaterials
+
+quadrilateral::quadrilateral(const point3& cornerOrigin, const vector3& horizontal, const vector3& vertical, shared_ptr<::material> material)
+    : cornerOrigin(cornerOrigin), vertical(vertical), horizontal(horizontal), material(material) 
+{
+    setBoundingBox();
+}
+
+void quadrilateral::setBoundingBox()
+{
+    boundingbox bboxDiagonal1 = boundingbox(cornerOrigin, cornerOrigin + horizontal + vertical);
+    boundingbox bboxDiagonal2 = boundingbox(cornerOrigin + horizontal, cornerOrigin + vertical);
+
+    bbox = boundingbox(bboxDiagonal1, bboxDiagonal2);
+}
+
+bool quadrilateral::hit(const ray& r, interval rayT, hitdata& hd) const
+{
+    return false; // Will be implemented later
+}
+
+boundingbox quadrilateral::getBoundingBox() const { return bbox; }

@@ -18,6 +18,23 @@ public:
 
     static void getSphereUV(const point3& point, double& horizontalTexture, double& verticalTexture);
 
-    virtual bool hit(const ray& r, interval rayt, hitdata& hd) const override;
+    bool hit(const ray& r, interval rayt, hitdata& hd) const override;
+    boundingbox getBoundingBox() const override;
+};
+
+struct quadrilateral : public hittable
+{
+private:
+    boundingbox bbox;
+
+public:
+    point3 cornerOrigin;
+    vector3 horizontal, vertical;
+    shared_ptr<material> material;
+
+    quadrilateral(const point3& cornerOrigin, const vector3& horizontal, const vector3& vertical, shared_ptr<::material> material);
+
+    virtual void setBoundingBox();
+    bool hit(const ray& r, interval rayt, hitdata& hd) const override;
     boundingbox getBoundingBox() const override;
 };
