@@ -67,7 +67,7 @@ quadrilateral::quadrilateral(const point3& cornerOrigin, const vector3& horizont
     : cornerOrigin(cornerOrigin), vertical(vertical), horizontal(horizontal), material(material) 
 {
     vector3 n = cross(horizontal, vertical);
-    normal = n;
+    normal = normalized(n);
     planeConst = dot(normal, cornerOrigin);
 
     setBoundingBox();
