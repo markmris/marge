@@ -69,6 +69,7 @@ quadrilateral::quadrilateral(const point3& cornerOrigin, const vector3& horizont
     vector3 n = cross(horizontal, vertical);
     normal = normalized(n);
     planeConst = dot(normal, cornerOrigin);
+    scaledNormal = n / dot(n, n);
 
     setBoundingBox();
 }
@@ -93,12 +94,27 @@ bool quadrilateral::hit(const ray& r, interval rayT, hitdata& hd) const
         return false;
 
     point3 intersection = r.at(t);
+    vector3 planarHitPointVector = intersection - cornerOrigin;
+    double alpha = dot(scaledNormal, cross(planarHitPointVector, vertical));
+    double beta = dot(scaledNormal, cross(horizontal, planarHitPointVector));
 
     hd.t = t;
     hd.point = intersection;
     hd.material = material;
     hd.setFaceNormal(r, normal);
 
+    return true;
+}
+
+bool quadrilateral::isInterior(double a, double b, hitdata& hd) const
+{
+    interval normalInterval(0, 1);
+
+    if (!normalInterval.contains(a) || !normalInterval.contains(b))
+        return false;
+
+    hd.horizontalCoord = a;
+    hd.verticalCoord = b;
     return true;
 }
 

@@ -27,6 +27,7 @@ struct quadrilateral : public hittable
 private:
     boundingbox bbox;
     vector3 normal;
+    vector3 scaledNormal;
     double planeConst;
 
 public:
@@ -37,6 +38,7 @@ public:
     quadrilateral(const point3& cornerOrigin, const vector3& horizontal, const vector3& vertical, shared_ptr<::material> material);
 
     virtual void setBoundingBox();
+    virtual bool isInterior(double a, double b, hitdata& hd) const;
     bool hit(const ray& r, interval rayt, hitdata& hd) const override;
     boundingbox getBoundingBox() const override;
 };
