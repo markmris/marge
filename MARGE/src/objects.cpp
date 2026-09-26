@@ -97,6 +97,9 @@ bool quadrilateral::hit(const ray& r, interval rayT, hitdata& hd) const
     vector3 planarHitPointVector = intersection - cornerOrigin;
     double alpha = dot(scaledNormal, cross(planarHitPointVector, vertical));
     double beta = dot(scaledNormal, cross(horizontal, planarHitPointVector));
+    
+    if (!isInterior(alpha, beta, hd))
+        return false;
 
     hd.t = t;
     hd.point = intersection;

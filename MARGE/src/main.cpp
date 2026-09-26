@@ -20,6 +20,7 @@
 
 static void initializeEngine(int argc, char* argv[], camera& camera, int& globalObjectCount);
 static void getTextures(std::vector<shared_ptr<imagetexture>>& images);
+static void quads();
 
 std::ofstream outFile("image.ppm");
 std::streambuf* originalBuffer = std::cout.rdbuf();
@@ -39,25 +40,6 @@ int main(int argc, char* argv[])
 	// World Creation
 	objectlist world;
 
-	auto checkerTexture = make_shared<checkertexture>(0.3, color3(1, 0, 0), color3(.9, .9, .9));
-
-	auto groundMaterial = make_shared<diffuse>(checkerTexture);
-	world.add(make_shared<sphere>(point3(0, -1000.5, 1), 1000, groundMaterial));
-
-	hitdata hd;
-	ray objectOriginRay = ray(camera.cameraPoint, camera.getForward());
-	point3 objectOrigin;
-
-	if (world.hit(objectOriginRay, interval(0.01, infinity), hd))
-	{
-		objectOrigin = hd.point - normalized(objectOriginRay.direction) * 0.5;
-	}
-	else
-	{
-		std::cerr << "Scene generation failed. Please try again. (Maybe you modified pitch/yaw incorrectly?)";
-		return 0;
-	}
-
 	std::vector<shared_ptr<imagetexture>> images;
 
 	getTextures(images);
@@ -65,70 +47,6 @@ int main(int argc, char* argv[])
 	shared_ptr<material> objectMaterial;
 	shared_ptr<texture> perlinTexture = make_shared<perlintexture>(4);
 	color3 albedo;
-
-	for (int x = -globalObjectCount / 4; x < globalObjectCount / 4; x++)
-	{
-		for (int z = -globalObjectCount / 4; z < globalObjectCount / 4; z++)
-		{
-			double randomMaterial = randomDouble();
-			double radius = randomDouble(0.15, 0.35);
-			point3 position = point3(objectOrigin.x + x + randomDouble(-0.3, 0.3), radius, objectOrigin.z + z + randomDouble(-0.3, 0.3));
-			point3 position2;
-
-			if (randomMaterial < 0.8) // Diffuse
-			{
-				int sphereType;
-				if (images.empty())
-					sphereType = randomInt(1, 3);
-				else
-					sphereType = randomInt(1, 4);
-
-				switch (sphereType)
-				{
-				case 1:
-					albedo = randomColor() * randomColor();
-					objectMaterial = make_shared<diffuse>(albedo);
-					world.add(make_shared<sphere>(position, radius, objectMaterial));
-
-					break;
-
-				case 2:
-					position2 = position + vector3(0, randomDouble(0, 0.5), 0);
-					albedo = randomColor() * randomColor();
-					objectMaterial = make_shared<diffuse>(albedo);
-					world.add(make_shared<sphere>(position, position2, radius, objectMaterial));
-
-					break;
-
-				case 3:
-					objectMaterial = make_shared<diffuse>(perlinTexture);
-					world.add(make_shared<sphere>(position, radius, objectMaterial));
-
-					break;
-
-				case 4:
-					int imageIndex = randomInt(0, static_cast<int>(images.size() - 1));
-					world.add(make_shared<sphere>(position, radius, make_shared<diffuse>(images[imageIndex])));
-
-					break;
-				}
-				
-				continue;
-			}
-			else if (randomMaterial < 0.9) // Metal
-			{
-				color3 albedo = randomColor(0, 0.51) * randomColor(0, 0.51);
-				double fuzz = randomDouble(0, 0.501);
-				objectMaterial = make_shared<metal>(albedo, fuzz);
-			}
-			else // Dielectric
-			{
-				objectMaterial = make_shared<dielectric>(randomDouble(1.5, 1.71));
-			}
-
-			world.add(make_shared<sphere>(position, radius, objectMaterial));
-		}
-	}
 
 	world = objectlist(make_shared<bvhnode>(world));
 
@@ -141,7 +59,7 @@ int main(int argc, char* argv[])
 
 static void initializeEngine(int argc, char* argv[], camera& camera, int& globalObjectCount)
 {
-	camera.cameraPoint = point3(13, 1.5, 3);
+	camera.cameraPoint = point3(0, 0, 0);
 	camera.aspectRatio = 16.0 / 9.0;
 	camera.imageWidth = 1080;
 	camera.maxPixelSamples = 32;
@@ -207,4 +125,13 @@ static void getTextures(std::vector<shared_ptr<imagetexture>>& images)
 	{
 		std::clog << "No textures folder found. Image textures will not render." << '\n';
 	}
+}
+
+static void renderScene(objectlist& world)
+{
+	auto wallmaterial = make_shared<diffuse>(color3(0.439, 0.439, 0.439));
+	auto groundMaterial = make_shared<diffuse>(color3(0.8, 0.8, 0.8));
+
+	world.add(make_shared<quadrilateral>(point3(-1, 3, 5), vector3(0, 0, 5), vector3(5, 0, 0), wallmaterial));
+	world.add(make_shared<quadrilateral>(point3(-2.5, 3, 5), vector3(5, 0, 0), vector3(5, 0, 0), wallmaterial));
 }
