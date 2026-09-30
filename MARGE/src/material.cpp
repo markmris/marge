@@ -1,16 +1,17 @@
 #include "material.h"
 #include <algorithm>
 
-bool material::scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, ray& scattered) const
-{
-	return false;
-}
+bool material::scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, ray& scattered) const { return false; }
+
+color3 material::emitted(double horizontalCoord, double verticalCoord, const point3& point) const { return color3(0, 0, 0); }
 
 
 diffuse::diffuse(const color3& albedo) : diffuse(make_shared<solidcolor>(albedo)) {}
 diffuse::diffuse(shared_ptr<texture> surfaceTexture) : surfaceTexture(surfaceTexture) {}
 metal::metal(const color3& albedo, double fuzz) : albedo(albedo), fuzz(std::clamp(fuzz, 0.0, 1.0)) {}
 dielectric::dielectric(double refractionIndex) : refractionIndex(refractionIndex) {}
+diffuselight::diffuselight(shared_ptr<texture> tex) : tex(tex) {}
+diffuselight::diffuselight(const color3& emit) : tex(make_shared<solidcolor>(emit)) {} 
 
 
 bool diffuse::scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, ray& scattered) const
@@ -69,4 +70,9 @@ double dielectric::reflectance(double cosine, double refractionIndex)
 	r0 = r0 * r0;
 
 	return r0 + (1 - r0) * std::pow((1 - cosine), 5);
+}
+
+color3 diffuselight::emitted(double horizontalCoord, double verticalCoord, const point3& point) const
+{
+	return tex->value(horizontalCoord, verticalCoord, point);
 }
