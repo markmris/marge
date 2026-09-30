@@ -11,10 +11,10 @@ public:
     ray position;
     double radius;
 
-    shared_ptr<::material> material;
+    shared_ptr<::material> mat;
 
-    sphere(const point3& staticPosition, double radius, shared_ptr<::material> material);
-    sphere(const point3& position1,const point3& position2, double radius, shared_ptr<::material> material);
+    sphere(const point3& staticPosition, double radius, shared_ptr<::material> mat);
+    sphere(const point3& position1,const point3& position2, double radius, shared_ptr<::material> mat);
 
     static void getSphereUV(const point3& point, double& horizontalTexture, double& verticalTexture);
 
@@ -33,9 +33,9 @@ private:
 public:
     point3 cornerOrigin;
     vector3 horizontal, vertical;
-    shared_ptr<material> material;
+    shared_ptr<::material> mat;
 
-    quadrilateral(const point3& cornerOrigin, const vector3& horizontal, const vector3& vertical, shared_ptr<::material> material);
+    quadrilateral(const point3& cornerOrigin, const vector3& horizontal, const vector3& vertical, shared_ptr<::material> mat);
 
     virtual void setBoundingBox();
     virtual bool isInterior(double a, double b, hitdata& hd) const;

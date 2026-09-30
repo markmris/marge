@@ -8,7 +8,6 @@
 #include "bvh.h"
 #include "texture.h"
 #include <fstream>
-#include <string>
 #include <filesystem>
 #include <cstdlib>
 
@@ -18,9 +17,9 @@
 	Z: Positive Z forward, Negative Z backward
 */
 
-static void initializeEngine(int argc, char* argv[], camera& camera, int& globalObjectCount);
+static void initializeEngine(const int argc, char* argv[], camera& camera, int& globalObjectCount);
 static void getTextures(std::vector<shared_ptr<imagetexture>>& images);
-static void quads();
+static void renderScene(objectlist& world);
 
 std::ofstream outFile("image.ppm");
 std::streambuf* originalBuffer = std::cout.rdbuf();
@@ -32,47 +31,41 @@ int main(int argc, char* argv[])
 
 	std::cout.rdbuf(outFile.rdbuf());
 
-	camera camera;
+	camera cam;
 	int globalObjectCount = 20;
 
-	initializeEngine(argc, argv, camera, globalObjectCount);
+	initializeEngine(argc, argv, cam, globalObjectCount);
 
 	// World Creation
 	objectlist world;
 
-	std::vector<shared_ptr<imagetexture>> images;
-
-	getTextures(images);
-
-	shared_ptr<material> objectMaterial;
-	shared_ptr<texture> perlinTexture = make_shared<perlintexture>(4);
-	color3 albedo;
+	renderScene(world);
 
 	world = objectlist(make_shared<bvhnode>(world));
 
-	camera.render(world);
+	cam.render(world);
 
 	std::cout.rdbuf(originalBuffer);
 	return 0;
 }
 
 
-static void initializeEngine(int argc, char* argv[], camera& camera, int& globalObjectCount)
+static void initializeEngine(const int argc, char* argv[], camera& cam, int& globalObjectCount)
 {
-	camera.cameraPoint = point3(0, 0, 0);
-	camera.aspectRatio = 16.0 / 9.0;
-	camera.imageWidth = 1080;
-	camera.maxPixelSamples = 32;
-	camera.maxDepth = 13;
-	camera.fov = 90;
-	camera.yaw = 0;
-	camera.pitch = -45;
-	camera.defocusAngle = 0.6;
-	camera.focusDistance = 2.5;
+	cam.cameraPoint = point3(0.5, 1, 0);
+	cam.aspectRatio = 16.0 / 9.0;
+	cam.imageWidth = 1080;
+	cam.maxPixelSamples = 32;
+	cam.maxDepth = 13;
+	cam.fov = 90;
+	cam.yaw = 0;
+	cam.pitch = 0;
+	cam.defocusAngle = 0.6;
+	cam.focusDistance = 2.5;
 
 	try
 	{
-		bool help = parseCommands(argc, argv, camera, globalObjectCount);
+		bool help = parseCommands(argc, argv, cam, globalObjectCount);
 
 		if (help)
 		{
@@ -90,7 +83,7 @@ static void initializeEngine(int argc, char* argv[], camera& camera, int& global
 		std::exit(0);
 	}
 
-	camera.initialize();
+	cam.initialize();
 }
 
 static void getTextures(std::vector<shared_ptr<imagetexture>>& images)
@@ -129,9 +122,57 @@ static void getTextures(std::vector<shared_ptr<imagetexture>>& images)
 
 static void renderScene(objectlist& world)
 {
-	auto wallmaterial = make_shared<diffuse>(color3(0.439, 0.439, 0.439));
+	auto wallmaterial = make_shared<diffuse>(color3(0.239, 0.239, 0.239));
 	auto groundMaterial = make_shared<diffuse>(color3(0.8, 0.8, 0.8));
 
-	world.add(make_shared<quadrilateral>(point3(-1, 3, 5), vector3(0, 0, 5), vector3(5, 0, 0), wallmaterial));
-	world.add(make_shared<quadrilateral>(point3(-2.5, 3, 5), vector3(5, 0, 0), vector3(5, 0, 0), wallmaterial));
+	world.add(make_shared<quadrilateral>(point3(-2.5, -0.1, -0.1), vector3(0, 0, 5), vector3(0, 5, 0), wallmaterial));
+	world.add(make_shared<quadrilateral>(point3(-2.5, -0.1, 4.9), vector3(5, 0, 0), vector3(0, 5, 0), wallmaterial));
+	world.add(make_shared<quadrilateral>(point3(2.5, -0.1, -0.1), vector3(0, 0, 5), vector3(0, 5, 0), wallmaterial));
+	// world.add(make_shared<quadrilateral>(point3(-2.5, -0.1, -0.1), vector3(5, 0, 0), vector3(0, 5, 0), wallmaterial));
+	world.add(make_shared<quadrilateral>(point3(-2.5, 4.9, -0.1), vector3(5, 0, 0), vector3(0, 0, 5), groundMaterial));
+	world.add(make_shared<quadrilateral>(point3(-2.5, -0.1, -0.1), vector3(5, 0, 0), vector3(0, 0, 5), groundMaterial));
+
+	std::vector<shared_ptr<imagetexture>> images;
+	getTextures(images);
+
+	int maxSurfaceTypes = 3;
+	if (!images.empty())
+		maxSurfaceTypes = 4;
+
+	shared_ptr<material> objectMaterial;
+	shared_ptr<texture> perlinTexture = make_shared<perlintexture>(4);
+	color3 albedo;
+
+	vector3 objectPosition;
+	double radius;
+	int imageIndex;
+
+	for (int i = 0; i < 20; i++)
+	{
+		objectPosition = vector3(randomDouble(-2.3, 2.3), randomDouble(0.5, 4.8), randomDouble(1.5, 4.8));
+		radius = randomDouble(0.1, 0.5);
+		
+		switch(randomInt(1, maxSurfaceTypes))
+		{
+			case 1:
+				albedo = randomColor() * randomColor();
+				objectMaterial = make_shared<diffuse>(albedo);
+				break;
+			
+			case 2:
+				albedo = randomColor() * randomColor();
+				objectMaterial = make_shared<metal>(albedo, randomDouble(0, 1));
+				break;
+			
+			case 3:
+				objectMaterial = make_shared<dielectric>(randomDouble(1.5, 1.7));
+				break;
+			
+			case 4:
+				imageIndex = randomInt(0, static_cast<int>(images.size() - 1));
+				break;
+		}
+
+		world.add(make_shared<sphere>(objectPosition, radius, objectMaterial));
+	}	
 }
