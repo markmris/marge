@@ -52,7 +52,7 @@ int main(int argc, char* argv[])
 
 static void initializeEngine(const int argc, char* argv[], camera& cam, int& globalObjectCount)
 {
-	cam.cameraPoint = point3(0.5, 1, 0);
+	cam.cameraPoint = point3(0, 1, 0);
 	cam.aspectRatio = 16.0 / 9.0;
 	cam.imageWidth = 1080;
 	cam.maxPixelSamples = 32;
@@ -62,6 +62,7 @@ static void initializeEngine(const int argc, char* argv[], camera& cam, int& glo
 	cam.pitch = 0;
 	cam.defocusAngle = 0.6;
 	cam.focusDistance = 2.5;
+	cam.backgroundColor = color3(0.5, 0.8, 1);
 
 	try
 	{
@@ -124,13 +125,16 @@ static void renderScene(objectlist& world)
 {
 	auto wallmaterial = make_shared<diffuse>(color3(0.239, 0.239, 0.239));
 	auto groundMaterial = make_shared<diffuse>(color3(0.8, 0.8, 0.8));
+	auto lightMaterial = make_shared<diffuselight>(color3(4, 4, 4));
 
 	world.add(make_shared<quadrilateral>(point3(-2.5, -0.1, -0.1), vector3(0, 0, 5), vector3(0, 5, 0), wallmaterial));
 	world.add(make_shared<quadrilateral>(point3(-2.5, -0.1, 4.9), vector3(5, 0, 0), vector3(0, 5, 0), wallmaterial));
 	world.add(make_shared<quadrilateral>(point3(2.5, -0.1, -0.1), vector3(0, 0, 5), vector3(0, 5, 0), wallmaterial));
-	// world.add(make_shared<quadrilateral>(point3(-2.5, -0.1, -0.1), vector3(5, 0, 0), vector3(0, 5, 0), wallmaterial));
+	world.add(make_shared<quadrilateral>(point3(-2.5, -0.1, -0.1), vector3(5, 0, 0), vector3(0, 5, 0), wallmaterial));
 	world.add(make_shared<quadrilateral>(point3(-2.5, 4.9, -0.1), vector3(5, 0, 0), vector3(0, 0, 5), groundMaterial));
 	world.add(make_shared<quadrilateral>(point3(-2.5, -0.1, -0.1), vector3(5, 0, 0), vector3(0, 0, 5), groundMaterial));
+
+	world.add(make_shared<quadrilateral>(point3(-1.25, 4.9, 1.25), vector3(0, 0, 2.5), vector3(2.5, 0, 0), lightMaterial));
 
 	std::vector<shared_ptr<imagetexture>> images;
 	getTextures(images);
