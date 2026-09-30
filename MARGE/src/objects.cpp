@@ -1,13 +1,15 @@
 #include "marge.h"
 #include "objects.h"
 
-sphere::sphere(const point3& staticPosition, double radius, shared_ptr<::material> material) : position(staticPosition, vector3(0, 0, 0)), radius(std::fmax(0, radius)), material(material)
+// Spheres
+
+sphere::sphere(const point3& staticPosition, double radius, shared_ptr<::material> mat) : position(staticPosition, vector3(0, 0, 0)), radius(std::fmax(0, radius)), mat(mat)
 {
     vector3 rvector = vector3(radius, radius, radius);
     bbox = boundingbox(staticPosition - rvector, staticPosition + rvector);
 }
 
-sphere::sphere(const point3& position1, const point3& position2, double radius, shared_ptr<::material> material) : position(position1, position2 - position1), radius(radius), material(material)
+sphere::sphere(const point3& position1, const point3& position2, double radius, shared_ptr<::material> mat) : position(position1, position2 - position1), radius(radius), mat(mat)
 {
     vector3 rvector = vector3(radius, radius, radius);
     boundingbox box1(position.at(0) - rvector, position.at(0) + rvector);
@@ -52,9 +54,71 @@ bool sphere::hit(const ray& r, interval rayt, hitdata& hd) const
     vector3 outwardNormal = (hd.point - currentPosition) / radius;
     hd.setFaceNormal(r, outwardNormal);
     getSphereUV(outwardNormal, hd.horizontalCoord, hd.verticalCoord);
-    hd.material = material;
+    hd.material = mat;
 
     return true;
 }
 
 boundingbox sphere::getBoundingBox() const { return bbox; }
+
+// Quadrilaterials
+
+quadrilateral::quadrilateral(const point3& cornerOrigin, const vector3& horizontal, const vector3& vertical, shared_ptr<::material> mat)
+    : cornerOrigin(cornerOrigin), vertical(vertical), horizontal(horizontal), mat(mat) 
+{
+    vector3 n = cross(horizontal, vertical);
+    normal = normalized(n);
+    planeConst = dot(normal, cornerOrigin);
+    scaledNormal = n / dot(n, n);
+
+    setBoundingBox();
+}
+
+void quadrilateral::setBoundingBox()
+{
+    boundingbox bboxDiagonal1 = boundingbox(cornerOrigin, cornerOrigin + horizontal + vertical);
+    boundingbox bboxDiagonal2 = boundingbox(cornerOrigin + horizontal, cornerOrigin + vertical);
+
+    bbox = boundingbox(bboxDiagonal1, bboxDiagonal2);
+}
+
+bool quadrilateral::hit(const ray& r, interval rayT, hitdata& hd) const
+{
+    double denominator = dot(normal, r.direction);
+
+    if (std::fabs(denominator) < 1e-8)
+        return false;
+
+    double t = (planeConst - dot(normal, r.origin)) / denominator;
+    if (!rayT.contains(t))
+        return false;
+
+    point3 intersection = r.at(t);
+    vector3 planarHitPointVector = intersection - cornerOrigin;
+    double alpha = dot(scaledNormal, cross(planarHitPointVector, vertical));
+    double beta = dot(scaledNormal, cross(horizontal, planarHitPointVector));
+    
+    if (!isInterior(alpha, beta, hd))
+        return false;
+
+    hd.t = t;
+    hd.point = intersection;
+    hd.material = mat;
+    hd.setFaceNormal(r, normal);
+
+    return true;
+}
+
+bool quadrilateral::isInterior(double a, double b, hitdata& hd) const
+{
+    interval normalInterval(0, 1);
+
+    if (!normalInterval.contains(a) || !normalInterval.contains(b))
+        return false;
+
+    hd.horizontalCoord = a;
+    hd.verticalCoord = b;
+    return true;
+}
+
+boundingbox quadrilateral::getBoundingBox() const { return bbox; }

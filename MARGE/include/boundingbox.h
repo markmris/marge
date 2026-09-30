@@ -12,10 +12,13 @@ struct boundingbox
 	boundingbox(const boundingbox& box1, const boundingbox& box2);
 
 	const interval& axisInterval(const int& n) const;
-
 	int getLongestAxis() const;
 
 	bool hit(const ray& r, interval& rayT) const;
 
 	static const boundingbox empty, universe;
+
+private:
+
+	void padToMinimums();
 };

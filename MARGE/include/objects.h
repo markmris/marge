@@ -11,13 +11,34 @@ public:
     ray position;
     double radius;
 
-    shared_ptr<::material> material;
+    shared_ptr<::material> mat;
 
-    sphere(const point3& staticPosition, double radius, shared_ptr<::material> material);
-    sphere(const point3& position1,const point3& position2, double radius, shared_ptr<::material> material);
+    sphere(const point3& staticPosition, double radius, shared_ptr<::material> mat);
+    sphere(const point3& position1,const point3& position2, double radius, shared_ptr<::material> mat);
 
     static void getSphereUV(const point3& point, double& horizontalTexture, double& verticalTexture);
 
-    virtual bool hit(const ray& r, interval rayt, hitdata& hd) const override;
+    bool hit(const ray& r, interval rayt, hitdata& hd) const override;
+    boundingbox getBoundingBox() const override;
+};
+
+struct quadrilateral : public hittable
+{
+private:
+    boundingbox bbox;
+    vector3 normal;
+    vector3 scaledNormal;
+    double planeConst;
+
+public:
+    point3 cornerOrigin;
+    vector3 horizontal, vertical;
+    shared_ptr<::material> mat;
+
+    quadrilateral(const point3& cornerOrigin, const vector3& horizontal, const vector3& vertical, shared_ptr<::material> mat);
+
+    virtual void setBoundingBox();
+    virtual bool isInterior(double a, double b, hitdata& hd) const;
+    bool hit(const ray& r, interval rayt, hitdata& hd) const override;
     boundingbox getBoundingBox() const override;
 };
