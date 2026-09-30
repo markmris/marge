@@ -72,20 +72,19 @@ color3 camera::rayColor(const ray& r, const int& depth, const hittable& world) c
 
 	hitdata hd;
 
-	if (world.hit(r, interval(0.002, infinity), hd))
-	{
-		ray scattered;
-		color3 attenuation;
+	if (!world.hit(r, interval(0.001, infinity), hd))
+		return backgroundColor;
+	
+	ray scattered;
+	color3 attenuation;
+	color3 emissionColor = hd.material->emitted(hd.horizontalCoord, hd.verticalCoord, hd.point);
 
-		if (hd.material->scatter(r, hd, attenuation, scattered))
-			return attenuation * rayColor(scattered, depth - 1, world);
+	if (!hd.material->scatter(r, hd, attenuation, scattered))
+		return emissionColor;
+	
+	color3 scatterColor = attenuation * rayColor(scattered, depth-1, world);
 
-		return color3(0, 0, 0);
-	}
-
-	vector3 normalDirection = normalized(r.direction);
-	auto a = 0.5 * (normalDirection.y + 1.0);
-	return (1.0 - a) * color3(1, 1, 1) + a * color3(0.5, 0.7, 1.0);
+	return emissionColor + scatterColor;
 }
 
 ray camera::getRay(int j, int i) const
