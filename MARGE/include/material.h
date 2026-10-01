@@ -8,6 +8,7 @@ struct material
 	virtual ~material() = default;
 
 	virtual bool scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, ray& scattered) const;
+	virtual color3 emitted(double horizontalCoord, double verticalCoord, const point3& point) const;
 };
 
 struct diffuse : public material
@@ -36,4 +37,14 @@ struct dielectric : public material
 	dielectric(double refractionIndex);
 	bool scatter(const ray& rayIn, const hitdata& hd, color3& attenuation, ray& scattered) const override;
 	static double reflectance(double cosine, double refractionIndex);
+};
+
+struct diffuselight : public material
+{
+	shared_ptr<texture> tex;
+
+	diffuselight(shared_ptr<texture> tex);
+	diffuselight(const color3& emit);
+
+	color3 emitted(double horizontalCoord, double verticalCoord, const point3& point) const override;
 };

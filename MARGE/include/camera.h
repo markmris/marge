@@ -13,6 +13,8 @@ public:
 	double pixelSamplesScale;
 	int maxDepth;
 
+	color3 backgroundColor;
+
 	double fov;
 
 	double pitch;
