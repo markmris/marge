@@ -1,9 +1,9 @@
-# MARGE (v0.18.0) - Quadrilateral Update
+# MARGE (v0.19.0) - Lighting Update
 
 *MARGE - Modular Advanced Raytracing & Graphics Engine*<br>
 
 ## Changes
-This update introduces Planes/Quadrilaterals. In the near future, planes will be extended to add boxes, triangles, etc.
+This update introduces light sources and emissive materials into the engine. The background color of a scene is also now modifiable without touching rendering code.
 
 <img width="2202" height="1237" alt="image" src="https://github.com/user-attachments/assets/f0cdcc17-93dc-4919-9bf4-7211a532ddf0" /><br>
 
@@ -15,7 +15,7 @@ MARGE is a lightweight raytracing graphics engine built from scratch in raw C++.
 MARGE's goal is to build a clean, lightweight, easy-to-use, open-source graphics engine from the ground up, starting with single-image generation and gradually expanding into a frame-based renderer that can be used for game engines, CAD software, etc.
 
 ## Current Status
-MARGE is in early development (v0.18.0).  
+MARGE is in early development (v0.19.0).  
 At this stage, the focus is correctness and structure, not feature completeness. MARGE is currently run entirely on the CPU, but will be transformed into a GPU renderer in the future.
 
 ## Current Features
