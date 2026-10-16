@@ -48,7 +48,7 @@ inline shared_ptr<objectlist> box(const point3& a, const point3& b, shared_ptr<m
 {
     auto sides = make_shared<objectlist>();
 
-    point3 min(std::fmin(a.x, b.x), std::fmin(a.y, b.y), std::fmin(a.x, b.x));
+    point3 min(std::fmin(a.x, b.x), std::fmin(a.y, b.y), std::fmin(a.z, b.z));
     point3 max(std::fmax(a.x, b.x), std::fmax(a.y, b.y), std::fmax(a.z, b.z));
 
     vector3 dx(max.x - min.x, 0, 0);

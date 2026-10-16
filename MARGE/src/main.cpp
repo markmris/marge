@@ -130,11 +130,11 @@ static void renderScene(objectlist& world)
 	world.add(make_shared<quadrilateral>(point3(-2.5, -0.1, -0.1), vector3(0, 0, 5), vector3(0, 5, 0), wallmaterial));
 	world.add(make_shared<quadrilateral>(point3(-2.5, -0.1, 4.9), vector3(5, 0, 0), vector3(0, 5, 0), wallmaterial));
 	world.add(make_shared<quadrilateral>(point3(2.5, -0.1, -0.1), vector3(0, 0, 5), vector3(0, 5, 0), wallmaterial));
-	world.add(make_shared<quadrilateral>(point3(-2.5, -0.1, -0.1), vector3(5, 0, 0), vector3(0, 5, 0), wallmaterial));
+	// world.add(make_shared<quadrilateral>(point3(-2.5, -0.1, -0.1), vector3(5, 0, 0), vector3(0, 5, 0), wallmaterial));
 	world.add(make_shared<quadrilateral>(point3(-2.5, 4.9, -0.1), vector3(5, 0, 0), vector3(0, 0, 5), groundMaterial));
 	world.add(make_shared<quadrilateral>(point3(-2.5, -0.1, -0.1), vector3(5, 0, 0), vector3(0, 0, 5), groundMaterial));
 
-	world.add(make_shared<quadrilateral>(point3(-1.25, 4.9, 1.25), vector3(0, 0, 2.5), vector3(2.5, 0, 0), lightMaterial));
+	// world.add(make_shared<quadrilateral>(point3(-1.25, 4.9, 1.25), vector3(0, 0, 2.5), vector3(2.5, 0, 0), lightMaterial));
 
 	std::vector<shared_ptr<imagetexture>> images;
 	getTextures(images);
@@ -177,6 +177,16 @@ static void renderScene(objectlist& world)
 				break;
 		}
 
-		world.add(make_shared<sphere>(objectPosition, radius, objectMaterial));
-	}	
+		switch(randomInt(1, 2))
+		{
+			case 1:
+				world.add(make_shared<sphere>(objectPosition, radius, objectMaterial));
+				break;
+			
+			case 2:
+				world.add(box(objectPosition, objectPosition - vector3(randomDouble(0.3, 0.4), randomDouble(0.3, 0.8), randomDouble(0.3, 0.4)), objectMaterial));
+		}
+
+		// world.add(make_shared<sphere>(objectPosition, radius, objectMaterial));
+	}
 }
