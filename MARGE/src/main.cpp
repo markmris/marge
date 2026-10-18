@@ -186,7 +186,5 @@ static void renderScene(objectlist& world)
 			case 2:
 				world.add(box(objectPosition, objectPosition - vector3(randomDouble(0.3, 0.4), randomDouble(0.3, 0.8), randomDouble(0.3, 0.4)), objectMaterial));
 		}
-
-		// world.add(make_shared<sphere>(objectPosition, radius, objectMaterial));
 	}
 }
