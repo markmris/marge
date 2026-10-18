@@ -18,3 +18,6 @@ struct interval
 
     static const interval empty, universe;
 };
+
+interval operator+(const interval& ival, const double offset);
+interval operator+(double offset, const interval& ival);

@@ -38,3 +38,13 @@ interval interval::expand(double delta) const
 
 const interval interval::empty = interval(infinity, -infinity);
 const interval interval::universe = interval(-infinity, infinity);
+
+interval operator+(const interval& ival, const double offset)
+{
+    return interval(ival.min + offset, ival.max + offset);
+}
+
+interval operator+(const double offset, const interval& ival)
+{
+    return ival + offset;
+}

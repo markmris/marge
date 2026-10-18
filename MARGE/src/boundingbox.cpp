@@ -72,3 +72,13 @@ void boundingbox::padToMinimums()
 
 const boundingbox boundingbox::empty = boundingbox(interval::empty, interval::empty, interval::empty);
 const boundingbox boundingbox::universe = boundingbox(interval::universe, interval::universe, interval::universe);
+
+boundingbox operator+(const boundingbox& bbox, const vector3& offset)
+{
+	return boundingbox(bbox.x + offset.x, bbox.y + offset.y, bbox.z + offset.z);
+}
+
+boundingbox operator+(const vector3& offset, const boundingbox& bbox)
+{
+	return bbox + offset;
+}

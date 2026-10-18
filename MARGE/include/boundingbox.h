@@ -22,3 +22,7 @@ private:
 
 	void padToMinimums();
 };
+
+
+boundingbox operator+(const boundingbox& bbox, const vector3& offset);
+boundingbox operator+(const vector3& offset, const boundingbox& bbox);
