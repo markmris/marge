@@ -33,3 +33,14 @@ struct hittable
     virtual bool hit(const ray& r, interval rayt, hitdata& hd) const = 0;
     virtual boundingbox getBoundingBox() const = 0;
 };
+
+struct translate : public hittable
+{
+    vector3 offset;
+    shared_ptr<hittable> object;
+    boundingbox bbox;
+
+    translate(vector3& offset, shared_ptr<hittable> object);
+    bool hit(const ray& r, interval rayt, hitdata& hd) const override;
+    boundingbox getBoundingBox() const override;
+};
